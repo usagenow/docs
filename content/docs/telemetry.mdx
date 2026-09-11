@@ -1,0 +1,55 @@
+---
+title: Telemetry
+description: How UsageNow’s optional, anonymous analytics are designed, and what they can never include.
+---
+
+UsageNow includes support for privacy-preserving, anonymous analytics. They’re opt-in and off by default.
+
+## Turning analytics on or off
+
+Go to **Settings › Privacy** and use **Share anonymous usage analytics**. It’s off by default in every build.
+
+While it’s off, UsageNow does nothing related to analytics: no events, no bookkeeping, and no identifier. Turning it off deletes the installation identifier, so if you turn it on again later, you start over as a new, unlinked installation.
+
+## What an event contains
+
+Each event has only these fields:
+
+| Field | Example | Purpose |
+| --- | --- | --- |
+| `event` | `app_active` | Which event happened |
+| `installation_id` | a random UUID | Counting installations without identifying anyone |
+| `app_version`, `build` | `0.1.0`, `1` | Which versions are in use |
+| `macos_version` | `15.6.1` | Which macOS versions to support |
+| `architecture` | `arm64` | Apple silicon or Intel |
+| `timestamp` | ISO 8601 date and time | When the event happened |
+
+Events contain no IP address or location. As with any network request, the request itself reaches the server from your IP address; the analytics design derives at most an approximate country from it.
+
+The installation identifier is a random UUID generated on your Mac. It isn’t derived from hardware identifiers, serial numbers, network addresses, your Apple Account, your user name, or your computer’s name. It’s created only when analytics actually send something, and it’s kept in your keychain so it survives app updates.
+
+## Events
+
+| Event | When |
+| --- | --- |
+| `install` | Once, the first time analytics are active on this installation |
+| `app_active` | At most once per day, when UsageNow is used |
+| `app_updated` | Once after the app version changes |
+| `codex_detected` | Once, if Codex is installed — a yes, nothing more |
+| `claude_detected` | Once, if Claude Code is installed — a yes, nothing more |
+
+## What analytics never include
+
+- quotas, usage percentages, or reset times
+- token or request counts
+- model names or plans
+- prompts, conversations, or session contents
+- files, file paths, or source code
+- project names
+- provider accounts or credentials
+
+The analytics code has no access to provider data at all: it can only send the events above.
+
+## Development builds
+
+Development builds keep analytics disabled by default, the same as every other build. Developers can point a debug build at their own endpoint to test analytics locally.

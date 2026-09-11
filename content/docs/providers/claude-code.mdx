@@ -1,0 +1,103 @@
+---
+title: Claude Code
+description: How UsageNow reads Claude Code activity, how the experimental usage limits work, and what happens to your credentials.
+---
+
+UsageNow gets Claude Code information from two separate sources:
+
+1. **Local activity** — always available when Claude Code is enabled. Tokens, requests, most recent model, and plan, read from files on your Mac.
+2. **Usage limits** — experimental and off by default. Your 5-hour and weekly limits, fetched from Anthropic with your existing Claude Code sign-in.
+
+<Callout type="privacy" title="Your credentials stay yours">
+  UsageNow never refreshes, modifies, or stores your Claude Code credentials.
+</Callout>
+
+## Requirements
+
+- Claude Code installed on your Mac
+- Signed in to Claude Code, and used at least once on this Mac
+
+## Local activity
+
+UsageNow reads safe, structured metadata from Claude Code’s local session data in `~/.claude/projects` to show:
+
+- **tokens today** — tokens recorded since midnight, including cached input
+- **requests** — model responses recorded today
+- **most recent model**
+
+It extracts only timestamps, identifiers, model names, and token counts. UsageNow ignores:
+
+- prompt contents
+- assistant responses
+- source code
+- file contents
+
+### Plan
+
+Your plan — Pro, Max, Max 5x, Max 20x, Team, or Enterprise — comes from the account profile Claude Code caches in `~/.claude.json`. UsageNow reads only the fields that state the plan. If the plan isn’t stated there, no badge is shown; the plan is never inferred from the models you use.
+
+## Experimental usage limits
+
+<Callout type="experimental">
+  Claude usage limits use an undocumented Anthropic endpoint. This integration may stop working without notice if Anthropic changes the endpoint.
+</Callout>
+
+Claude Code does not currently expose subscription limits through a supported local API. UsageNow can optionally read the existing Claude Code access token from macOS Keychain and query Anthropic’s usage endpoint — the same information Claude Code itself shows with its `/usage` command.
+
+### Turn it on
+
+1. Make sure Claude Code is enabled in **Settings › Providers**.
+2. Go to **Settings › General** and turn on **Fetch Claude usage limits**.
+3. When macOS asks whether UsageNow may use the “Claude Code-credentials” item in your keychain, choose **Allow**.
+
+Limits then appear in the Claude Code section: usually a 5-hour window and a weekly window, and sometimes a weekly window for a single model family such as Opus.
+
+### What UsageNow does with your sign-in
+
+When the setting is on, UsageNow:
+
+- reads the keychain item Claude Code created, only after you turn the setting on
+- extracts only the access token and its expiry time from it
+- keeps the token in memory only
+- sends it only to `api.anthropic.com`, to request your usage
+- asks for limits at most once every five minutes during automatic refreshes, one request at a time
+
+UsageNow never:
+
+- refreshes your Claude Code sign-in
+- modifies or deletes the keychain item
+- stores the token or any other Claude Code credential
+- logs the token
+- uses the refresh token
+
+When you turn the setting off, UsageNow forgets the token and any cached limits.
+
+### Keeping your session fresh
+
+Claude Code’s access token expires after a while. Claude Code renews it when it runs; UsageNow never does. If you mostly use the Claude desktop app, note that it keeps its own sign-in and doesn’t renew the one in your keychain.
+
+When the token has expired, launch `claude` in Terminal to refresh your Claude Code session, then return to UsageNow and choose **Try Again**:
+
+```bash
+claude
+```
+
+To avoid repeated keychain prompts, UsageNow doesn’t read the keychain again during automatic refreshes after a failed attempt. A manual refresh, **Try Again**, or turning the setting off and on tries again.
+
+## States
+
+When usage limits aren’t available, UsageNow says why in one line — in the Claude Code section and under the setting in **Settings › General**:
+
+| Message | What it means | What to do |
+| --- | --- | --- |
+| **Refresh Claude Code from Terminal to view usage limits.** | The Claude Code sign-in in your keychain is missing, expired, or was rejected. | Launch `claude` in Terminal, then choose **Try Again**. |
+| **Allow UsageNow to access your Claude Code sign-in in Keychain.** | Keychain access was denied or the prompt was dismissed. | Choose **Try Again** and select **Allow** when macOS asks. |
+| **Claude usage limits are temporarily unavailable.** | Anthropic’s usage endpoint didn’t answer, or answered in a way UsageNow doesn’t understand. | Wait and refresh later. Nothing is wrong with your account. |
+| **Usage limits unavailable** | The experimental setting is off. | Optional: turn on **Fetch Claude usage limits**. |
+| **Sign in to Claude Code to view usage** | Claude Code is installed, but there’s no sign-in and no local activity. | Sign in to Claude Code and use it once. |
+
+In every case, local token, request, model, and plan information stays visible when it’s available. Usage limits are the only part that depends on the experimental source.
+
+## Where UsageNow looks
+
+UsageNow looks for Claude Code data in `~/.claude` and `~/.claude.json`, or in the folder set by `CLAUDE_CONFIG_DIR`. It also recognizes the `claude` executable in `~/.local/bin`, `~/.claude/local`, `/opt/homebrew/bin`, and `/usr/local/bin`.

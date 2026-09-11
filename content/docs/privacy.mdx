@@ -1,0 +1,77 @@
+---
+title: Privacy
+description: What UsageNow reads, what it keeps, and what never leaves your Mac.
+---
+
+UsageNow is local-first. Your usage data stays on your Mac unless a request to the provider is needed to get your current limits.
+
+## What UsageNow never sends to UsageNow servers
+
+- prompts
+- source code
+- project names
+- file contents
+- conversation content
+- Claude credentials
+- Codex credentials
+- token counts
+- quota percentages
+- reset times
+
+## At a glance
+
+| Data | Stored locally | Sent to UsageNow |
+| --- | --- | --- |
+| Preferences | Yes | No |
+| Provider activity (tokens, requests, model) | Kept in memory, and in the widget snapshot | No |
+| Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
+| Claude Code credentials | No | No |
+| Codex credentials | Never read | No |
+| Prompts, responses, and code | No | No |
+| Anonymous product analytics | Optional | Optional, and not sent by current builds |
+
+## What UsageNow reads
+
+UsageNow reads only what it needs to show your usage, and only for [providers you’ve enabled](/providers#turning-a-provider-off).
+
+- **Codex** — rate limits and plan from Codex’s own app-server, and token counts, model identifiers, timestamps, and recorded rate limits from Codex session files. UsageNow checks whether Codex’s credentials file exists but never reads its contents. [Details](/providers/codex)
+- **Claude Code** — timestamps, identifiers, model names, and token counts from Claude Code session files, and the plan from Claude Code’s account profile. [Details](/providers/claude-code)
+
+Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals.
+
+## Network requests
+
+UsageNow itself makes network requests only in these cases:
+
+| Request | When | Goes to |
+| --- | --- | --- |
+| Claude usage limits | Only if you turn on the experimental setting | `api.anthropic.com` |
+| Anonymous analytics | Only if you opt in, and only in a future build with an analytics service | UsageNow |
+
+For Codex, UsageNow runs the Codex app-server locally, and the app-server talks to Codex’s own services on its behalf, the same way Codex does.
+
+## Experimental Claude usage limits
+
+This is the one feature that uses a credential. It’s off by default. When you turn it on, UsageNow reads your existing Claude Code access token from the macOS keychain, keeps it in memory, and sends it only to Anthropic to ask for your usage.
+
+<Callout type="privacy">
+  UsageNow never refreshes, modifies, or stores your Claude Code credentials.
+</Callout>
+
+See [Claude Code](/providers/claude-code#what-usagenow-does-with-your-sign-in) for the full list of guarantees.
+
+## Widget snapshot
+
+The desktop widget can’t read provider data itself. The UsageNow app writes a small snapshot of display values — usage windows, reset times, plan, most recent model, and today’s token and request counts — to an App Group container on your Mac, and the widget renders only that. The snapshot never includes prompts, code, file paths, or credentials, and it isn’t sent anywhere. See [Widgets](/widgets#how-the-widget-gets-its-data).
+
+## Analytics
+
+Anonymous analytics are optional and off by default. Current builds don’t send any analytics, whether or not the setting is on. [Telemetry](/telemetry) documents exactly what an opted-in build would send.
+
+## Logs
+
+UsageNow writes diagnostic messages to the macOS unified log. They never include tokens, credentials, prompts, conversation content, source code, or file paths from `~/.codex` or `~/.claude`. See [Security](/security#logging).
+
+## Questions
+
+If something in UsageNow seems to contradict this page, that’s a bug. Please report it — see [Security](/security#reporting-a-vulnerability).

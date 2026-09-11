@@ -1,0 +1,60 @@
+---
+title: FAQ
+description: Short answers to common questions about UsageNow.
+---
+
+### Does UsageNow upload my prompts?
+
+No. UsageNow never stores or uploads prompts, responses, or conversation content. See [Privacy](/privacy).
+
+### Does UsageNow read my source code?
+
+No. From session files, UsageNow reads only timestamps, identifiers, model names, token counts, and rate limits. Lines with conversation content are skipped.
+
+### Why does Claude sometimes show “Usage limits unavailable”?
+
+Because Claude Code does not currently expose quota through a supported local API, and the optional experimental quota source may be turned off or may not have a current access token. Local activity still appears. See [Claude Code](/providers/claude-code#states).
+
+### Does UsageNow modify Claude credentials?
+
+No. UsageNow never refreshes, modifies, or stores your Claude Code credentials.
+
+### Does UsageNow read my Codex credentials?
+
+No. Codex’s own app-server signs in with Codex’s credentials. UsageNow only asks it for your rate limits.
+
+### What does “58% left” mean?
+
+58% of that usage window remains. UsageNow always shows what’s left, never what’s used. See [Menu Bar](/menu-bar#percentages-show-whats-left).
+
+### Why don’t token counts match my plan’s usage?
+
+Token and request counts are local activity recorded on this Mac. They include cached input and don’t include other devices, so they don’t necessarily match quota consumption or billing.
+
+### Why are Codex and Claude values different?
+
+Different providers expose different quota systems and usage windows. Their percentages aren’t directly comparable.
+
+### Do I need an account?
+
+No. UsageNow has no accounts.
+
+### Is UsageNow open source?
+
+Yes. The source code is available on [GitHub](https://github.com/usagenow/usagenow) under the MIT License.
+
+### Will UsageNow support more providers?
+
+Yes, when reliable integrations are available. See [Coming Soon](/providers/coming-soon).
+
+### Is there a Windows or Linux version?
+
+No. UsageNow currently focuses on macOS.
+
+### Is there a command-line tool?
+
+A CLI is planned.
+
+### Where can I download UsageNow?
+
+See [Installation](/installation) for the official distribution channels and how to build UsageNow from source.

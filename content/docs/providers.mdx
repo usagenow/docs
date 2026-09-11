@@ -1,0 +1,41 @@
+---
+title: Providers
+description: The AI coding tools UsageNow reports on, and how to turn each one on or off.
+---
+
+A provider is an AI coding tool UsageNow can report on. Each one exposes different information, so UsageNow shows only what a provider actually reports.
+
+## Available
+
+<Cards>
+  <Card title="Codex" href="/providers/codex">Usage limits, reset times, plan, and local activity.</Card>
+  <Card title="Claude Code" href="/providers/claude-code">Local activity and plan, plus experimental usage limits.</Card>
+</Cards>
+
+## Coming soon
+
+Gemini CLI, DeepSeek, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
+
+## Turning a provider off
+
+Codex and Claude Code are on by default. Turn either one on or off in **Settings › Providers**.
+
+When a provider is off, UsageNow doesn’t:
+
+- refresh the provider
+- access the provider’s local files
+- access the provider’s credentials
+- include the provider’s values in menu bar calculations
+- include the provider in widget data
+
+UsageNow never deletes or changes anything belonging to a provider when you turn it off. Turning it back on picks up where things are.
+
+## How data differs between providers
+
+Providers measure usage in their own ways, so their numbers aren’t directly comparable:
+
+- **Windows differ.** One provider may report a 5-hour and a weekly window; another may report only one, or a window for a single model family.
+- **Sources differ.** Codex reports limits through its own app-server. Claude Code doesn’t expose limits locally, so they’re only available through an [experimental source](/providers/claude-code#experimental-usage-limits).
+- **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption.
+
+UsageNow never fills a gap with an estimate. When a value isn’t reported, it isn’t shown.

@@ -1,0 +1,93 @@
+---
+title: Installation
+description: Requirements, how UsageNow will be distributed, and how to build it from source today.
+---
+
+## Requirements
+
+<Requirements />
+
+UsageNow reads data from the AI coding tools you already use, so install and sign in to at least one of them first. You can add or remove providers at any time.
+
+## Download
+
+Once public builds are ready, UsageNow will be distributed through the channels below. This page will be updated as each one becomes available.
+
+<DistributionChannels />
+
+<Callout type="warning" title="Only use official builds">
+  Until a channel above is marked Available, any download that claims to be UsageNow isn’t an official build. UsageNow is built from the [public repository](https://github.com/usagenow/usagenow).
+</Callout>
+
+## Build from source
+
+Building from source is currently the way to run UsageNow. You need Xcode 26 or later.
+
+<Steps>
+
+### Clone the repository
+
+```bash
+git clone https://github.com/usagenow/usagenow.git
+cd usagenow
+```
+
+### Open the project
+
+Open `UsageNow.xcodeproj` in Xcode.
+
+```bash
+open UsageNow.xcodeproj
+```
+
+### Build and run
+
+Select the **UsageNow** scheme and choose **Product › Run** (<Kbd>⌘R</Kbd>). The UsageNow symbol appears in the menu bar. Click it to open the popover.
+
+</Steps>
+
+To build from Terminal instead:
+
+```bash
+xcodebuild -project UsageNow.xcodeproj -scheme UsageNow build
+```
+
+Continue with [Getting Started](/getting-started) once the app is running.
+
+### Enable the widget in a local build
+
+The desktop widget reads data through an App Group, and App Groups require a signing team. Builds without one work normally, but the widget only shows **Open UsageNow to load usage data.** To enable it, build with your own team ID:
+
+```bash
+xcodebuild -project UsageNow.xcodeproj -scheme UsageNow \
+    DEVELOPMENT_TEAM=YOURTEAMID \
+    USAGENOW_APP_GROUP=YOURTEAMID.group.com.usagenow.UsageNow \
+    USAGENOW_APP_ENTITLEMENTS=Config/UsageNow.entitlements \
+    USAGENOW_WIDGET_ENTITLEMENTS=Config/UsageNowWidget.entitlements \
+    build
+```
+
+You can set the same four build settings once in Xcode instead. See the [repository README](https://github.com/usagenow/usagenow#readme) for more.
+
+### Update a source build
+
+Pull the latest changes and build again:
+
+```bash
+git pull
+```
+
+## Uninstall
+
+UsageNow doesn’t change any Codex or Claude Code files, so removing it leaves your tools exactly as they were.
+
+1. If you added the UsageNow widget, remove it from your desktop.
+2. If Launch at Login is on, turn it off in **Settings › General** so macOS removes the login item.
+3. Click **Quit** in the popover, or press <Kbd>⌘Q</Kbd> while it’s open.
+4. Delete UsageNow.app.
+
+To also remove UsageNow’s preferences, run:
+
+```bash
+defaults delete com.usagenow.UsageNow
+```

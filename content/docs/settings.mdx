@@ -1,0 +1,58 @@
+---
+title: Settings
+description: Every UsageNow setting, tab by tab.
+---
+
+Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> while the popover is open. Settings has five tabs: General, Providers, Menu Bar, Privacy, and About.
+
+## General
+
+### Launch UsageNow at login
+
+Starts UsageNow automatically when you log in to your Mac. macOS manages this setting, so you can also change it in **System Settings › General › Login Items**.
+
+If macOS needs your approval, Settings shows **Allow UsageNow in System Settings to finish setup.** with a button that opens Login Items.
+
+### Appearance
+
+Choose **Light**, **Dark**, or **System**. System follows your Mac’s appearance. The default is Light. The setting applies to the popover and Settings.
+
+### Refresh interval
+
+How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover.
+
+### Claude usage limits — Experimental
+
+**Fetch Claude usage limits** shows your current Claude Code subscription limits by asking Anthropic, using your existing Claude Code sign-in. It’s off by default, and it appears only while Claude Code is enabled in the Providers tab.
+
+When limits can’t be fetched, a one-line reason and a **Try Again** button appear under the setting. Read [Claude Code](/providers/claude-code#experimental-usage-limits) before turning this on.
+
+## Providers
+
+Choose which services UsageNow displays and monitors.
+
+- **Available** — Codex and Claude Code, each with its own switch. Both start on.
+- **Coming soon** — providers on the roadmap, shown as labels. They can’t be turned on yet.
+
+Turning a provider off stops UsageNow from refreshing it or reading anything for it. See [Providers](/providers#turning-a-provider-off).
+
+## Menu Bar
+
+**Display** chooses what appears next to the symbol in the menu bar:
+
+- **Icon only** — the default
+- **Most critical usage**
+- **Codex usage**
+- **Claude Code usage**
+
+When no usage limit is available, the menu bar shows the icon alone. See [Menu bar display](/menu-bar#menu-bar-display) for how each option is calculated.
+
+## Privacy
+
+### Share anonymous usage analytics
+
+Optional, and off by default. When on, UsageNow may share basic app usage and device information to help improve the app. It never includes prompts, tokens, project names, files, credentials, or coding activity. See [Telemetry](/telemetry) for exactly what could be sent.
+
+## About
+
+Shows the UsageNow version and build number, links to [usagenow.com](https://usagenow.com) and [@UsageNow](https://x.com/UsageNow) on X, and **Open Source Licenses…**. Include the version and build number when you report a problem.

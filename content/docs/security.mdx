@@ -1,0 +1,45 @@
+---
+title: Security
+description: The boundaries UsageNow is built around, and how to report a vulnerability.
+---
+
+UsageNow reads data written by tools that have access to your code and accounts, so it’s designed around a few strict boundaries. Issues that break any of them are security bugs.
+
+## Local-first design
+
+Usage data stays on your Mac. Nothing from `~/.codex` or `~/.claude` is sent to UsageNow servers, and UsageNow works without an account.
+
+## Credentials boundary
+
+- **Codex** — UsageNow never reads Codex credentials. The official Codex app-server authenticates itself. UsageNow checks only whether Codex’s credentials file exists.
+- **Claude Code** — the experimental usage limits feature is off by default. Only after you turn it on does UsageNow read the existing access token from the keychain. The token stays in memory, is sent only to `api.anthropic.com`, and is never logged or written anywhere.
+
+UsageNow never refreshes, modifies, or stores your Claude Code credentials.
+
+## Widget isolation
+
+The widget extension renders a sanitized snapshot written by the main app. It doesn’t read provider files, open the keychain, launch processes, or make network requests — the provider and credential code isn’t compiled into the widget at all. See [Widgets](/widgets#how-the-widget-gets-its-data).
+
+## Provider parsing rules
+
+- Session files are read for timestamps, identifiers, model names, token counts, and rate limits only.
+- Lines that hold conversation content are skipped without being decoded.
+- Prompts, responses, tool inputs, and code are never stored or logged.
+- Responses UsageNow doesn’t recognize are skipped rather than guessed at. When data can’t be understood, UsageNow shows nothing instead of a wrong value.
+- Turning a provider off stops all file and credential access for it.
+
+## Logging
+
+UsageNow writes diagnostic messages to the macOS unified log (OSLog) under the subsystem `com.usagenow.UsageNow`. Logs never include tokens, credentials, prompts, conversation content, source code, or file paths from `~/.codex` or `~/.claude`. Values written into log messages are private by default, and only non-identifying values such as status codes are marked public.
+
+## No credential modification
+
+UsageNow doesn’t change files, settings, or keychain items that belong to Codex or Claude Code. When a Claude Code sign-in expires, UsageNow asks you to [refresh it with Claude Code](/providers/claude-code#keeping-your-session-fresh) rather than renewing it itself.
+
+## Reporting a vulnerability
+
+Please don’t open a public issue for security problems. Report them privately through GitHub’s private vulnerability reporting on the UsageNow repository.
+
+Include a description of the issue and its impact, steps to reproduce, and the UsageNow and macOS versions you tested.
+
+The full policy, including supported versions, is in [SECURITY.md](https://github.com/usagenow/usagenow/blob/main/SECURITY.md).

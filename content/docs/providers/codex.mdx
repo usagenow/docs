@@ -1,0 +1,68 @@
+---
+title: Codex
+description: How UsageNow reads Codex usage limits and local activity, and what each state means.
+---
+
+UsageNow shows Codex usage limits, reset times, and your plan, alongside the activity Codex recorded on your Mac today.
+
+## Requirements
+
+- The Codex CLI or the Codex app installed on your Mac
+- Signed in to Codex with your ChatGPT account
+
+## Usage limits
+
+UsageNow gets current usage limits from Codex itself, through the app-server that comes with Codex:
+
+```text
+codex app-server  →  account/rateLimits/read
+```
+
+UsageNow starts the app-server locally, asks it for your account’s rate limits, and closes it. The app-server signs in with Codex’s own credentials, so UsageNow doesn’t need to read or copy them, and it never calls Codex’s backend services itself.
+
+The app-server also reports your plan, such as Plus or Pro, which appears as a badge in the popover.
+
+- Automatic refreshes ask the app-server for limits at most once every five minutes. A manual refresh always asks immediately.
+- If the app-server can’t be reached, UsageNow uses the most recent limits Codex recorded in its session files and marks them with an **Updated … ago** note.
+- Codex’s app-server interface is marked experimental by Codex, so UsageNow treats any failure as non-fatal: local activity keeps working.
+
+### API key sign-in
+
+If you sign in to Codex with an API key instead of a ChatGPT account, there are no subscription limits to report. UsageNow shows **Usage limits unavailable** for Codex and still shows local activity.
+
+## Local activity
+
+UsageNow reads structured metadata from Codex’s local session files to show:
+
+- **tokens today** — tokens recorded since midnight, including cached input
+- **requests** — model responses recorded today
+- **most recent model**
+
+Only token counts, model identifiers, timestamps, and rate-limit fields are read. Lines that hold conversation content are skipped without being decoded, and nothing is stored beyond in-memory totals.
+
+<Callout type="info" title="Local activity isn’t quota">
+  Local token activity is not the same as subscription quota consumption. It covers only what Codex recorded on this Mac, and Codex may weigh usage differently.
+</Callout>
+
+## Where UsageNow looks
+
+UsageNow looks for Codex data in `~/.codex`, or in the folder set by `CODEX_HOME`.
+
+To run the app-server, it looks for the `codex` executable in these locations:
+
+- inside the Codex app or ChatGPT app, in `/Applications` or `~/Applications`
+- `/opt/homebrew/bin/codex`
+- `/usr/local/bin/codex`
+- `~/.local/bin/codex`
+
+Apps opened from Finder don’t see your shell’s `PATH`, so UsageNow doesn’t search it. If `codex` is somewhere else, for example under a Node version manager, UsageNow can still read local activity, but its limits may come only from session files and appear as stale. See [Troubleshooting](/troubleshooting#codex-is-not-detected).
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Codex section | Codex isn’t installed, or Codex is turned off in Settings. | Install Codex, or turn it on in **Settings › Providers**. |
+| **Sign in to Codex to view usage** | Codex is installed but not signed in. | Sign in to Codex, then refresh. |
+| **Usage limits unavailable** | No limits are available — for example, you signed in with an API key, or no limits have been reported yet. | Local activity still appears. Use Codex, then refresh. |
+| **Updated … ago** | The limits shown are more than 10 minutes old. This can happen when the app-server isn’t reachable. | Refresh. If it persists, see [Troubleshooting](/troubleshooting#usage-data-is-stale). |
+| **Couldn’t refresh Codex** | The last refresh failed. The previous data stays visible. | Choose **Retry**. |

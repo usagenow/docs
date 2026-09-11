@@ -1,0 +1,142 @@
+---
+title: Menu Bar
+description: The menu bar item and its popover — how to read usage windows, reset times, and local activity.
+---
+
+UsageNow lives in the macOS menu bar. There’s no Dock icon and no main window. Everything happens in the menu bar item and the popover it opens.
+
+## The menu bar item
+
+By default, the menu bar item shows only the UsageNow symbol. It can also show one percentage next to the symbol. See [Menu bar display](#menu-bar-display).
+
+## The popover
+
+Click the menu bar item to open the popover.
+
+<Screenshot name="popover" caption="The popover with Codex and Claude Code enabled." />
+
+From top to bottom, it contains:
+
+- **Header** — the Refresh and Settings buttons.
+- **Provider sections** — one for each enabled provider that’s installed on your Mac.
+- **Footer** — when UsageNow last refreshed, and **Quit**.
+
+The dot in the footer is green when the last refresh succeeded and orange when a provider couldn’t be refreshed.
+
+| Action | Shortcut |
+| --- | --- |
+| Refresh | <Kbd>⌘R</Kbd> |
+| Open Settings | <Kbd>⌘,</Kbd> |
+| Quit UsageNow | <Kbd>⌘Q</Kbd> |
+
+These shortcuts work while the popover is open.
+
+## Refreshing
+
+UsageNow refreshes:
+
+- automatically, at the interval you choose in **Settings › General** (every 5 minutes by default)
+- when you open the popover, if the last refresh was more than a minute ago
+- when you click Refresh or press <Kbd>⌘R</Kbd>
+
+During automatic refreshes, UsageNow asks providers for usage limits at most once every five minutes. A manual refresh always asks for fresh limits.
+
+If a refresh fails, UsageNow keeps the last data it had and adds a line such as **Couldn’t refresh Codex** with a **Retry** button.
+
+## Provider sections
+
+Each provider section starts with a header:
+
+- **Name** — Codex or Claude Code.
+- **Most recent model** — the model you used most recently on this Mac, when it can be determined.
+- **Plan** — for example Plus, Pro, or Max 5x. The plan appears only when the provider states it explicitly. UsageNow never guesses it.
+
+When the data shown is more than 10 minutes old, the header adds a note such as **Updated 18m ago**.
+
+## Usage windows
+
+Below the header, each row is one usage window reported by the provider. In the screenshot above, Codex reports a single weekly window, while Claude Code reports a 5-hour window and a weekly one.
+
+- **Label** — the length of the window: 5-hour, Weekly, or another length the provider reports, such as 30-day.
+- **Bar and percentage** — how much of the window is left. The bar shrinks as you use more.
+- **Reset time** — when the window starts over.
+
+Some windows apply to a single model family. These show the family before the reset time, for example **Opus · Resets Mon 09:00**.
+
+### Percentages show what’s left
+
+UsageNow always displays the percentage **remaining**.
+
+**58% left** means 58% of that usage window remains. You have used 42%. It never means 58% consumed.
+
+UsageNow rounds so that **0% left** appears only once the limit has actually been reached.
+
+### Reset times
+
+| When the reset is | UsageNow shows |
+| --- | --- |
+| Within 24 hours | A countdown, such as **Resets in 1h 24m** |
+| Further away | Weekday and time, such as **Resets Mon 09:00** |
+| Past, before new data arrives | **Resetting now** |
+
+Times use your Mac’s time zone and a 24-hour clock. Countdowns keep updating while the popover is open.
+
+### When little is left
+
+As a window runs low, its row changes. The color comes with a symbol, so the state never relies on color alone.
+
+| Left | Appearance |
+| --- | --- |
+| 16% or more | Normal |
+| 6–15% | Orange, with an exclamation mark |
+| 5% or less | Red, with a warning triangle |
+
+VoiceOver reads these states as “High usage” and “Nearly exhausted.”
+
+### Which windows appear
+
+Providers decide which windows exist, and that depends on your plan and can change over time. An account might have only a weekly limit, for example. UsageNow shows exactly the windows a provider reports and never adds a placeholder for a missing one.
+
+## Local activity
+
+Below the windows, a provider section can show today’s activity:
+
+- **Tokens today** — tokens recorded in the provider’s local session files since midnight. Counts include cached input, as recorded by the tool.
+- **Requests** — model responses recorded today.
+
+Each value appears only when the provider can observe it.
+
+<Callout type="info" title="Local activity isn’t quota">
+  Tokens and requests describe activity recorded on this Mac. They don’t necessarily match your subscription’s quota consumption or billing. Activity from other devices or the web isn’t included, and providers weigh usage in their own ways.
+</Callout>
+
+## Status messages
+
+| Message | What it means |
+| --- | --- |
+| **Checking usage…** | The first refresh is running. |
+| **No providers detected** | None of your enabled providers is installed on this Mac. |
+| **No providers enabled** | Every provider is turned off. Choose **Open Provider Settings** to turn one on. |
+| **Sign in to Codex to view usage** | Codex is installed but not signed in. The same applies to Claude Code. |
+| **Usage limits unavailable** | The provider isn’t reporting limits right now. Local activity may still appear. |
+| **Couldn’t refresh …** | The last refresh failed. The previous data stays visible. |
+
+A provider that isn’t installed doesn’t get a section at all. For provider-specific messages, see [Codex](/providers/codex#states) and [Claude Code](/providers/claude-code#states).
+
+## Menu bar display
+
+Choose what appears next to the symbol in **Settings › Menu Bar › Display**.
+
+| Option | Shows |
+| --- | --- |
+| Icon only | The symbol alone. This is the default. |
+| Most critical usage | The percentage left in the window with the least remaining capacity, across all enabled providers. |
+| Codex usage | The percentage left in Codex’s tightest window. |
+| Claude Code usage | The percentage left in Claude Code’s tightest window. |
+
+A few details:
+
+- **Most critical usage** compares every enabled provider’s windows and picks the one with the least left. Within a provider, when two windows are equally low, the one that resets sooner wins.
+- Only one percentage is ever shown, and it always means what’s left: **58%** next to the symbol means 58% left.
+- When no usage limit is available for the chosen option, the menu bar shows the icon alone rather than 0%.
+- **Codex usage** and **Claude Code usage** are offered only while that provider is enabled. If you turn the provider off, the display switches back to **Icon only**.

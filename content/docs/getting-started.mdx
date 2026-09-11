@@ -1,0 +1,76 @@
+---
+title: Getting Started
+description: Launch UsageNow, choose your providers, and read your first usage limits.
+---
+
+This guide walks you through the first run. It takes a couple of minutes. If UsageNow isn’t on your Mac yet, start with [Installation](/installation).
+
+## Before you begin
+
+UsageNow reads information your AI coding tools already keep, so you need at least one of them:
+
+- **Codex**, installed and signed in with your ChatGPT account
+- **Claude Code**, installed, signed in, and used at least once on this Mac
+
+## First run
+
+<Steps>
+
+### Launch UsageNow
+
+Open UsageNow. It lives in the menu bar only: there’s no Dock icon and no main window.
+
+### Find UsageNow in the menu bar
+
+Look for the UsageNow symbol on the right side of the menu bar, and click it to open the popover.
+
+If you don’t see it, the menu bar may be full. On a Mac with a camera notch, macOS hides menu bar items that don’t fit, so try quitting a few other menu bar apps.
+
+### Open Providers in Settings
+
+In the popover, click the gear button or press <Kbd>⌘,</Kbd> to open Settings, then select the **Providers** tab.
+
+### Enable Codex or Claude Code
+
+Turn on the providers you use. Both are on by default. Turn off any you don’t use — UsageNow then stops reading anything for that provider.
+
+### Refresh
+
+Back in the popover, click the refresh button or press <Kbd>⌘R</Kbd>. After that, UsageNow refreshes on its own every 5 minutes by default, and whenever you open the popover.
+
+### View your limits
+
+Each provider gets its own section showing its usage windows, when each one resets, and today’s activity on this Mac.
+
+</Steps>
+
+<Screenshot name="popover" caption="The popover with Codex and Claude Code enabled." />
+
+The percentage is always what’s **left**. **58% left** means 58% of that usage window remains. [Menu Bar](/menu-bar#usage-windows) explains every part of the popover.
+
+## What each provider shows
+
+What you see depends on what each provider exposes.
+
+| | Codex | Claude Code |
+| --- | --- | --- |
+| Usage limits and reset times | Yes | Only with the [experimental setting](/providers/claude-code#experimental-usage-limits) turned on |
+| Plan | Yes | Yes |
+| Tokens and requests today | Yes | Yes |
+| Most recent model | Yes | Yes |
+
+<Callout type="note" title="UsageNow never fabricates values">
+  If a provider doesn’t report a value, UsageNow leaves it out. It never invents a missing usage window or shows a placeholder 0%. When no limits are available, a provider shows **Usage limits unavailable**, and its local activity can still appear below.
+</Callout>
+
+## Optional: Claude Code usage limits
+
+Claude Code doesn’t expose subscription limits through a supported local API, so UsageNow can’t read them by default. There is an experimental, opt-in way to show them: turn on **Settings › General › Fetch Claude usage limits**, then allow access when macOS asks about Claude Code’s sign-in in Keychain.
+
+Read [Claude Code](/providers/claude-code#experimental-usage-limits) before you turn it on. It explains what the setting does and what UsageNow never does with your credentials.
+
+## Next steps
+
+- Show a percentage next to the menu bar icon: [Menu bar display](/menu-bar#menu-bar-display)
+- Add the [desktop widget](/widgets)
+- Start UsageNow automatically with [Launch at Login](/settings#general)

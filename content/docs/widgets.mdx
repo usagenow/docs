@@ -1,0 +1,68 @@
+---
+title: Widgets
+description: Small and medium macOS widgets that show what’s left at a glance, and how they stay isolated from your data.
+---
+
+UsageNow includes native macOS widgets, built with WidgetKit, that you can place on your desktop.
+
+## Sizes
+
+### Small
+
+A glance at what matters most: for each enabled provider, the usage window with the least left, plus the next reset. With a single provider, it has room for the window’s name and reset time.
+
+### Medium
+
+A column for each enabled provider, with its usage windows, the percentage left in each, and reset times.
+
+In both sizes, percentages mean what’s **left**, exactly as in the [menu bar](/menu-bar#percentages-show-whats-left).
+
+## Add the widget
+
+1. Right-click an empty area of your desktop and choose **Edit Widgets**.
+2. Search for **UsageNow**.
+3. Choose Small or Medium and drag it onto your desktop.
+
+Open UsageNow at least once first, so the widget has data to show.
+
+## How the widget gets its data
+
+The widget never reads your provider data itself.
+
+```text
+UsageNow app ──► sanitized snapshot (App Group) ──► widget
+```
+
+The main UsageNow app refreshes providers, then writes a small snapshot of the values the widget displays to a shared App Group container on your Mac. The widget renders only that snapshot.
+
+<Callout type="privacy" title="The widget is isolated">
+  The widget doesn’t access `~/.codex` or `~/.claude`, doesn’t open the Keychain, doesn’t call Anthropic, and doesn’t launch Codex. The code that talks to providers and credentials isn’t part of the widget at all.
+</Callout>
+
+The snapshot holds display values only: each enabled provider’s usage windows and reset times, plan, most recent model, and today’s token and request counts. It never contains prompts, code, file paths, or credentials. It stays on your Mac.
+
+## Providers and the widget
+
+The widget follows your provider settings automatically:
+
+- Providers you turn off in **Settings › Providers** don’t appear in the widget.
+- Providers that aren’t installed don’t appear either.
+- When a provider has no usage limits available, the widget shows **Usage limits unavailable** instead of a number.
+
+## Freshness
+
+The widget shows what UsageNow last saw. Its values change when the UsageNow app refreshes and writes a new snapshot, so keep UsageNow running if you rely on the widget. [Launch at Login](/settings#general) helps.
+
+- When the data is old, the widget keeps showing the last known values with an **Updated … ago** note rather than hiding them.
+- The widget asks macOS to redraw it periodically and shortly after a reset, so countdowns stay current. macOS decides exactly when widgets update.
+
+## Widget messages
+
+| Message | What it means |
+| --- | --- |
+| **Open UsageNow to load usage data.** | The widget has no snapshot yet. Open UsageNow, or use a build with widget support. |
+| **No providers enabled** | Every provider is turned off. Open UsageNow to choose providers. |
+| **No providers detected** | None of your enabled providers is installed on this Mac. |
+| **Usage limits unavailable** | A provider isn’t reporting limits right now. |
+
+See [Troubleshooting](/troubleshooting#widget-shows-old-data) if the widget looks stale or doesn’t appear.

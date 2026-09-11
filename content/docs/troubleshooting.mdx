@@ -1,0 +1,101 @@
+---
+title: Troubleshooting
+description: Fixes for the most common problems with providers, usage limits, the widget, and Launch at Login.
+---
+
+Start with a manual refresh: open the popover and press <Kbd>⌘R</Kbd>. Many problems clear up once UsageNow asks providers for fresh data.
+
+## Codex is not detected
+
+UsageNow hides Codex when it can’t find it. Check that:
+
+- Codex is enabled in **Settings › Providers**.
+- Codex is installed. UsageNow looks for Codex data in `~/.codex`, and for the `codex` executable inside the Codex app or ChatGPT app, in `/opt/homebrew/bin`, `/usr/local/bin`, or `~/.local/bin`.
+- If you use `CODEX_HOME`, UsageNow can see it. Apps opened from Finder or at login don’t inherit variables set in your shell profile.
+
+If `codex` is installed somewhere else — for example through a Node version manager — UsageNow can still read local activity from `~/.codex`, but it can’t run the app-server, so limits may be stale. Installing Codex in one of the locations above fixes this. See [Codex](/providers/codex#where-usagenow-looks).
+
+## Claude Code is not detected
+
+Check that:
+
+- Claude Code is enabled in **Settings › Providers**.
+- Claude Code is installed and you’ve used it at least once on this Mac, so `~/.claude` exists.
+- If you use `CLAUDE_CONFIG_DIR`, UsageNow can see it. Apps opened from Finder or at login don’t inherit variables set in your shell profile.
+
+If the section says **Sign in to Claude Code to view usage**, sign in to Claude Code and use it once, then refresh.
+
+## Claude usage limits unavailable
+
+This is expected by default. Claude Code does not currently expose subscription limits through a supported local API, so UsageNow shows **Usage limits unavailable** unless you turn on the experimental source in **Settings › General › Fetch Claude usage limits**. See [Claude Code](/providers/claude-code#experimental-usage-limits).
+
+If the setting is on, the message under it tells you what’s wrong. The sections below cover each one.
+
+## Keychain access denied
+
+**Allow UsageNow to access your Claude Code sign-in in Keychain.** means access was denied or the macOS prompt was dismissed.
+
+1. Open **Settings › General**.
+2. Choose **Try Again** under Fetch Claude usage limits.
+3. When macOS asks about “Claude Code-credentials”, choose **Allow**.
+
+After a denial, UsageNow doesn’t ask again on its own, so macOS won’t keep prompting you. It tries again only when you choose Try Again or refresh manually.
+
+## Claude token is stale
+
+**Refresh Claude Code from Terminal to view usage limits.** means the Claude Code sign-in in your keychain has expired or was rejected. UsageNow never renews it.
+
+Launch `claude` in Terminal to refresh your Claude Code session, then return to UsageNow and choose **Try Again**.
+
+```bash
+claude
+```
+
+If you mostly use the Claude desktop app, this happens more often: the desktop app keeps its own sign-in and doesn’t renew the one Claude Code stores in your keychain.
+
+<Callout type="warning">
+  Don’t edit Claude Code’s keychain item by hand, and don’t copy tokens anywhere. UsageNow never asks you to.
+</Callout>
+
+## Claude usage limits are temporarily unavailable
+
+Anthropic’s usage endpoint didn’t answer, or answered in a way UsageNow doesn’t understand. Wait a few minutes and refresh. If it persists across app updates, the undocumented endpoint may have changed — [open an issue](https://github.com/usagenow/usagenow/issues). Local activity keeps working in the meantime.
+
+## Usage data is stale
+
+A provider header shows **Updated … ago** when its data is more than 10 minutes old.
+
+- Refresh manually with <Kbd>⌘R</Kbd>.
+- Check **Settings › General › Refresh interval**. With **Manual**, UsageNow refreshes only when you open the popover or press Refresh.
+- For Codex, stale limits usually mean the app-server couldn’t be reached, so UsageNow is using the last limits recorded in Codex’s session files. Make sure Codex is signed in and can reach the internet.
+- A line such as **Couldn’t refresh Codex** means the last refresh failed. Choose **Retry**.
+
+## Widget shows old data
+
+The widget shows the last snapshot the UsageNow app wrote.
+
+- Make sure UsageNow is running. The widget can’t refresh providers itself. Turn on [Launch at Login](/settings#general) to keep it running.
+- Open the popover to trigger a refresh.
+- Old values stay visible with an **Updated … ago** note until new data arrives; this is intended.
+
+## Widget does not appear
+
+- If you built UsageNow yourself without a signing team, the widget shows only **Open UsageNow to load usage data.** See [Enable the widget in a local build](/installation#enable-the-widget-in-a-local-build).
+- Open UsageNow at least once, then look for UsageNow in **Edit Widgets**.
+- If the widget shows **No providers enabled**, turn on a provider in **Settings › Providers**.
+
+## Launch at Login does not work
+
+- If Settings shows **Allow UsageNow in System Settings to finish setup.**, choose **Open Login Items…** and allow UsageNow.
+- Check **System Settings › General › Login Items** to confirm UsageNow is listed and allowed.
+- If turning the setting on shows an error, the message under the switch comes from macOS.
+
+## No providers enabled
+
+The popover shows **No providers enabled** when every provider is turned off. Choose **Open Provider Settings** and turn on Codex, Claude Code, or both.
+
+If it shows **No providers detected**, your enabled providers aren’t installed on this Mac. See the detection sections above.
+
+## Still stuck?
+
+[Open an issue](https://github.com/usagenow/usagenow/issues) with your UsageNow version and build number (in **Settings › About**), your macOS version, and what you see. Please don’t include prompts, tokens, account details, or files from `~/.codex` or `~/.claude`.
