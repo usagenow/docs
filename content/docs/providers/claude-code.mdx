@@ -76,7 +76,11 @@ When you turn the setting off, UsageNow forgets the token and any cached limits.
 
 Claude Code’s access token expires after a while. Claude Code renews it when it runs; UsageNow never does. If you mostly use the Claude desktop app, note that it keeps its own sign-in and doesn’t renew the one in your keychain.
 
-When the token has expired, launch `claude` in Terminal to refresh your Claude Code session, then return to UsageNow and choose **Try Again**:
+When the saved token has expired, UsageNow asks the Claude Code CLI to renew its own sign-in: it runs the CLI’s read-only `auth status`, which sends no prompt and uses no quota, then reads the keychain again. UsageNow still writes nothing itself.
+
+A sign-in that expires overnight doesn’t empty the display. The last limits UsageNow read stay for a day, marked stale, so the menu bar and the widget still show yesterday’s numbers in the morning; a successful read replaces them.
+
+If the CLI isn’t installed or can’t renew on its own, launch `claude` in Terminal to refresh your Claude Code session, then return to UsageNow and choose **Try Again**:
 
 ```bash
 claude
@@ -96,7 +100,7 @@ When usage limits aren’t available, UsageNow says why in one line — in the C
 | **Usage limits unavailable** | The experimental setting is off. | Optional: turn on **Fetch Claude usage limits**. |
 | **Sign in to Claude Code to view usage** | Claude Code is installed, but there’s no sign-in and no local activity. | Sign in to Claude Code and use it once. |
 
-In every case, local token, request, model, and plan information stays visible when it’s available. Usage limits are the only part that depends on the experimental source.
+In every case, local token, request, model, and plan information stays visible when it’s available, and limits read earlier stay on screen as stale for a day. Usage limits are the only part that depends on the experimental source.
 
 ## Where UsageNow looks
 

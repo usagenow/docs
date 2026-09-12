@@ -7,9 +7,9 @@
  */
 export const release = {
   /** Download from usagenow.com. */
-  websiteDownload: { available: false, url: "https://usagenow.com" },
+  websiteDownload: { available: true, url: "https://usagenow.com/download/usagenow.dmg" },
   /** GitHub Releases. */
-  githubReleases: { available: false, url: "https://github.com/usagenow/usagenow/releases" },
+  githubReleases: { available: true, url: "https://github.com/usagenow/usagenow/releases" },
   /** Homebrew Cask. `command` is shown only once the cask exists. */
   homebrew: { available: false, command: "brew install --cask usagenow" },
   /** Minimum macOS version, from the Xcode project's deployment target. */
