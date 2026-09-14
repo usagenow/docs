@@ -1,0 +1,42 @@
+---
+title: Gemini CLI
+description: How UsageNow reads Gemini CLI activity by model, and why it shows no usage limits.
+---
+
+UsageNow shows Gemini CLI activity — tokens, requests, and the models you used today — from the sessions Gemini CLI records on your Mac. It does not show usage limits, because Gemini CLI doesn’t expose them locally.
+
+## Requirements
+
+- Gemini CLI installed on your Mac
+- Signed in, or configured with an API key or Vertex AI, and used at least once
+
+<Callout type="note" title="Personal Google sign-in">
+  As of mid-2026, Google no longer lets personal Google accounts sign in to Gemini CLI. It still works with a Gemini API key, Vertex AI, or Gemini Code Assist Standard and Enterprise. UsageNow reads whatever Gemini CLI has recorded, however it’s configured.
+</Callout>
+
+## Local activity
+
+UsageNow reads structured metadata from Gemini CLI’s session recordings in `~/.gemini/tmp/<project>/chats` to show:
+
+- **tokens today** — input, output, cached, and reasoning tokens recorded since midnight
+- **requests** — model responses recorded today
+- **most recent model**
+- **activity by model** — see [Models today](/menu-bar#models-today)
+
+Only message identifiers, timestamps, model names, and token counts are read. Prompts, responses, thoughts, and tool calls are never decoded or kept.
+
+## No usage limits
+
+Gemini CLI records no usage limits on your Mac, and its quota service requires the Google sign-in. UsageNow won’t read that sign-in for this, so the Gemini CLI section shows **Usage limits unavailable** with today’s activity below it. The **Gemini CLI usage** menu bar mode shows the icon until limits exist.
+
+## Where UsageNow looks
+
+UsageNow looks for Gemini CLI data in `~/.gemini`. It reads one setting — which sign-in method is configured — and checks only whether a saved sign-in exists; it never opens credential files. It also recognizes the `gemini` executable in the usual install locations.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Gemini CLI section | Gemini CLI isn’t installed, or it’s turned off in Settings. | Install Gemini CLI, or turn it on in **Settings › Providers**. |
+| **Sign in to Gemini CLI to view usage** | Gemini CLI is installed but has no sign-in and no local activity. | Sign in or set an API key, then use it once. |
+| **Usage limits unavailable** | Expected: Gemini CLI reports no limits. | Today’s tokens, requests, and models still appear. |

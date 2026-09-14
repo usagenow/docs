@@ -20,7 +20,7 @@ codex app-server  →  account/rateLimits/read
 
 UsageNow starts the app-server locally, asks it for your account’s rate limits, and closes it. The app-server signs in with Codex’s own credentials, so UsageNow doesn’t need to read or copy them, and it never calls Codex’s backend services itself.
 
-The app-server also reports your plan, such as Plus or Pro, which appears as a badge in the popover.
+The app-server also reports your plan — including Team, Business, and Enterprise — which appears as a badge in the popover, even when rate limits aren’t returned for that plan.
 
 - Automatic refreshes ask the app-server for limits at most once every five minutes. A manual refresh always asks immediately.
 - If the app-server can’t be reached, UsageNow uses the most recent limits Codex recorded in its session files and marks them with an **Updated … ago** note.
@@ -37,6 +37,7 @@ UsageNow reads structured metadata from Codex’s local session files to show:
 - **tokens today** — tokens recorded since midnight, including cached input
 - **requests** — model responses recorded today
 - **most recent model**
+- **activity by model** — see [Models today](/menu-bar#models-today)
 
 Only token counts, model identifiers, timestamps, and rate-limit fields are read. Lines that hold conversation content are skipped without being decoded, and nothing is stored beyond in-memory totals.
 

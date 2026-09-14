@@ -38,6 +38,8 @@ export const navigation: NavGroup[] = [
       { title: "Overview", slug: "providers" },
       { title: "Codex", slug: "providers/codex" },
       { title: "Claude Code", slug: "providers/claude-code" },
+      { title: "Gemini CLI", slug: "providers/gemini" },
+      { title: "Antigravity", slug: "providers/antigravity" },
       { title: "Coming Soon", slug: "providers/coming-soon" },
     ],
   },

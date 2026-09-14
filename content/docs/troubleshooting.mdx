@@ -33,19 +33,19 @@ If the setting is on, the message under it tells you what’s wrong. The section
 
 ## Keychain access denied
 
-**Allow UsageNow to access your Claude Code sign-in in Keychain.** means access was denied or the macOS prompt was dismissed.
+**Allow UsageNow to access your Claude Code sign-in in Keychain.** means the sign-in couldn’t be read. UsageNow reads it with `/usr/bin/security`, the tool Claude Code saves it with, so normally no prompt appears. If one does — your keychain may have been set up differently — and it was dismissed or denied:
 
 1. Open **Settings › General**.
 2. Choose **Try Again** under Fetch Claude usage limits.
-3. When macOS asks about “Claude Code-credentials”, choose **Allow**.
+3. If macOS asks whether `security` may use “Claude Code-credentials”, choose **Allow**.
 
-After a denial, UsageNow doesn’t ask again on its own, so macOS won’t keep prompting you. It tries again only when you choose Try Again or refresh manually.
+After a failure like this, UsageNow doesn’t try again on its own, so macOS won’t keep prompting you. It tries again only when you choose Try Again or refresh manually.
 
 ## Claude token is stale
 
 **Refresh Claude Code from Terminal to view usage limits.** means the Claude Code sign-in in your keychain has expired or was rejected. UsageNow never renews it.
 
-Launch `claude` in Terminal to refresh your Claude Code session, then return to UsageNow and choose **Try Again**.
+Launch `claude` in Terminal to refresh your Claude Code session. You don’t need to choose **Try Again**: UsageNow notices the renewed sign-in on its next refresh. Until then, the last limits it read stay on screen, marked stale.
 
 ```bash
 claude
@@ -60,6 +60,14 @@ If you mostly use the Claude desktop app, this happens more often: the desktop a
 ## Claude usage limits are temporarily unavailable
 
 Anthropic’s usage endpoint didn’t answer, or answered in a way UsageNow doesn’t understand. Wait a few minutes and refresh. If it persists across app updates, the undocumented endpoint may have changed — [open an issue](https://github.com/usagenow/usagenow/issues). Local activity keeps working in the meantime.
+
+## Antigravity limits aren't shown
+
+UsageNow reads Antigravity limits from the **Antigravity app** while it runs — the `agy` CLI alone isn't enough, because its local server keeps its token in memory. Open the Antigravity app; limits appear on the next refresh. Until then, the last known limits stay, marked stale, with **Open the Antigravity app to update usage limits.** See [Antigravity](/providers/antigravity).
+
+## Gemini CLI shows no limits
+
+This is expected. Gemini CLI records no usage limits on your Mac, so UsageNow shows **Usage limits unavailable** with today's tokens, requests, and models below. See [Gemini CLI](/providers/gemini).
 
 ## Usage data is stale
 

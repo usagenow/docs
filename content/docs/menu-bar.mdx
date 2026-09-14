@@ -47,7 +47,7 @@ If a refresh fails, UsageNow keeps the last data it had and adds a line such as 
 
 Each provider section starts with a header:
 
-- **Name** — Codex or Claude Code.
+- **Name** — the provider, such as Codex, Claude Code, Gemini CLI, or Antigravity.
 - **Most recent model** — the model you used most recently on this Mac, when it can be determined.
 - **Plan** — for example Plus, Pro, or Max 5x. The plan appears only when the provider states it explicitly. UsageNow never guesses it.
 
@@ -106,6 +106,10 @@ Below the windows, a provider section can show today’s activity:
 
 Each value appears only when the provider can observe it.
 
+### Models today
+
+When a provider records which model answered — Claude Code, Codex, and Gemini CLI do — a compact **Models today** list appears under the totals, most active first, with each model’s tokens and requests. Up to three models are shown, then “+N more”. It never shows a percentage: account limits aren’t split by model, so a model row is activity only. The list is hidden when only one model was used.
+
 <Callout type="info" title="Local activity isn’t quota">
   Tokens and requests describe activity recorded on this Mac. They don’t necessarily match your subscription’s quota consumption or billing. Activity from other devices or the web isn’t included, and providers weigh usage in their own ways.
 </Callout>
@@ -133,10 +137,12 @@ Choose what appears next to the symbol in **Settings › Menu Bar › Display**.
 | Most critical usage | The percentage left in the window with the least remaining capacity, across all enabled providers. |
 | Codex usage | The percentage left in Codex’s tightest window. |
 | Claude Code usage | The percentage left in Claude Code’s tightest window. |
+| Gemini CLI usage | Gemini CLI reports no limits, so this shows the icon. |
+| Antigravity usage | The percentage left in Antigravity’s tightest window. |
 
 A few details:
 
 - **Most critical usage** compares every enabled provider’s windows and picks the one with the least left. Within a provider, when two windows are equally low, the one that resets sooner wins.
 - Only one percentage is ever shown, and it always means what’s left: **58%** next to the symbol means 58% left.
 - When no usage limit is available for the chosen option, the menu bar shows the icon alone rather than 0%.
-- **Codex usage** and **Claude Code usage** are offered only while that provider is enabled. If you turn the provider off, the display switches back to **Icon only**.
+- A provider-specific mode is offered only while that provider is enabled. If you turn the provider off, the display switches back to **Icon only**.

@@ -19,7 +19,7 @@ Each event has only these fields:
 | --- | --- | --- |
 | `event` | `app_active` | Which event happened |
 | `installation_id` | a random UUID | Counting installations without identifying anyone |
-| `app_version`, `build` | `0.1.0`, `1` | Which versions are in use |
+| `app_version`, `build` | `0.3.0`, `1` | Which versions are in use |
 | `macos_version` | `15.6.1` | Which macOS versions to support |
 | `architecture` | `arm64` | Apple silicon or Intel |
 | `timestamp` | ISO 8601 date and time | When the event happened |
@@ -37,6 +37,8 @@ The installation identifier is a random UUID generated on your Mac. It isn’t d
 | `app_updated` | Once after the app version changes |
 | `codex_detected` | Once, if Codex is installed — a yes, nothing more |
 | `claude_detected` | Once, if Claude Code is installed — a yes, nothing more |
+| `gemini_detected` | Once, if Gemini CLI is installed — a yes, nothing more |
+| `antigravity_detected` | Once, if Antigravity is installed — a yes, nothing more |
 
 ## What analytics never include
 

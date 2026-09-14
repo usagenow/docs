@@ -3,7 +3,7 @@ title: Introduction
 description: What UsageNow is, why it exists, and what it can show you today.
 ---
 
-UsageNow is a native macOS menu bar app for people who build with AI coding tools. It shows how much of your Codex and Claude Code usage limits is left, when each limit resets, and how much activity those tools have recorded on your Mac today.
+UsageNow is a native macOS menu bar app for people who build with AI coding tools. It shows how much of your Codex, Claude Code, Gemini CLI, and Antigravity usage is left, when each limit resets, and how much activity those tools have recorded on your Mac today — including a breakdown by model.
 
 ## Why UsageNow exists
 
@@ -16,8 +16,9 @@ UsageNow puts that information in the menu bar, for every tool you use, one clic
 UsageNow works from information that already exists on your Mac:
 
 - the official Codex app-server, which comes with Codex
-- the session files Codex and Claude Code write as you work
+- the session files Codex, Claude Code, and Gemini CLI write as you work
 - the account profile Claude Code keeps in its own configuration
+- the Antigravity app’s own local server, while it’s running
 
 You don’t need a UsageNow account, and there’s no UsageNow server that receives your usage. The one exception is optional and off by default: if you turn on experimental Claude usage limits, UsageNow asks Anthropic, not UsageNow, for your current limits.
 
@@ -33,7 +34,9 @@ A provider is an AI coding tool UsageNow can report on.
 | --- | --- |
 | Codex | <Badge variant="available">Available</Badge> |
 | Claude Code | <Badge variant="available">Available</Badge> Usage limits are <Badge variant="experimental">Experimental</Badge> |
-| Gemini CLI, DeepSeek, Qwen | <Badge variant="planned">Coming soon</Badge> |
+| Gemini CLI | <Badge variant="available">Available</Badge> Activity only; no usage limits |
+| Antigravity | <Badge variant="available">Available</Badge> Limits while the app runs |
+| Cursor, GitHub Copilot, DeepSeek, Qwen | <Badge variant="planned">Coming soon</Badge> |
 
 What UsageNow can show depends on what each provider exposes. See [Providers](/providers) for details.
 

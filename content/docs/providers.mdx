@@ -10,15 +10,17 @@ A provider is an AI coding tool UsageNow can report on. Each one exposes differe
 <Cards>
   <Card title="Codex" href="/providers/codex">Usage limits, reset times, plan, and local activity.</Card>
   <Card title="Claude Code" href="/providers/claude-code">Local activity and plan, plus experimental usage limits.</Card>
+  <Card title="Gemini CLI" href="/providers/gemini">Activity by model. No usage limits.</Card>
+  <Card title="Antigravity" href="/providers/antigravity">Usage limits while the Antigravity app runs.</Card>
 </Cards>
 
 ## Coming soon
 
-Gemini CLI, DeepSeek, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
+Cursor, GitHub Copilot, DeepSeek, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
 
 ## Turning a provider off
 
-Codex and Claude Code are on by default. Turn either one on or off in **Settings › Providers**.
+Every available provider is on by default. Turn any one on or off in **Settings › Providers**, and drag providers into the order the popover and widget should use.
 
 When a provider is off, UsageNow doesn’t:
 
@@ -35,7 +37,7 @@ UsageNow never deletes or changes anything belonging to a provider when you turn
 Providers measure usage in their own ways, so their numbers aren’t directly comparable:
 
 - **Windows differ.** One provider may report a 5-hour and a weekly window; another may report only one, or a window for a single model family.
-- **Sources differ.** Codex reports limits through its own app-server. Claude Code doesn’t expose limits locally, so they’re only available through an [experimental source](/providers/claude-code#experimental-usage-limits).
-- **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption.
+- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs. Gemini CLI reports no limits.
+- **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption. Where a provider records the model, UsageNow also shows [activity by model](/menu-bar#models-today).
 
 UsageNow never fills a gap with an estimate. When a value isn’t reported, it isn’t shown.
