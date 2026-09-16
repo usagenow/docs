@@ -32,13 +32,19 @@ The installation identifier is a random UUID generated on your Mac. It isn’t d
 
 | Event | When |
 | --- | --- |
-| `install` | Once, the first time analytics are active on this installation |
+| `first_launch` | Once, the first time analytics are active on this installation |
 | `app_active` | At most once per day, when UsageNow is used |
 | `app_updated` | Once after the app version changes |
 | `codex_detected` | Once, if Codex is installed — a yes, nothing more |
 | `claude_detected` | Once, if Claude Code is installed — a yes, nothing more |
 | `gemini_detected` | Once, if Gemini CLI is installed — a yes, nothing more |
 | `antigravity_detected` | Once, if Antigravity is installed — a yes, nothing more |
+
+## Where events would go
+
+Nothing is sent from any release published so far: those builds carry no endpoint, so the analytics client behaves exactly like a disabled one whatever the setting says.
+
+When a build does carry one, events reach a small Cloudflare Worker whose source is part of the repository, in [`telemetry/`](https://github.com/usagenow/usagenow/tree/main/telemetry). It accepts only the seven fields above and refuses any body with an extra field, so the design is checkable rather than a promise. It records the two-letter country Cloudflare resolved for the connection — never the IP address, request headers, or user agent — and rows are deleted after 180 days.
 
 ## What analytics never include
 
