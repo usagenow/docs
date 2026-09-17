@@ -36,6 +36,12 @@ UsageNow writes diagnostic messages to the macOS unified log (OSLog) under the s
 
 UsageNow doesn’t change files, settings, or keychain items that belong to Codex or Claude Code. When a Claude Code sign-in expires, UsageNow asks you to [refresh it with Claude Code](/providers/claude-code#keeping-your-session-fresh) rather than renewing it itself.
 
+## Update signing
+
+UsageNow installs an update only when it is signed with the private half of an EdDSA key whose public half is inside the app. That private key exists in one place — the maintainer's keychain — and is in no build, no script, and no part of the public repository, so nothing published there can produce an update UsageNow will accept. Apple's own check applies as well: every release is signed with a Developer ID certificate and notarized.
+
+A build that carries no public key, which is any build not made by the release process, doesn't start the updater at all.
+
 ## Reporting a vulnerability
 
 Please don’t open a public issue for security problems. Report them privately through GitHub’s private vulnerability reporting on the UsageNow repository.

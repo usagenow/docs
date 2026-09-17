@@ -46,9 +46,13 @@ UsageNow itself makes network requests only in these cases:
 | Request | When | Goes to |
 | --- | --- | --- |
 | Claude usage limits | Only if you turn on the experimental setting | `api.anthropic.com` |
-| Anonymous analytics | Only if you opt in, and only in a future build with an analytics service | UsageNow |
+| Anonymous analytics | Only if you opt in, and only in a build with an analytics endpoint | UsageNow |
+| Update check | Only if updates are on, or you choose Check Now | `usagenow.com` |
+| Update download | Only after you accept an update | `usagenow.com` |
 
 For Codex, UsageNow runs the Codex app-server locally, and the app-server talks to Codex’s own services on its behalf, the same way Codex does.
+
+An update check asks for one file — the update feed — and carries nothing about you: Sparkle's system profiling is off, so no identifier, version history, or hardware description is attached. As with any request, the server sees your IP address, which is unavoidable in fetching a file at all.
 
 ## Experimental Claude usage limits
 

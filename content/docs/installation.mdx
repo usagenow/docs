@@ -23,6 +23,18 @@ These are the channels it ships through:
   Official builds come from the channels marked Available above, and nowhere else. Any other download claiming to be UsageNow isn’t official. Everything is built from the [public repository](https://github.com/usagenow/usagenow).
 </Callout>
 
+## Updates
+
+From 0.4.0, UsageNow updates itself. It checks for a new version, shows you what changed, and installs it when you agree. **Settings › General › Updates** has the switch and a **Check Now** button.
+
+An update is installed only when it carries UsageNow's own signature, made with a key that exists in one place: its maintainer's keychain. Nothing in the public repository can produce an update UsageNow accepts, and a build that didn't come from the release process can't update itself at all.
+
+A check is a plain request for the update feed at `usagenow.com`. Sparkle's system profiling is switched off, so nothing about your Mac, your version, or you is sent with it.
+
+<Callout type="info" title="Coming from 0.3.0 or earlier">
+  Those versions have no updater, so install 0.4.0 by hand once — download it and drag it to Applications, replacing the old copy. Later versions arrive on their own.
+</Callout>
+
 ## Build from source
 
 You can also build UsageNow yourself — to contribute, or to run an unreleased change. You need Xcode 26 or later.

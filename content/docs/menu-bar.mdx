@@ -103,12 +103,23 @@ Below the windows, a provider section can show today’s activity:
 
 - **Tokens today** — tokens recorded in the provider’s local session files since midnight. Counts include cached input, as recorded by the tool.
 - **Requests** — model responses recorded today.
+- **≈ $4.20 at API prices** — what those tokens would have cost if the same work had been billed through the provider's API. See [Estimated cost](/menu-bar#estimated-cost).
 
 Each value appears only when the provider can observe it.
 
 ### Models today
 
 When a provider records which model answered — Claude Code, Codex, and Gemini CLI do — a compact **Models today** list appears under the totals, most active first, with each model’s tokens and requests. Up to three models are shown, then “+N more”. It never shows a percentage: account limits aren’t split by model, so a model row is activity only. The list is hidden when only one model was used.
+
+### Estimated cost
+
+The estimate answers one question: how much work was this? It multiplies today's tokens by the model's published API price, so a day of heavy use reads as a number you can compare, rather than as millions of tokens.
+
+It is not a bill, and UsageNow never sees one. A subscription doesn't charge per token, so if you work inside Pro, Max, or Plus, this money is not being spent. It's what the same work would have cost through the API.
+
+Each kind of token is priced the way providers price it: fresh input, tokens written into the prompt cache, tokens read back from it, and output. That distinction matters more than it sounds. In Claude Code most of the volume is cache reads, billed at a tenth of the input price, so pricing every token at the input rate would overstate a day several times over.
+
+A model UsageNow has no published price for is left out of the total, and the label then reads **at API prices, partial** rather than pretending the number is complete. Prices ship inside the app and are refreshed with each release, so the estimate needs no network access and no account of any kind.
 
 <Callout type="info" title="Local activity isn’t quota">
   Tokens and requests describe activity recorded on this Mac. They don’t necessarily match your subscription’s quota consumption or billing. Activity from other devices or the web isn’t included, and providers weigh usage in their own ways.
