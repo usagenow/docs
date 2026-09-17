@@ -15,6 +15,10 @@ These providers are off until you turn them on, and stay out of the popover unti
 | Kimi | Available balance, in US dollars | `GET api.moonshot.ai/v1/users/me/balance` |
 | OpenRouter | Spent today, spent this month, what's left on the key, and the key's limit as a window if it resets daily, weekly, or monthly | `GET openrouter.ai/api/v1/key` |
 
+<Callout type="note" title="Not yet verified against live accounts">
+  Kimi and OpenRouter are built on the responses their documentation describes, and haven't yet been checked against a real account. If a balance looks wrong or doesn't appear, please [open an issue](https://github.com/usagenow/usagenow/issues) — without your key.
+</Callout>
+
 Amounts are exactly what the service reports, in its own currency. A DeepSeek account kept in yuan is shown in yuan; nothing is converted or estimated.
 
 <Callout type="note" title="Kimi keys">
