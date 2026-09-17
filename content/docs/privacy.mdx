@@ -27,8 +27,10 @@ UsageNow is local-first. Your usage data stays on your Mac unless a request to t
 | Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
 | Claude Code credentials | No | No |
 | Codex credentials | Never read | No |
+| Kiro and Warp credentials | Never read | No |
+| API keys you add (DeepSeek, Kimi, OpenRouter) | In your Keychain, on this Mac only | No — sent only to that provider |
 | Prompts, responses, and code | No | No |
-| Anonymous product analytics | Optional | Optional, and not sent by current builds |
+| Anonymous product analytics | Optional | Optional, off by default |
 
 ## What UsageNow reads
 
@@ -36,6 +38,8 @@ UsageNow reads only what it needs to show your usage, and only for [providers yo
 
 - **Codex** — rate limits and plan from Codex’s own app-server, and token counts, model identifiers, timestamps, and recorded rate limits from Codex session files. UsageNow checks whether Codex’s credentials file exists but never reads its contents. [Details](/providers/codex)
 - **Claude Code** — timestamps, identifiers, model names, and token counts from Claude Code session files, and the plan from Claude Code’s account profile. [Details](/providers/claude-code)
+- **Kiro** — the plan, credit amounts, and reset date from the usage-limits answer Kiro writes to its own log, and the time and credits of each prompt from Kiro session files. The account identifiers in that log are never read. [Details](/providers/kiro)
+- **Warp** — times, outcomes, credit amounts, and tokens per model from Warp's local database, opened read-only. The text of prompts and replies is never read. [Details](/providers/warp)
 
 Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals.
 
@@ -47,6 +51,9 @@ UsageNow itself makes network requests only in these cases:
 | --- | --- | --- |
 | Claude usage limits | Only if you turn on the experimental setting | `api.anthropic.com` |
 | Anonymous analytics | Only if you opt in, and only in a build with an analytics endpoint | UsageNow |
+| DeepSeek balance | Only after you add a DeepSeek API key | `api.deepseek.com` |
+| Kimi balance | Only after you add a Kimi API key | `api.moonshot.ai` |
+| OpenRouter spending | Only after you add an OpenRouter API key | `openrouter.ai` |
 | Update check | Only if updates are on, or you choose Check Now | `usagenow.com` |
 | Update download | Only after you accept an update | `usagenow.com` |
 

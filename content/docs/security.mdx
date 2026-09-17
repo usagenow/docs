@@ -14,6 +14,9 @@ Usage data stays on your Mac. Nothing from `~/.codex` or `~/.claude` is sent to 
 - **Codex** — UsageNow never reads Codex credentials. The official Codex app-server authenticates itself. UsageNow checks only whether Codex’s credentials file exists.
 - **Claude Code** — the experimental usage limits feature is off by default. Only after you turn it on does UsageNow read the existing access token from the keychain. The token stays in memory, is sent only to `api.anthropic.com`, and is never logged or written anywhere.
 
+- **Kiro and Warp** — UsageNow reads no credential for either. Kiro's limits come from its own log and Warp's activity from its local database, opened read-only.
+- **API keys you add** — for DeepSeek, Kimi, and OpenRouter. A key is stored only in the Keychain on this Mac, sent over HTTPS only to that provider's host, used only for read requests, and deleted when you turn the provider off. Redirects aren't followed, and an answer from any other host is refused, so the key can't be passed on. See [API Key Providers](/providers/api-keys).
+
 UsageNow never refreshes, modifies, or stores your Claude Code credentials.
 
 ## Widget isolation

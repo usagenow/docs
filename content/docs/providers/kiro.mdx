@@ -1,0 +1,47 @@
+---
+title: Kiro
+description: How UsageNow shows Kiro's monthly credit limit and today's credits, without any Kiro credential.
+---
+
+UsageNow shows how much of your Kiro plan's monthly credits is left, when they reset, and the credits and prompts you used today. Everything comes from files Kiro writes on your Mac. UsageNow sends no request to Kiro and reads no Kiro sign-in.
+
+## Requirements
+
+- Kiro installed on your Mac and signed in
+- Opened at least once, so it has recorded your limits
+
+## Monthly limit
+
+While Kiro runs, it asks its service for your plan's usage and writes the answer to its own log in `~/Library/Application Support/Kiro/logs`. UsageNow reads the newest of those answers:
+
+- **Monthly** — the share of your plan's credits left, and when they reset
+- **plan** — shown as a badge, such as **Free** or **Pro**
+
+Only the plan, the credit amounts, and the reset date are read. The same answer also identifies your account; those fields aren't read at all.
+
+A free trial that has ended is still listed in that answer, fully used. UsageNow ignores it, so a plan with every credit left isn't shown as exhausted. An active trial or bonus credits count toward what's left.
+
+### When Kiro is closed
+
+Kiro updates its limits while it runs. When it's closed, UsageNow keeps showing the last limits Kiro recorded, with **Updated … ago**. Once the reset date passes, the old percentage is dropped — it says nothing about the new month — and the section asks you to open Kiro.
+
+<Callout type="note" title="A log isn't a promise">
+  Kiro offers no public way to read these limits, so UsageNow relies on what Kiro writes to its own log. If a Kiro update stops writing it, the limit disappears and the section asks you to open Kiro, rather than showing a number that could be wrong.
+</Callout>
+
+## Today's activity
+
+After each prompt, Kiro records the credits it used in its session files in `~/.kiro/sessions`. UsageNow adds them up for:
+
+- **credits today** — credits used since midnight
+- **requests** — prompts answered today
+
+Only the record's time and credit amount are read. Messages, tool calls, and file contents are never decoded. Kiro doesn't record tokens or which model answered, so there's no model list or cost estimate for Kiro.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Kiro section | Kiro isn't installed, or it's turned off in Settings. | Install Kiro, or turn it on in **Settings › Providers**. |
+| **Open Kiro to update usage limits.** | Kiro hasn't recorded limits yet, or the last ones are from before the reset. | Open Kiro; limits appear on the next refresh. |
+| **Updated … ago** | Kiro is closed; these are the limits it last recorded. | Nothing, or open Kiro for fresh numbers. |

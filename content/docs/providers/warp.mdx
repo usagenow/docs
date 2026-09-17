@@ -1,0 +1,43 @@
+---
+title: Warp
+description: How UsageNow reads Warp agent requests, credits, and models from Warp's local database.
+---
+
+UsageNow shows your Warp agent activity for today — requests, credits, and the models that answered — from the database Warp keeps on your Mac. It doesn't show a usage limit yet.
+
+## Requirements
+
+- Warp installed on your Mac
+- Warp's agent used at least once
+
+## Today's activity
+
+Warp stores its agent history in a local database. UsageNow opens it read-only to show:
+
+- **credits today** — credits spent by agent conversations that began today
+- **requests** — prompts answered today
+- **most recent model** and **activity by model** — tokens per model, such as Claude Sonnet 4.6 or GPT-5.3 Codex
+
+Only times, outcomes, credit amounts, and token counts per model are read. The text of your prompts and the agent's replies is never read.
+
+### Why credits can say “partial”
+
+Warp keeps one running total of credits for each conversation, not one per day. A conversation that began today is counted in full. One that began earlier and continued today can't be split between the days honestly, so it's left out of today's credits and the label reads **credits today, partial** instead of showing a number that's too high. Requests are always complete: Warp records each one with its time.
+
+Warp doesn't record how many requests went to each model, so model rows show tokens without a request count.
+
+## No usage limit yet
+
+Warp's settings still hold a request limit from its earlier, request-based plans — currently a limit of 0 — which doesn't describe today's credits. UsageNow doesn't show it, so the Warp section shows **Usage limits unavailable**.
+
+## Where UsageNow looks
+
+UsageNow reads Warp's database at `~/Library/Group Containers/2BBY89MBSN.dev.warp/Library/Application Support/dev.warp.Warp-Stable/warp.sqlite`, read-only. It never writes to it and reads no Warp credential.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Warp section | Warp isn't installed, or it's turned off in Settings. | Install Warp, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's requests, credits, and models still appear. |
+| **Couldn't refresh Warp** | Warp's database couldn't be read at that moment. | Choose **Retry**. |

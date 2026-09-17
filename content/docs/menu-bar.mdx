@@ -102,6 +102,7 @@ Providers decide which windows exist, and that depends on your plan and can chan
 Below the windows, a provider section can show today’s activity:
 
 - **Tokens today** — tokens recorded in the provider’s local session files since midnight. Counts include cached input, as recorded by the tool.
+- **Credits today** — for Kiro and Warp, which measure usage in credits rather than tokens. **partial** means some of today's credits couldn't be told apart from earlier days; see [Warp](/providers/warp#why-credits-can-say-partial).
 - **Requests** — model responses recorded today.
 - **≈ $4.20 at API prices** — what those tokens would have cost if the same work had been billed through the provider's API. See [Estimated cost](/menu-bar#estimated-cost).
 
@@ -110,6 +111,10 @@ Each value appears only when the provider can observe it.
 ### Models today
 
 When a provider records which model answered — Claude Code, Codex, and Gemini CLI do — a compact **Models today** list appears under the totals, most active first, with each model’s tokens and requests. Up to three models are shown, then “+N more”. It never shows a percentage: account limits aren’t split by model, so a model row is activity only. The list is hidden when only one model was used.
+
+### Balance
+
+DeepSeek, Kimi, and OpenRouter show money instead of a percentage: what's **left** on the account, and for OpenRouter what was **spent today** and **this month**. The amounts come straight from the service, in its own currency. If the service says the balance can't pay for more requests, a warning appears under it. See [API Key Providers](/providers/api-keys).
 
 ### Estimated cost
 

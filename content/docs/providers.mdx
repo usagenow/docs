@@ -12,15 +12,18 @@ A provider is an AI coding tool UsageNow can report on. Each one exposes differe
   <Card title="Claude Code" href="/providers/claude-code">Local activity and plan, plus experimental usage limits.</Card>
   <Card title="Gemini CLI" href="/providers/gemini">Activity by model. No usage limits.</Card>
   <Card title="Antigravity" href="/providers/antigravity">Usage limits while the Antigravity app runs.</Card>
+  <Card title="Kiro" href="/providers/kiro">Monthly credit limit, plan, and today's credits.</Card>
+  <Card title="Warp" href="/providers/warp">Today's agent requests, credits, and models.</Card>
+  <Card title="DeepSeek, Kimi, OpenRouter" href="/providers/api-keys">Balance and spending, with your own API key.</Card>
 </Cards>
 
 ## Coming soon
 
-Cursor, GitHub Copilot, DeepSeek, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
+Cursor, GitHub Copilot, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
 
 ## Turning a provider off
 
-Every available provider is on by default. Turn any one on or off in **Settings › Providers**, and drag providers into the order the popover and widget should use.
+Every provider that reads a tool on your Mac is on by default, and appears once the tool is installed. Providers that need your API key start off. Turn any one on or off in **Settings › Providers**, and drag providers into the order the popover and widget should use.
 
 When a provider is off, UsageNow doesn’t:
 
@@ -37,7 +40,7 @@ UsageNow never deletes or changes anything belonging to a provider when you turn
 Providers measure usage in their own ways, so their numbers aren’t directly comparable:
 
 - **Windows differ.** One provider may report a 5-hour and a weekly window; another may report only one, or a window for a single model family.
-- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs. Gemini CLI reports no limits.
+- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs; Kiro through the limits it writes to its own log. Gemini CLI and Warp report no limits. DeepSeek, Kimi, and OpenRouter report money rather than a percentage.
 - **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption. Where a provider records the model, UsageNow also shows [activity by model](/menu-bar#models-today).
 
 UsageNow never fills a gap with an estimate. When a value isn’t reported, it isn’t shown.

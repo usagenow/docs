@@ -1,0 +1,55 @@
+---
+title: API Key Providers
+description: How UsageNow shows DeepSeek, Kimi, and OpenRouter balances with your own API key, and exactly what happens to that key.
+---
+
+Some services have no app on your Mac to read, but do publish an official API for your balance or spending. For those, UsageNow can use an API key you give it: **DeepSeek**, **Kimi**, and **OpenRouter**.
+
+These providers are off until you turn them on, and stay out of the popover until you add a key.
+
+## What each one shows
+
+| Provider | What you see | Where it comes from |
+| --- | --- | --- |
+| DeepSeek | Balance left, in your account's currency | `GET api.deepseek.com/user/balance` |
+| Kimi | Available balance, in US dollars | `GET api.moonshot.ai/v1/users/me/balance` |
+| OpenRouter | Spent today, spent this month, what's left on the key, and the key's limit as a window if it resets daily, weekly, or monthly | `GET openrouter.ai/api/v1/key` |
+
+Amounts are exactly what the service reports, in its own currency. A DeepSeek account kept in yuan is shown in yuan; nothing is converted or estimated.
+
+<Callout type="note" title="Kimi keys">
+  UsageNow reads balances from Kimi's international platform, platform.moonshot.ai. Keys from the China platform (platform.moonshot.cn) are separate and aren't supported yet.
+</Callout>
+
+## Add a key
+
+1. Open **Settings › Providers** and turn the provider on.
+2. Choose **Add API Key…**, paste the key, and choose **Save**.
+
+The balance appears on the next refresh. **Replace…** and **Remove** are under the provider in the same list.
+
+## What happens to your key
+
+<Callout type="privacy" title="Your key, one place, one host">
+  UsageNow keeps the key in the Keychain on this Mac and sends it only to that provider's own API, only to read your balance or spending.
+</Callout>
+
+- **Stored only in your Keychain**, on this Mac, and not synced to other devices.
+- **Sent only to the provider's host**, over HTTPS: `api.deepseek.com`, `api.moonshot.ai`, or `openrouter.ai`. A request to any other address isn't made, and an answer from any other address is refused.
+- **Never redirected.** UsageNow doesn't follow redirects, so a response can't pass the key on to somewhere else.
+- **Only read requests.** UsageNow asks for your balance or spending and nothing else.
+- **Never written anywhere else** — not to logs, the widget, analytics, or UsageNow's preferences.
+- **Deleted when you turn the provider off**, or when you choose **Remove**.
+
+<Callout type="warning" title="API keys can usually spend money">
+  These services don't offer read-only keys, so the key you give UsageNow could also be used to make paid requests. UsageNow never does, but if a service lets you, create a separate key just for UsageNow, and revoke it on the service's site if you stop using it.
+</Callout>
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No section in the popover | The provider is off, or has no key yet. | Turn it on and add a key in **Settings › Providers**. |
+| **… didn't accept the API key.** | The key is wrong, revoked, or expired. | Replace it in **Settings › Providers**. |
+| **The balance can't pay for more requests.** | The service reports the balance is used up. | Top up on the service's site. |
+| **Couldn't refresh …** | The service didn't answer. The last balance stays on screen. | Choose **Retry**, or wait for the next refresh. |
