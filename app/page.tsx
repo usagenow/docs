@@ -27,7 +27,7 @@ const entryPoints = [
 
 const facts = [
   { term: "Platform", value: `${release.minimumMacOS} or later` },
-  { term: "Providers", value: "Codex, Claude Code" },
+  { term: "Providers", value: "Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, and API accounts" },
   { term: "Surfaces", value: "Menu bar, desktop widget" },
   { term: "License", value: "MIT" },
 ];
