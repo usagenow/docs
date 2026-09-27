@@ -42,6 +42,8 @@ export const navigation: NavGroup[] = [
       { title: "Antigravity", slug: "providers/antigravity" },
       { title: "Kiro", slug: "providers/kiro" },
       { title: "Warp", slug: "providers/warp" },
+      { title: "OpenCode", slug: "providers/opencode" },
+      { title: "Qoder", slug: "providers/qoder" },
       { title: "API Key Providers", slug: "providers/api-keys" },
       { title: "Coming Soon", slug: "providers/coming-soon" },
     ],

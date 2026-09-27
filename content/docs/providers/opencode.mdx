@@ -1,0 +1,51 @@
+---
+title: OpenCode
+description: How UsageNow reads OpenCode tokens, requests, and models from OpenCode's local database.
+---
+
+UsageNow shows your OpenCode activity for today — tokens, requests, the models that answered, and what that work would have cost at API prices — and a [30-day history](/menu-bar#last-30-days). Everything comes from the database OpenCode keeps on your Mac. It doesn't show a usage limit.
+
+<Callout type="note" title="Not yet verified against a live install">
+  OpenCode support follows OpenCode's own source code for how it stores messages, and is covered by tests, but hasn't yet been checked against a real OpenCode database. If numbers look wrong, use **Settings › About › Report a Problem**.
+</Callout>
+
+## Requirements
+
+- OpenCode installed — the CLI, or the OpenCode app
+- Used at least once, so it has recorded some answers
+
+## Today's activity
+
+OpenCode records every answer from a model with the model's name and how many tokens it used. UsageNow adds them up for:
+
+- **tokens today** — fresh input, output, reasoning, and tokens read from or written to the prompt cache
+- **requests** — answers recorded today
+- **most recent model** and **activity by model**
+- **≈ cost at API prices** — see [Estimated cost](/menu-bar#estimated-cost)
+
+OpenCode runs on whichever provider you connect — Anthropic, OpenAI, OpenRouter, DeepSeek, and many more — so the models in the list are the ones you chose there. A model UsageNow has no published price for is left out of the estimate, which then reads **partial**.
+
+## What is read, and what isn't
+
+OpenCode keeps each answer as a JSON record, and newer versions keep the text of the reply in the same record as its token counts. UsageNow never reads that record whole: SQLite extracts only the time, the model, and the token counts, and nothing else leaves the database. The tables that hold your prompts aren't read at all, and neither is OpenCode's sign-in.
+
+The database is opened read-only. UsageNow never writes to it and never migrates it, and reads it again only when it has changed.
+
+## No usage limit
+
+OpenCode has no limit of its own to report: limits belong to the provider you run it with. OpenCode's subscriptions show theirs only on OpenCode's website, so the OpenCode section says **Usage limits unavailable**.
+
+## Where UsageNow looks
+
+UsageNow reads `~/.local/share/opencode/opencode.db`. If you run a pre-release channel of OpenCode instead, it reads the most recently used `opencode-<channel>.db` in the same folder.
+
+It recognizes OpenCode as installed when that folder has a database, when the `opencode` CLI is in `~/.opencode/bin`, `~/.local/bin`, Homebrew, `/usr/local/bin`, Bun, or a Node version under nvm, or when the OpenCode app is in `/Applications` or `~/Applications`.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No OpenCode section | OpenCode isn't installed, or it's turned off in Settings. | Install OpenCode, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's tokens, requests, and models still appear. |
+| **0 tokens today** | OpenCode is installed but hasn't answered anything today. | Use OpenCode, then refresh. |
+| **Couldn't refresh OpenCode** | The database couldn't be read at that moment. The last reading stays. | Choose **Retry**. |

@@ -1,9 +1,9 @@
 ---
 title: API Key Providers
-description: How UsageNow shows DeepSeek, Kimi, and OpenRouter balances with your own API key, and exactly what happens to that key.
+description: How UsageNow shows DeepSeek, Kimi, and OpenRouter balances and Ollama Cloud limits with your own API key, and exactly what happens to that key.
 ---
 
-Some services have no app on your Mac to read, but do publish an official API for your balance or spending. For those, UsageNow can use an API key you give it: **DeepSeek**, **Kimi**, and **OpenRouter**.
+Some services have no app on your Mac to read, but do publish an official API for your balance or spending. For those, UsageNow can use an API key you give it: **DeepSeek**, **Kimi**, and **OpenRouter**, and — experimentally — **Ollama Cloud**.
 
 These providers are off until you turn them on, and stay out of the popover until you add a key.
 
@@ -14,10 +14,19 @@ These providers are off until you turn them on, and stay out of the popover unti
 | DeepSeek | Balance left, in your account's currency | `GET api.deepseek.com/user/balance` |
 | Kimi | Available balance, in US dollars | `GET api.moonshot.ai/v1/users/me/balance` |
 | OpenRouter | Spent today, spent this month, what's left on the key, and the key's limit as a window if it resets daily, weekly, or monthly | `GET openrouter.ai/api/v1/key` |
+| Ollama Cloud <Badge variant="experimental">Experimental</Badge> | Your account's session and weekly limits, as a percentage | `GET ollama.com/api/usage` |
 
 <Callout type="note" title="Not yet verified against live accounts">
-  DeepSeek, Kimi, and OpenRouter are built on the responses their documentation describes, and haven't yet been checked against a real account. If a balance looks wrong or doesn't appear, please [open an issue](https://github.com/usagenow/usagenow/issues) — without your key.
+  DeepSeek, Kimi, and OpenRouter are built on the responses their documentation describes, and Ollama Cloud on the answers others have observed; none has yet been checked against a real account. If a balance or limit looks wrong or doesn't appear, use **Settings › About › Report a Problem** — it never includes your key.
 </Callout>
+
+## Ollama Cloud
+
+Ollama Cloud's limits come from an endpoint Ollama doesn't document, so this provider is marked **Experimental** in Settings and may stop working without notice. UsageNow reads only two numbers from the answer — how much of the session and weekly allowances is used — and nothing else. If an answer no longer carries them, the section says **Usage limits unavailable** rather than showing a guess.
+
+- Ollama gives no reset time, so none is shown.
+- Plans started after August 2026 may have no session window; then only the weekly one appears.
+- Use a key from [ollama.com/settings/keys](https://ollama.com/settings/keys). Local Ollama keeps no record of cloud usage on your Mac, so it isn't read.
 
 Amounts are exactly what the service reports, in its own currency. A DeepSeek account kept in yuan is shown in yuan; nothing is converted or estimated.
 
@@ -39,9 +48,9 @@ The balance appears on the next refresh. **Replace…** and **Remove** are under
 </Callout>
 
 - **Stored only in your Keychain**, on this Mac, and not synced to other devices.
-- **Sent only to the provider's host**, over HTTPS: `api.deepseek.com`, `api.moonshot.ai`, or `openrouter.ai`. A request to any other address isn't made, and an answer from any other address is refused.
+- **Sent only to the provider's host**, over HTTPS: `api.deepseek.com`, `api.moonshot.ai`, `openrouter.ai`, or `ollama.com`. A request to any other address isn't made, and an answer from any other address is refused.
 - **Never redirected.** UsageNow doesn't follow redirects, so a response can't pass the key on to somewhere else.
-- **Only read requests.** UsageNow asks for your balance or spending and nothing else.
+- **Only read requests.** UsageNow asks for your balance, spending, or limits and nothing else.
 - **Never written anywhere else** — not to logs, the widget, analytics, or UsageNow's preferences.
 - **Deleted when you turn the provider off**, or when you choose **Remove**.
 

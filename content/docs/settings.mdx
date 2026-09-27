@@ -17,6 +17,14 @@ If macOS needs your approval, Settings shows **Allow UsageNow in System Settings
 
 Choose **Light**, **Dark**, or **System**. System follows your Mac’s appearance. The default is Light. The setting applies to the popover and Settings.
 
+### Show limits as
+
+**Remaining** (the default) or **Used**. Every percentage — in the popover, the menu bar, and the widget — follows this choice. See [Left or used](/menu-bar#left-or-used).
+
+### Show the last 30 days
+
+The chart of daily activity under each provider in the popover. On by default; turn it off to keep the popover short when you track many providers. See [Last 30 days](/menu-bar#last-30-days).
+
 ### Refresh interval
 
 How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover.
@@ -37,9 +45,11 @@ When limits can’t be fetched, a one-line reason and a **Try Again** button app
 
 Choose which services UsageNow displays and monitors.
 
-- **Available** — Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, DeepSeek, Kimi, and OpenRouter, each with its own switch. Providers that read a tool on your Mac start on; DeepSeek, Kimi, and OpenRouter start off. Drag a row, or use its **Move Up** / **Move Down** menu, to set the order the popover and widget use.
-- **API key** — under DeepSeek, Kimi, and OpenRouter once they're on: **Add API Key…**, or **Replace…** and **Remove** when a key is saved. Turning one of them off deletes its key. See [API Key Providers](/providers/api-keys).
-- **Coming soon** — providers on the roadmap (Cursor, GitHub Copilot, DeepSeek, Qwen), shown as labels. They can’t be turned on yet.
+- **Available** — Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, DeepSeek, Kimi, OpenRouter, and Ollama Cloud, each with its own switch. Providers that read a tool on your Mac start on; the ones that need an API key start off. Ollama Cloud carries an **Experimental** badge. Drag a row, or use its **Move Up** / **Move Down** menu, to set the order the popover and widget use.
+- **API key** — under DeepSeek, Kimi, OpenRouter, and Ollama Cloud once they're on: **Add API Key…**, or **Replace…** and **Remove** when a key is saved. Turning one of them off deletes its key. See [API Key Providers](/providers/api-keys).
+- **Coming soon** — providers on the roadmap (Cursor, GitHub Copilot, and Qwen), shown together in one row. They can’t be turned on yet.
+
+The list scrolls when it's taller than the window.
 
 Turning a provider off stops UsageNow from refreshing it or reading anything for it. See [Providers](/providers#turning-a-provider-off).
 
@@ -49,7 +59,7 @@ Turning a provider off stops UsageNow from refreshing it or reading anything for
 
 - **Icon only** — the default
 - **Most critical usage**
-- One per enabled provider, such as **Codex usage** or **Antigravity usage**
+- One per enabled provider with limits, such as **Codex usage**, **Antigravity usage**, or **Kiro usage**
 
 When no usage limit is available, the menu bar shows the icon alone. See [Menu bar display](/menu-bar#menu-bar-display) for how each option is calculated.
 
@@ -61,4 +71,18 @@ Optional, and off by default. When on, UsageNow may share basic app usage and de
 
 ## About
 
-Shows the UsageNow version and build number, links to [usagenow.com](https://usagenow.com) and [@UsageNow](https://x.com/UsageNow) on X, and **Open Source Licenses…**. Include the version and build number when you report a problem.
+Shows the UsageNow version and build number, links to [usagenow.com](https://usagenow.com) and [@UsageNow](https://x.com/UsageNow) on X, **Open Source Licenses…**, and **Report a Problem…**.
+
+### Report a Problem
+
+Builds a report of what UsageNow sees and shows all of it before anything leaves your Mac:
+
+- the UsageNow and macOS versions, and your Mac's architecture
+- each screen's size, and whether it has a camera housing in the menu bar
+- menu bar organizers that are running, such as Bartender or Ice, by name only
+- your UsageNow settings
+- for each enabled provider: its status, limits, today's totals, how many of the last 30 days had activity, and the last refresh error
+
+It never includes names, emails, file paths, API keys, tokens, or prompts. Error messages are cleaned before they're included: your home folder becomes `~`, and email addresses and anything shaped like a key are masked. Times are relative, such as "5m ago".
+
+From there, choose **Copy**, **Email…**, or **Open GitHub Issue…**. Email and GitHub open with the report filled in; UsageNow sends nothing itself.

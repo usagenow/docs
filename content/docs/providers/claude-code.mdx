@@ -88,7 +88,7 @@ claude
 
 You don’t need to come back and choose **Try Again**. While the saved sign-in is expired, UsageNow checks only when the keychain item last changed — which reads no secret — and reads the token again as soon as Claude Code has saved a new one, on its next refresh.
 
-An expired sign-in doesn’t empty the display, either. The last limits UsageNow read stay for a day, marked stale, even if you quit or update the app in between, so the menu bar and the widget still show yesterday’s numbers in the morning. A successful read replaces them. The stored copy holds only percentages and reset times, and turning the setting off removes it.
+An expired sign-in doesn’t empty the display, either. The last limits UsageNow read stay for a day, marked stale with **Updated … ago** and with **Refresh Claude Code from Terminal to view usage limits.** beneath them, even if you quit or update the app in between, so the menu bar and the widget still show yesterday’s numbers in the morning — and the popover says they're old and how to bring them up to date. A successful read replaces them. The stored copy holds only percentages and reset times, and turning the setting off removes it.
 
 ### Limits you hit
 
@@ -98,7 +98,7 @@ A window that reset since UsageNow last read your limits stays on screen without
 
 ## States
 
-When usage limits aren’t available, UsageNow says why in one line — in the Claude Code section and under the setting in **Settings › General**:
+When usage limits aren’t available or can't be refreshed, UsageNow says why in one line — in the Claude Code section and under the setting in **Settings › General**. When you need to act, the line appears even beside last known values; a passing outage is mentioned only once those values are more than 10 minutes old:
 
 | Message | What it means | What to do |
 | --- | --- | --- |

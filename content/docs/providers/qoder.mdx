@@ -1,0 +1,38 @@
+---
+title: Qoder
+description: How UsageNow shows the credits Qoder spent, from the transcripts Qoder writes on your Mac.
+---
+
+UsageNow shows the credits Qoder spent today, how many answers they paid for, and a [30-day history](/menu-bar#last-30-days) of credits. Everything comes from files Qoder writes on your Mac. UsageNow sends no request to Qoder and reads no Qoder sign-in.
+
+## Requirements
+
+- Qoder installed — the Qoder app or `qodercli`
+- Used at least once, so it has recorded some answers
+
+## Credits
+
+Qoder's agent keeps a transcript of each session in `~/.qoder/projects`, whether it runs in the Qoder app or in the terminal. Every answer from the model records the credits Qoder charged for it. UsageNow adds them up for:
+
+- **credits today** — credits charged since midnight, after any discount Qoder applied
+- **requests** — answers from the model today
+
+An answer Qoder marks as not billable counts as zero. An answer copied into another session — when you resume or fork one — is counted once.
+
+## What isn't shown
+
+- **Tokens and a cost estimate.** Qoder records zero for every token count, so there's nothing to add up or price.
+- **Models.** Qoder names models by internal aliases rather than the names you pick in the app, so none is shown.
+- **Your plan's remaining credits.** Qoder shows them only in its app and on its website and keeps no copy on your Mac, so the Qoder section says **Usage limits unavailable**.
+
+## What is read, and what isn't
+
+Only each answer's time, its request identifier, and its credit fields are decoded. Your prompts, Qoder's replies, and tool results sit on the same lines and are never decoded. Qoder's sign-in — `~/.qoder/.auth` and the app's own sign-in files — is never opened.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Qoder section | Qoder isn't installed, or it's turned off in Settings. | Install Qoder, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's credits and requests still appear. |
+| **0 credits today** | Qoder hasn't answered anything today. | Use Qoder, then refresh. |

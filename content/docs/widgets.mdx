@@ -15,7 +15,9 @@ A glance at what matters most: for each enabled provider, the usage window with 
 
 A column for each enabled provider, with its usage windows, the percentage left in each, and reset times. With three or more providers, it switches to one compact row per provider so each stays readable. When more providers are enabled than fit, the ones closest to a limit are shown.
 
-In both sizes, percentages mean what’s **left**, exactly as in the [menu bar](/menu-bar#percentages-show-whats-left).
+In both sizes, percentages follow **Settings › General › Show limits as**: what's **left** by default, or what's **used** — exactly as in the [menu bar](/menu-bar#left-or-used).
+
+A provider with no limits to show — Gemini CLI, Warp, OpenCode, or Qoder — shows today's activity in its own unit instead: tokens, or credits for Kiro, Warp, and Qoder.
 
 ## Add the widget
 
@@ -39,7 +41,7 @@ The main UsageNow app refreshes providers, then writes a small snapshot of the v
   The widget doesn’t access `~/.codex` or `~/.claude`, doesn’t open the Keychain, doesn’t call Anthropic, and doesn’t launch Codex. The code that talks to providers and credentials isn’t part of the widget at all.
 </Callout>
 
-The snapshot holds display values only: each enabled provider’s usage windows and reset times, plan, most recent model, and today’s token and request counts. It never contains prompts, code, file paths, or credentials. It stays on your Mac.
+The snapshot holds display values only: each enabled provider’s usage windows and reset times, plan, most recent model, today’s token, request, and credit counts, and whether percentages read as left or used. It never contains prompts, code, file paths, or credentials. It stays on your Mac.
 
 ## Providers and the widget
 
@@ -55,6 +57,7 @@ The widget shows what UsageNow last saw. Its values change when the UsageNow app
 
 - When the data is old, the widget keeps showing the last known values with an **Updated … ago** note rather than hiding them.
 - The widget asks macOS to redraw it periodically and shortly after a reset, so countdowns stay current. macOS decides exactly when widgets update.
+- While UsageNow updates, the app and the widget can briefly be different versions. The widget skips anything from a newer app it doesn't recognize — a provider added in that version, for example — and shows the rest.
 
 ## Widget messages
 

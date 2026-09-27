@@ -1,6 +1,6 @@
 ---
 title: Menu Bar
-description: The menu bar item and its popover — how to read usage windows, reset times, and local activity.
+description: The menu bar item and its popover — how to read usage windows, reset times, local activity, and the last 30 days.
 ---
 
 UsageNow lives in the macOS menu bar. There’s no Dock icon and no main window. Everything happens in the menu bar item and the popover it opens.
@@ -20,6 +20,8 @@ From top to bottom, it contains:
 - **Header** — the Refresh and Settings buttons.
 - **Provider sections** — one for each enabled provider that’s installed on your Mac.
 - **Footer** — when UsageNow last refreshed, and **Quit**.
+
+When the provider sections are taller than your screen, they scroll between the header and the footer, so the popover never runs off a small display.
 
 The dot in the footer is green when the last refresh succeeded and orange when a provider couldn’t be refreshed.
 
@@ -47,29 +49,29 @@ If a refresh fails, UsageNow keeps the last data it had and adds a line such as 
 
 Each provider section starts with a header:
 
-- **Name** — the provider, such as Codex, Claude Code, Gemini CLI, Antigravity, Kiro, or Warp.
+- **Name** — the provider, such as Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, or Qoder.
 - **Most recent model** — the model you used most recently on this Mac, when it can be determined.
 - **Plan** — for example Plus, Pro, or Max 5x. The plan appears only when the provider states it explicitly. UsageNow never guesses it.
 
-When the data shown is more than 10 minutes old, the header adds a note such as **Updated 18m ago**.
+When the data shown is more than 10 minutes old, the header adds a note such as **Updated 18m ago**. When the provider needs you to do something before it can refresh — Claude Code's sign-in has expired, for example — the fix appears under the last known values too, so an old percentage isn't read as current.
 
 ## Usage windows
 
 Below the header, each row is one usage window reported by the provider. In the screenshot above, Codex reports a single weekly window, while Claude Code reports a 5-hour window and a weekly one.
 
 - **Label** — the length of the window: 5-hour, Weekly, or another length the provider reports, such as 30-day.
-- **Bar and percentage** — how much of the window is left. The bar shrinks as you use more.
+- **Bar and percentage** — how much of the window is left, or how much is used if you [choose so](#left-or-used). With **left**, the bar shrinks as you use more; with **used**, it grows.
 - **Reset time** — when the window starts over.
 
 Some windows apply to a single model family. These show the family before the reset time, for example **Opus · Resets Mon 09:00**.
 
-### Percentages show what’s left
+### Left or used
 
-UsageNow always displays the percentage **remaining**.
+By default, UsageNow shows the percentage **remaining**: **58% left** means 58% of that usage window remains, and you have used 42%.
 
-**58% left** means 58% of that usage window remains. You have used 42%. It never means 58% consumed.
+To see what's used instead, choose **Settings › General › Show limits as › Used**. Every percentage then reads the other way round — **42% used** — in the popover, the menu bar, and the widget alike, and bars grow instead of shrinking. The word after the number always says which one you're looking at.
 
-UsageNow rounds so that **0% left** appears only once the limit has actually been reached.
+Either way, UsageNow rounds so that **0% left** and **100% used** appear only once the limit has actually been reached.
 
 ### Reset times
 
@@ -102,7 +104,7 @@ Providers decide which windows exist, and that depends on your plan and can chan
 Below the windows, a provider section can show today’s activity:
 
 - **Tokens today** — tokens recorded in the provider’s local session files since midnight. Counts include cached input, as recorded by the tool.
-- **Credits today** — for Kiro and Warp, which measure usage in credits rather than tokens. **partial** means some of today's credits couldn't be told apart from earlier days; see [Warp](/providers/warp#why-credits-can-say-partial).
+- **Credits today** — for Kiro, Warp, and Qoder, which measure usage in credits rather than tokens. **partial** means some of today's credits couldn't be told apart from earlier days; see [Warp](/providers/warp#why-credits-can-say-partial).
 - **Requests** — model responses recorded today.
 - **≈ $4.20 at API prices** — what those tokens would have cost if the same work had been billed through the provider's API. See [Estimated cost](/menu-bar#estimated-cost).
 
@@ -110,7 +112,23 @@ Each value appears only when the provider can observe it.
 
 ### Models today
 
-When a provider records which model answered — Claude Code, Codex, and Gemini CLI do — a compact **Models today** list appears under the totals, most active first, with each model’s tokens and requests. Up to three models are shown, then “+N more”. It never shows a percentage: account limits aren’t split by model, so a model row is activity only. The list is hidden when only one model was used.
+When a provider records which model answered — Claude Code, Codex, Gemini CLI, OpenCode, and Warp do — a compact **Models today** list appears under the totals, most active first, with each model’s tokens and requests. Up to three models are shown, then “+N more”. It never shows a percentage: account limits aren’t split by model, so a model row is activity only. The list is hidden when only one model was used.
+
+### Last 30 days
+
+Under today's numbers, a chart shows the last 30 days, one bar per day, with the month's totals beneath it:
+
+- **the estimated cost** of the month at API prices, when the tool's tokens can be priced
+- **tokens** or **credits** over the month
+- **the model used most**, when the tool records models
+
+Hover a bar to see that day's numbers in place of the month's. Today's bar is the brightest; a day with no activity keeps a thin mark, so the 30 days always read as 30 slots.
+
+Each tool is charted in its own unit: tokens for Codex, Claude Code, Gemini CLI, and OpenCode; credits for Kiro and Qoder; requests for Warp, which keeps its credits per conversation rather than per day. A **+** after the cost means some models had no published price, the same as **partial** for today.
+
+Days follow your Mac's calendar and time zone, so a day with a clock change is still one bar. The history comes from the same local files as today's numbers — nothing is stored beyond what the tools themselves keep — so a tool that deletes old sessions (Claude Code keeps 30 days by default) shows only what's still there.
+
+To keep the popover short with many providers, turn the charts off in **Settings › General › Show the last 30 days**.
 
 ### Balance
 
@@ -138,7 +156,7 @@ A model UsageNow has no published price for is left out of the total, and the la
 | **No providers detected** | None of your enabled providers is installed on this Mac. |
 | **No providers enabled** | Every provider is turned off. Choose **Open Provider Settings** to turn one on. |
 | **Sign in to Codex to view usage** | Codex is installed but not signed in. The same applies to Claude Code. |
-| **Usage limits unavailable** | The provider isn’t reporting limits right now. Local activity may still appear. |
+| **Usage limits unavailable** | The provider isn’t reporting limits right now, or never does — Gemini CLI, Warp, OpenCode, and Qoder don't. Local activity may still appear. |
 | **Couldn’t refresh …** | The last refresh failed. The previous data stays visible. |
 
 A provider that isn’t installed doesn’t get a section at all. For provider-specific messages, see [Codex](/providers/codex#states) and [Claude Code](/providers/claude-code#states).
@@ -155,10 +173,11 @@ Choose what appears next to the symbol in **Settings › Menu Bar › Display**.
 | Claude Code usage | The percentage left in Claude Code’s tightest window. |
 | Gemini CLI usage | Gemini CLI reports no limits, so this shows the icon. |
 | Antigravity usage | The percentage left in Antigravity’s tightest window. |
+| Kiro usage | The percentage left in Kiro's monthly credits. |
 
 A few details:
 
 - **Most critical usage** compares every enabled provider’s windows and picks the one with the least left. Within a provider, when two windows are equally low, the one that resets sooner wins.
-- Only one percentage is ever shown, and it always means what’s left: **58%** next to the symbol means 58% left.
+- Only one percentage is ever shown. It follows [Show limits as](#left-or-used): with the default, **58%** next to the symbol means 58% left; with **Used**, it means 58% used. The window chosen is always the one with the least left.
 - When no usage limit is available for the chosen option, the menu bar shows the icon alone rather than 0%.
 - A provider-specific mode is offered only while that provider is enabled. If you turn the provider off, the display switches back to **Icon only**.

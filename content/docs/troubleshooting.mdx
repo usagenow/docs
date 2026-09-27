@@ -10,7 +10,7 @@ Start with a manual refresh: open the popover and press <Kbd>⌘R</Kbd>. Many pr
 UsageNow hides Codex when it can’t find it. Check that:
 
 - Codex is enabled in **Settings › Providers**.
-- Codex is installed. UsageNow looks for Codex data in `~/.codex`, and for the `codex` executable inside the Codex app or ChatGPT app, in `/opt/homebrew/bin`, `/usr/local/bin`, or `~/.local/bin`.
+- Codex is installed. UsageNow looks for Codex data in `~/.codex`, and for the `codex` executable inside the Codex app or ChatGPT app, in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, Bun, nvm, and the Codex extension for VS Code and the editors built on it.
 - If you use `CODEX_HOME`, UsageNow can see it. Apps opened from Finder or at login don’t inherit variables set in your shell profile.
 
 If `codex` is installed somewhere else — for example through a Node version manager — UsageNow can still read local activity from `~/.codex`, but it can’t run the app-server, so limits may be stale. Installing Codex in one of the locations above fixes this. See [Codex](/providers/codex#where-usagenow-looks).
@@ -69,13 +69,20 @@ UsageNow reads Antigravity limits from the **Antigravity app** while it runs —
 
 This is expected. Gemini CLI records no usage limits on your Mac, so UsageNow shows **Usage limits unavailable** with today's tokens, requests, and models below. See [Gemini CLI](/providers/gemini).
 
+## OpenCode or Qoder is not detected
+
+- Check that the provider is enabled in **Settings › Providers**.
+- OpenCode is found by its database in `~/.local/share/opencode`, its CLI, or its app. Use it once so it creates the database. See [OpenCode](/providers/opencode#where-usagenow-looks).
+- Qoder is found by `~/.qoder`, the Qoder app, or `qodercli`. Credits appear once its agent has answered something. See [Qoder](/providers/qoder).
+
 ## Usage data is stale
 
 A provider header shows **Updated … ago** when its data is more than 10 minutes old.
 
 - Refresh manually with <Kbd>⌘R</Kbd>.
 - Check **Settings › General › Refresh interval**. With **Manual**, UsageNow refreshes only when you open the popover or press Refresh.
-- For Codex, stale limits usually mean the app-server couldn’t be reached, so UsageNow is using the last limits recorded in Codex’s session files. Make sure Codex is signed in and can reach the internet.
+- For Codex, stale limits usually mean the app-server couldn’t be reached, so UsageNow is using the last limits recorded in Codex’s session files. Make sure Codex is signed in and can reach the internet. With ChatGPT 26.9 or later and UsageNow 0.5.0 or earlier, Codex limits stopped updating because ChatGPT moved its bundled `codex`; UsageNow 0.6.0 finds it again.
+- For Claude Code, stale limits come with **Refresh Claude Code from Terminal to view usage limits.** Launch `claude` in Terminal; see [Claude token is stale](#claude-token-is-stale).
 - A line such as **Couldn’t refresh Codex** means the last refresh failed. Choose **Retry**.
 
 ## Widget shows old data
@@ -85,6 +92,7 @@ The widget shows the last snapshot the UsageNow app wrote.
 - Make sure UsageNow is running. The widget can’t refresh providers itself. Turn on [Launch at Login](/settings#general) to keep it running.
 - Open the popover to trigger a refresh.
 - Old values stay visible with an **Updated … ago** note until new data arrives; this is intended.
+- Right after an update, if the widget shows **Open UsageNow to load usage data.**, open UsageNow once. Widgets from 0.6.0 on read data from a newer app too; earlier ones couldn't.
 
 ## Widget does not appear
 
@@ -106,4 +114,6 @@ If it shows **No providers detected**, your enabled providers aren’t installed
 
 ## Still stuck?
 
-[Open an issue](https://github.com/usagenow/usagenow/issues) with your UsageNow version and build number (in **Settings › About**), your macOS version, and what you see. Please don’t include prompts, tokens, account details, or files from `~/.codex` or `~/.claude`.
+Choose **Settings › About › Report a Problem**. It collects the details that help — versions, screens, settings, and what each provider shows — without names, file paths, keys, or prompts, shows you all of it, and opens a prefilled GitHub issue or email. Add what you saw and, if you can, a screenshot. See [Settings](/settings#report-a-problem).
+
+If you'd rather write it yourself, [open an issue](https://github.com/usagenow/usagenow/issues) with your UsageNow version and build number (in **Settings › About**), your macOS version, and what you see. Please don’t include prompts, tokens, account details, or files from `~/.codex` or `~/.claude`.

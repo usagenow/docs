@@ -14,12 +14,15 @@ A provider is an AI coding tool UsageNow can report on. Each one exposes differe
   <Card title="Antigravity" href="/providers/antigravity">Usage limits while the Antigravity app runs.</Card>
   <Card title="Kiro" href="/providers/kiro">Monthly credit limit, plan, and today's credits.</Card>
   <Card title="Warp" href="/providers/warp">Today's agent requests, credits, and models.</Card>
+  <Card title="OpenCode" href="/providers/opencode">Today's tokens, requests, models, and estimated cost.</Card>
+  <Card title="Qoder" href="/providers/qoder">Credits spent today and the answers they paid for.</Card>
   <Card title="DeepSeek, Kimi, OpenRouter" href="/providers/api-keys">Balance and spending, with your own API key.</Card>
+  <Card title="Ollama Cloud" href="/providers/api-keys#ollama-cloud">Session and weekly limits, with your own API key. Experimental.</Card>
 </Cards>
 
 ## Coming soon
 
-Cursor, GitHub Copilot, OpenCode, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
+Cursor, GitHub Copilot, and Qwen are planned. None of them is supported yet. See [Coming Soon](/providers/coming-soon).
 
 ## Turning a provider off
 
@@ -40,7 +43,8 @@ UsageNow never deletes or changes anything belonging to a provider when you turn
 Providers measure usage in their own ways, so their numbers aren’t directly comparable:
 
 - **Windows differ.** One provider may report a 5-hour and a weekly window; another may report only one, or a window for a single model family.
-- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs; Kiro through the limits it writes to its own log. Gemini CLI and Warp report no limits. DeepSeek, Kimi, and OpenRouter report money rather than a percentage.
+- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs; Kiro through the limits it writes to its own log; Ollama Cloud through an [experimental endpoint](/providers/api-keys#ollama-cloud). Gemini CLI, Warp, OpenCode, and Qoder report no limits. DeepSeek, Kimi, and OpenRouter report money rather than a percentage.
+- **Meters differ.** Most tools count tokens. Kiro and Qoder count credits, and Warp counts both. The [30-day history](/menu-bar#last-30-days) charts each tool in its own unit.
 - **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption. Where a provider records the model, UsageNow also shows [activity by model](/menu-bar#models-today).
 
 UsageNow never fills a gap with an estimate. When a value isn’t reported, it isn’t shown.

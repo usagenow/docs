@@ -27,8 +27,8 @@ UsageNow is local-first. Your usage data stays on your Mac unless a request to t
 | Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
 | Claude Code credentials | No | No |
 | Codex credentials | Never read | No |
-| Kiro and Warp credentials | Never read | No |
-| API keys you add (DeepSeek, Kimi, OpenRouter) | In your Keychain, on this Mac only | No — sent only to that provider |
+| Kiro, Warp, OpenCode, and Qoder credentials | Never read | No |
+| API keys you add (DeepSeek, Kimi, OpenRouter, Ollama Cloud) | In your Keychain, on this Mac only | No — sent only to that provider |
 | Prompts, responses, and code | No | No |
 | Anonymous product analytics | Optional | Optional, off by default |
 
@@ -40,8 +40,10 @@ UsageNow reads only what it needs to show your usage, and only for [providers yo
 - **Claude Code** — timestamps, identifiers, model names, and token counts from Claude Code session files, and the plan from Claude Code’s account profile. [Details](/providers/claude-code)
 - **Kiro** — the plan, credit amounts, and reset date from the usage-limits answer Kiro writes to its own log, and the time and credits of each prompt from Kiro session files. The account identifiers in that log are never read. [Details](/providers/kiro)
 - **Warp** — times, outcomes, credit amounts, and tokens per model from Warp's local database, opened read-only. The text of prompts and replies is never read. [Details](/providers/warp)
+- **OpenCode** — each answer's time, model, and token counts from OpenCode's local database, opened read-only. SQLite extracts only those numbers, so the reply text stored beside them never leaves the database, and prompt tables aren't read. [Details](/providers/opencode)
+- **Qoder** — each answer's time, request identifier, and credits from the transcripts Qoder writes in `~/.qoder/projects`. Prompts, replies, and tool results on the same lines are never decoded, and Qoder's sign-in is never opened. [Details](/providers/qoder)
 
-Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals.
+Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals, including the [30-day history](/menu-bar#last-30-days), which is computed from the tools' own files each time and never saved by UsageNow.
 
 ## Network requests
 
@@ -54,6 +56,7 @@ UsageNow itself makes network requests only in these cases:
 | DeepSeek balance | Only after you add a DeepSeek API key | `api.deepseek.com` |
 | Kimi balance | Only after you add a Kimi API key | `api.moonshot.ai` |
 | OpenRouter spending | Only after you add an OpenRouter API key | `openrouter.ai` |
+| Ollama Cloud limits | Only after you add an Ollama Cloud API key | `ollama.com` |
 | Update check | Only if updates are on, or you choose Check Now | `usagenow.com` |
 | Update download | Only after you accept an update | `usagenow.com` |
 
@@ -77,7 +80,11 @@ The desktop widget can’t read provider data itself. The UsageNow app writes a 
 
 ## Analytics
 
-Anonymous analytics are optional and off by default. Current builds don’t send any analytics, whether or not the setting is on. [Telemetry](/telemetry) documents exactly what an opted-in build would send.
+Anonymous analytics are optional and off by default. Release builds from 0.4.0 send them only while you have the setting on, and nothing about your usage is ever part of them. [Telemetry](/telemetry) documents exactly what is sent.
+
+## Report a Problem
+
+**Settings › About › Report a Problem** builds a report of what UsageNow sees — versions, screen sizes, settings, and each provider's status and limits — and shows all of it first. UsageNow doesn't send it: it opens a GitHub issue or an email with the report filled in, for you to send or not. It never includes names, emails, file paths, keys, tokens, or prompts. See [Settings](/settings#report-a-problem).
 
 ## Logs
 
