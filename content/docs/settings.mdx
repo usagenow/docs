@@ -3,7 +3,7 @@ title: Settings
 description: Every UsageNow setting, tab by tab.
 ---
 
-Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> while the popover is open. Settings has five tabs: General, Providers, Menu Bar, Privacy, and About.
+Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> while the popover is open. Settings has six tabs: General, Providers, Menu Bar, Notifications, Privacy, and About.
 
 ## General
 
@@ -62,6 +62,29 @@ Turning a provider off stops UsageNow from refreshing it or reading anything for
 - One per enabled provider with limits, such as **Codex usage**, **Antigravity usage**, or **Kiro usage**
 
 When no usage limit is available, the menu bar shows the icon alone. See [Menu bar display](/menu-bar#menu-bar-display) for how each option is calculated.
+
+### Keyboard shortcut
+
+Opens UsageNow from any app. Click **Record Shortcut**, then press the keys: a letter or other key with at least one of <Kbd>⌃</Kbd>, <Kbd>⌥</Kbd>, or <Kbd>⌘</Kbd>, or a function key on its own. Press <Kbd>Esc</Kbd> to cancel recording, and use the button beside the shortcut to remove it. There's no default.
+
+Pressing the shortcut shows the same content as the popover, in a window under the menu bar item. Press it again, press <Kbd>Esc</Kbd>, or click elsewhere to close it.
+
+The shortcut needs no Accessibility or Input Monitoring permission: macOS tells UsageNow only that its own shortcut was pressed. If another app already holds the combination, Settings says so and asks for a different one.
+
+## Notifications
+
+### Notify me about limits
+
+Off by default. When on, UsageNow sends a notification:
+
+- when a limit is down to **20%**, and again at **5%** — once each, not on every refresh
+- when a limit it warned you about **has reset**
+
+A limit first seen below both thresholds gets one notification, not two. A limit you were never warned about resets silently. The wording follows [Show limits as](#show-limits-as): “18% of the 5-hour limit left” or “82% of the 5-hour limit used”.
+
+The first time you turn it on, macOS asks whether UsageNow may show notifications. If notifications are off for UsageNow in System Settings, the tab says so and offers **Open Notification Settings…**.
+
+Limits are checked when UsageNow refreshes, so a warning can arrive up to one [refresh interval](#refresh-interval) late. The reset notification is scheduled with macOS when the warning goes out, so it arrives on time even if UsageNow isn't running then. Notifications are local to this Mac; nothing is sent anywhere.
 
 ## Privacy
 

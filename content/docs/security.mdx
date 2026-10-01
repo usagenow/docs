@@ -48,6 +48,12 @@ UsageNow installs an update only when it is signed with the private half of an E
 
 A build that carries no public key, which is any build not made by the release process, doesn't start the updater at all.
 
+## Notifications and the keyboard shortcut
+
+Notifications about limits are off by default and local: UsageNow hands macOS a title and a line of text — a provider's name, a percentage, a reset time — and nothing is sent anywhere. macOS shows them wherever your notification settings allow, including the Lock Screen.
+
+The keyboard shortcut uses the system's hot key API, which needs no Accessibility or Input Monitoring permission. macOS tells UsageNow only that its own shortcut was pressed; UsageNow never sees anything else you type. See [Settings](/settings#notifications).
+
 ## Report a Problem
 
 **Settings › About › Report a Problem** shows its whole report before anything leaves your Mac and sends nothing itself: it opens a prefilled GitHub issue or email. Account names, emails, file paths, keys, tokens, and prompts are never in it, and error messages are cleaned of paths, emails, and key-shaped strings before they're included.
