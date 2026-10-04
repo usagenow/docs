@@ -1,0 +1,49 @@
+---
+title: Qwen Code
+description: How UsageNow reads Qwen Code tokens, answers, and models from the session recordings Qwen Code writes on your Mac.
+---
+
+UsageNow shows your Qwen Code activity for today — tokens, answers, the models that gave them, and what that work would have cost at API prices — and a [30-day history](/menu-bar#last-30-days). Everything comes from the session recordings Qwen Code writes on your Mac. It doesn't show a usage limit.
+
+<Callout type="note" title="Not yet verified against a live install">
+  Qwen Code support follows Qwen Code's own source code for how it records sessions, and is covered by tests, but hasn't yet been checked against real Qwen Code sessions. If numbers look wrong, use **Settings › About › Report a Problem**.
+</Callout>
+
+## Requirements
+
+- Qwen Code installed — the `qwen` CLI
+- Used at least once, so it has recorded a session
+
+## Today's activity
+
+Qwen Code records every message of a session, and attaches the model's token counts to each answer. UsageNow adds them up for:
+
+- **tokens today** — the whole prompt, cached part included, plus output and thinking
+- **requests** — answers recorded today
+- **most recent model** and **activity by model**
+- **≈ cost at API prices** — see [Estimated cost](/menu-bar#estimated-cost)
+
+A session you resume repeats its earlier records; UsageNow counts each answer once. A model UsageNow has no published price for is left out of the estimate, which then reads **partial**.
+
+## What is read, and what isn't
+
+From each line of a recording, UsageNow decodes only the answer's identifier, its time, the model, and the token counts. The message itself — your prompt, the reply, tool output — is never decoded. Workflow journals kept in the same folders aren't read at all.
+
+Qwen Code's sign-in (`~/.qwen/oauth_creds.json`) and its settings are never opened.
+
+## No usage limit
+
+Qwen Code doesn't write a limit to disk, so the Qwen Code section says **Usage limits unavailable**. Today's tokens, requests, and models still appear.
+
+## Where UsageNow looks
+
+UsageNow reads `~/.qwen/projects/<project>/chats/<session>.jsonl`. It recognizes Qwen Code as installed when `~/.qwen` exists, or when the `qwen` CLI is in `~/.local/bin`, Homebrew, `/usr/local/bin`, Bun, or a Node version under nvm.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Qwen Code section | Qwen Code isn't installed, or it's turned off in Settings. | Install Qwen Code, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's tokens, requests, and models still appear. |
+| **0 tokens today** | Qwen Code is installed but hasn't answered anything today. | Use Qwen Code, then refresh. |
+| **Couldn't refresh Qwen Code** | The recordings couldn't be read at that moment. The last reading stays. | Choose **Retry**. |

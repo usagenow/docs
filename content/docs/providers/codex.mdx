@@ -45,9 +45,13 @@ Only token counts, model identifiers, timestamps, and rate-limit fields are read
   Local token activity is not the same as subscription quota consumption. It covers only what Codex recorded on this Mac, and Codex may weigh usage differently.
 </Callout>
 
+## More than one account
+
+If you keep a second Codex account in its own folder — running Codex with `CODEX_HOME` pointing at it — add it in **Settings › Providers › Codex › Add Account…** and choose that folder. UsageNow reads it the same way as the first: limits through the app-server, started with `CODEX_HOME` set to that folder, and activity from its session files. It appears as its own section, such as **Codex · Work**. See [Accounts](/settings#accounts).
+
 ## Where UsageNow looks
 
-UsageNow looks for Codex data in `~/.codex`, or in the folder set by `CODEX_HOME`.
+UsageNow looks for Codex data in `~/.codex`, or in the folder set by `CODEX_HOME`, and in the folder of each [account you added](#more-than-one-account).
 
 To run the app-server, it looks for the `codex` executable in these locations:
 

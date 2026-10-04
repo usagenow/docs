@@ -110,6 +110,12 @@ When usage limits aren’t available or can't be refreshed, UsageNow says why in
 
 In every case, local token, request, model, and plan information stays visible when it’s available, and limits read earlier stay on screen as stale for a day. Usage limits are the only part that depends on the experimental source.
 
+## More than one account
+
+If you keep a second Claude Code account in its own folder — running Claude Code with `CLAUDE_CONFIG_DIR` pointing at it — add it in **Settings › Providers › Claude Code › Add Account…** and choose that folder. It appears as its own section, such as **Claude Code · Work**, with the plan, activity, and 30-day history from that folder.
+
+Its limits appear when Claude Code records reaching one in that folder's sessions. The [experimental usage limits](#experimental-usage-limits) source reads only the default account's sign-in, and never another account's. See [Accounts](/settings#accounts).
+
 ## Where UsageNow looks
 
-UsageNow looks for Claude Code data in `~/.claude` and `~/.claude.json`, or in the folder set by `CLAUDE_CONFIG_DIR`. It also recognizes the `claude` executable in `~/.local/bin`, `~/.claude/local`, `/opt/homebrew/bin`, and `/usr/local/bin`.
+UsageNow looks for Claude Code data in `~/.claude` and `~/.claude.json`, or in the folder set by `CLAUDE_CONFIG_DIR`, and in the folder of each [account you added](#more-than-one-account). It also recognizes the `claude` executable in `~/.local/bin`, `~/.claude/local`, `/opt/homebrew/bin`, and `/usr/local/bin`.

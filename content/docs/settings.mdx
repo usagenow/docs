@@ -5,6 +5,12 @@ description: Every UsageNow setting, tab by tab.
 
 Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> while the popover is open. Settings has six tabs: General, Providers, Menu Bar, Notifications, Privacy, and About.
 
+## Language
+
+UsageNow follows your Mac's language, in English, German, Spanish, French, or Russian. To use a different language for UsageNow only, choose it in **System Settings › General › Language & Region › Applications**, then quit and reopen UsageNow.
+
+Provider and model names, and the list of changes under [What's New](#whats-new), stay in English.
+
 ## General
 
 ### Launch UsageNow at login
@@ -45,11 +51,22 @@ When limits can’t be fetched, a one-line reason and a **Try Again** button app
 
 Choose which services UsageNow displays and monitors.
 
-- **Available** — Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, DeepSeek, Kimi, OpenRouter, and Ollama Cloud, each with its own switch. Providers that read a tool on your Mac start on; the ones that need an API key start off. Ollama Cloud carries an **Experimental** badge. Drag a row, or use its **Move Up** / **Move Down** menu, to set the order the popover and widget use.
+- **Available** — Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, Grok Build, DeepSeek, Kimi, OpenRouter, and Ollama Cloud, each with its own switch. Providers that read a tool on your Mac start on; the ones that need an API key start off. Ollama Cloud carries an **Experimental** badge. Drag a row, or use its **Move Up** / **Move Down** menu, to set the order the popover and widget use.
 - **API key** — under DeepSeek, Kimi, OpenRouter, and Ollama Cloud once they're on: **Add API Key…**, or **Replace…** and **Remove** when a key is saved. Turning one of them off deletes its key. See [API Key Providers](/providers/api-keys).
-- **Coming soon** — providers on the roadmap (Cursor, GitHub Copilot, and Qwen), shown together in one row. They can’t be turned on yet.
+- **Accounts** — under Codex, Claude Code, and the API key providers once they're on: the accounts you added, and **Add Account…**. See [Accounts](#accounts).
+- **Coming soon** — providers on the roadmap (Cursor and GitHub Copilot), shown together in one row. They can’t be turned on yet.
 
 The list scrolls when it's taller than the window.
+
+### Accounts
+
+UsageNow reads the account each tool uses by default. If you use more than one — a personal and a work Codex, say — add the others with **Add Account…** under the provider. Each account gets its own section in the popover and its own row in the widget, named after the provider and the account: **Codex · Work**.
+
+- **Name** — your own label, such as Work or Client. UsageNow never reads an account's name or email from the tool, and a [problem report](#report-a-problem) numbers accounts instead of naming them.
+- **Codex and Claude Code** — choose the folder the tool uses for that account: the one `CODEX_HOME` or `CLAUDE_CONFIG_DIR` points to when you run it. UsageNow reads it exactly as it reads `~/.codex` or `~/.claude`. For an added Claude Code account, limits appear when Claude Code records reaching one; the [experimental limits source](/providers/claude-code#experimental-usage-limits) reads only the default account's sign-in.
+- **DeepSeek, Kimi, OpenRouter, and Ollama Cloud** — enter that account's API key. It's kept like the first: only in this Mac's Keychain, sent only to the provider, and deleted when you remove the account or turn the provider off.
+
+**Remove** forgets an account and, for an API account, deletes its key. It never touches the tool's own folder.
 
 Turning a provider off stops UsageNow from refreshing it or reading anything for it. See [Providers](/providers#turning-a-provider-off).
 
@@ -94,7 +111,11 @@ Optional, and off by default. When on, UsageNow may share basic app usage and de
 
 ## About
 
-Shows the UsageNow version and build number, links to [usagenow.com](https://usagenow.com) and [@UsageNow](https://x.com/UsageNow) on X, **Open Source Licenses…**, and **Report a Problem…**.
+Shows the UsageNow version and build number, links to [usagenow.com](https://usagenow.com) and [@UsageNow](https://x.com/UsageNow) on X, **What's New…**, **Open Source Licenses…**, and **Report a Problem…**.
+
+### What's New
+
+Every version's changes, newest first, with the one you have marked **Installed**. The list ships inside the app, so it opens without a connection and always matches your version. It's the same as the [changelog on GitHub](https://github.com/usagenow/usagenow/blob/main/CHANGELOG.md), in English.
 
 ### Report a Problem
 
@@ -104,7 +125,7 @@ Builds a report of what UsageNow sees and shows all of it before anything leaves
 - each screen's size, and whether it has a camera housing in the menu bar
 - menu bar organizers that are running, such as Bartender or Ice, by name only
 - your UsageNow settings
-- for each enabled provider: its status, limits, today's totals, how many of the last 30 days had activity, and the last refresh error
+- for each enabled provider and added account: its status, limits, today's totals, how many of the last 30 days had activity, and the last refresh error — accounts are numbered, not named
 
 It never includes names, emails, file paths, API keys, tokens, or prompts. Error messages are cleaned before they're included: your home folder becomes `~`, and email addresses and anything shaped like a key are masked. Times are relative, such as "5m ago".
 

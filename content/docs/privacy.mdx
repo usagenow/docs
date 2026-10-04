@@ -27,7 +27,7 @@ UsageNow is local-first. Your usage data stays on your Mac unless a request to t
 | Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
 | Claude Code credentials | No | No |
 | Codex credentials | Never read | No |
-| Kiro, Warp, OpenCode, and Qoder credentials | Never read | No |
+| Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build credentials | Never read | No |
 | API keys you add (DeepSeek, Kimi, OpenRouter, Ollama Cloud) | In your Keychain, on this Mac only | No — sent only to that provider |
 | Prompts, responses, and code | No | No |
 | Anonymous product analytics | Optional | Optional, off by default |
@@ -42,6 +42,11 @@ UsageNow reads only what it needs to show your usage, and only for [providers yo
 - **Warp** — times, outcomes, credit amounts, and tokens per model from Warp's local database, opened read-only. The text of prompts and replies is never read. [Details](/providers/warp)
 - **OpenCode** — each answer's time, model, and token counts from OpenCode's local database, opened read-only. SQLite extracts only those numbers, so the reply text stored beside them never leaves the database, and prompt tables aren't read. [Details](/providers/opencode)
 - **Qoder** — each answer's time, request identifier, and credits from the transcripts Qoder writes in `~/.qoder/projects`. Prompts, replies, and tool results on the same lines are never decoded, and Qoder's sign-in is never opened. [Details](/providers/qoder)
+- **Qwen Code** — each answer's identifier, time, model, and token counts from the session recordings in `~/.qwen/projects`. Messages are never decoded, and Qwen Code's sign-in is never opened. [Details](/providers/qwen-code)
+- **Cline** — each API request's time, model, token counts, and the cost Cline recorded, from the tasks its editor extension saves and the sessions its CLI saves. The request Cline stored beside those numbers passes through memory and is never kept or logged; prompts, replies, and Cline's keys are never read. [Details](/providers/cline)
+- **Grok Build** — each finished turn's time, models, token counts, model calls, and the cost xAI reported, from the session logs in `~/.grok/sessions`. Prompts, replies, tool calls, and the turn's result text are never decoded. [Details](/providers/grok-build)
+
+For an [account you added](/settings#accounts), the same is read from the folder you chose. Its name is the label you typed; UsageNow never reads an account's own name or email.
 
 Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals, including the [30-day history](/menu-bar#last-30-days), which is computed from the tools' own files each time and never saved by UsageNow.
 

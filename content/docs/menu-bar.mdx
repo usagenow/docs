@@ -51,7 +51,7 @@ If a refresh fails, UsageNow keeps the last data it had and adds a line such as 
 
 Each provider section starts with a header:
 
-- **Name** — the provider, such as Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, or Qoder.
+- **Name** — the provider, such as Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, or Grok Build. An account you [added](/settings#accounts) carries its name too, such as **Codex · Work**, and follows the provider's own section.
 - **Most recent model** — the model you used most recently on this Mac, when it can be determined.
 - **Plan** — for example Plus, Pro, or Max 5x. The plan appears only when the provider states it explicitly. UsageNow never guesses it.
 
@@ -126,7 +126,7 @@ Under today's numbers, a chart shows the last 30 days, one bar per day, with the
 
 Hover a bar to see that day's numbers in place of the month's. Today's bar is the brightest; a day with no activity keeps a thin mark, so the 30 days always read as 30 slots.
 
-Each tool is charted in its own unit: tokens for Codex, Claude Code, Gemini CLI, and OpenCode; credits for Kiro and Qoder; requests for Warp, which keeps its credits per conversation rather than per day. A **+** after the cost means some models had no published price, the same as **partial** for today.
+Each tool is charted in its own unit: tokens for Codex, Claude Code, Gemini CLI, OpenCode, Qwen Code, Cline, and Grok Build; credits for Kiro and Qoder; requests for Warp, which keeps its credits per conversation rather than per day. A **+** after the cost means some models had no published price, the same as **partial** for today.
 
 Days follow your Mac's calendar and time zone, so a day with a clock change is still one bar. The history comes from the same local files as today's numbers — nothing is stored beyond what the tools themselves keep — so a tool that deletes old sessions (Claude Code keeps 30 days by default) shows only what's still there.
 
@@ -146,6 +146,8 @@ Each kind of token is priced the way providers price it: fresh input, tokens wri
 
 A model UsageNow has no published price for is left out of the total, and the label then reads **at API prices, partial** rather than pretending the number is complete. Prices ship inside the app and are refreshed with each release, so the estimate needs no network access and no account of any kind.
 
+Cline and Grok Build record what each request cost themselves, from the prices of the provider you ran them with. For them UsageNow shows that figure instead of its own, and estimates only a request they recorded no cost for.
+
 <Callout type="info" title="Local activity isn’t quota">
   Tokens and requests describe activity recorded on this Mac. They don’t necessarily match your subscription’s quota consumption or billing. Activity from other devices or the web isn’t included, and providers weigh usage in their own ways.
 </Callout>
@@ -158,7 +160,7 @@ A model UsageNow has no published price for is left out of the total, and the la
 | **No providers detected** | None of your enabled providers is installed on this Mac. |
 | **No providers enabled** | Every provider is turned off. Choose **Open Provider Settings** to turn one on. |
 | **Sign in to Codex to view usage** | Codex is installed but not signed in. The same applies to Claude Code. |
-| **Usage limits unavailable** | The provider isn’t reporting limits right now, or never does — Gemini CLI, Warp, OpenCode, and Qoder don't. Local activity may still appear. |
+| **Usage limits unavailable** | The provider isn’t reporting limits right now, or never does — Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build don't. Local activity may still appear. |
 | **Couldn’t refresh …** | The last refresh failed. The previous data stays visible. |
 
 A provider that isn’t installed doesn’t get a section at all. For provider-specific messages, see [Codex](/providers/codex#states) and [Claude Code](/providers/claude-code#states).

@@ -69,11 +69,19 @@ UsageNow reads Antigravity limits from the **Antigravity app** while it runs —
 
 This is expected. Gemini CLI records no usage limits on your Mac, so UsageNow shows **Usage limits unavailable** with today's tokens, requests, and models below. See [Gemini CLI](/providers/gemini).
 
-## OpenCode or Qoder is not detected
+## OpenCode, Qoder, Qwen Code, Cline, or Grok Build is not detected
 
 - Check that the provider is enabled in **Settings › Providers**.
 - OpenCode is found by its database in `~/.local/share/opencode`, its CLI, or its app. Use it once so it creates the database. See [OpenCode](/providers/opencode#where-usagenow-looks).
 - Qoder is found by `~/.qoder`, the Qoder app, or `qodercli`. Credits appear once its agent has answered something. See [Qoder](/providers/qoder).
+- Qwen Code is found by `~/.qwen` or the `qwen` CLI, and Grok Build by `~/.grok` or the `grok` CLI. Activity appears once they've recorded a session. See [Qwen Code](/providers/qwen-code) and [Grok Build](/providers/grok-build).
+- Cline is found by its saved tasks in VS Code, Cursor, Windsurf, Kiro, VSCodium, or Trae, by `~/.cline/data`, or by the `cline` CLI. Run one task so it saves something. Forks such as Roo Code and Kilo Code aren't read. See [Cline](/providers/cline#where-usagenow-looks).
+
+## An added account doesn't appear
+
+- Check the folder: it should be the one the tool uses for that account — where `CODEX_HOME` or `CLAUDE_CONFIG_DIR` points when you run it — not your projects folder.
+- An account whose folder has no sign-in and no sessions reads as signed out. Use the tool with that folder once, then refresh.
+- For an API account, check that its key was saved: **Settings › Providers** shows **API key saved** under the account's name.
 
 ## Usage data is stale
 

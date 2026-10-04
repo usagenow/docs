@@ -17,7 +17,9 @@ A column for each enabled provider, with its usage windows, the percentage left 
 
 In both sizes, percentages follow **Settings › General › Show limits as**: what's **left** by default, or what's **used** — exactly as in the [menu bar](/menu-bar#left-or-used).
 
-A provider with no limits to show — Gemini CLI, Warp, OpenCode, or Qoder — shows today's activity in its own unit instead: tokens, or credits for Kiro, Warp, and Qoder.
+A provider with no limits to show — Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, or Grok Build — shows today's activity in its own unit instead: tokens, or credits for Kiro, Warp, and Qoder. In the medium widget's rows, such a provider also gets a small chart of its last two weeks, one bar per day with today's bar highlighted. The chart shows the shape of your activity, not amounts, and turns off with **Settings › General › Show the last 30 days**.
+
+An account you [added](/settings#accounts) appears as its own row, named after the provider and the account — **Codex · Work**.
 
 ## Add the widget
 
@@ -41,7 +43,7 @@ The main UsageNow app refreshes providers, then writes a small snapshot of the v
   The widget doesn’t access `~/.codex` or `~/.claude`, doesn’t open the Keychain, doesn’t call Anthropic, and doesn’t launch Codex. The code that talks to providers and credentials isn’t part of the widget at all.
 </Callout>
 
-The snapshot holds display values only: each enabled provider’s usage windows and reset times, plan, most recent model, today’s token, request, and credit counts, and whether percentages read as left or used. It never contains prompts, code, file paths, or credentials. It stays on your Mac.
+The snapshot holds display values only: each enabled provider’s usage windows and reset times, plan, most recent model, today’s token, request, and credit counts, the name you gave an added account, the shape of the last two weeks as shares of the busiest day, and whether percentages read as left or used. It never contains prompts, code, file paths, or credentials. It stays on your Mac.
 
 ## Providers and the widget
 

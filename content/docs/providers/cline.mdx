@@ -1,0 +1,49 @@
+---
+title: Cline
+description: How UsageNow reads Cline tokens, requests, models, and cost from the tasks and sessions Cline saves on your Mac.
+---
+
+UsageNow shows your Cline activity for today — tokens, API requests, the models that answered, and what Cline worked out those requests cost — and a [30-day history](/menu-bar#last-30-days). It reads the tasks the Cline extension saves in your editor and the sessions the command-line Cline saves. It doesn't show a usage limit.
+
+## Requirements
+
+- Cline installed — the extension in VS Code, Cursor, Windsurf, Kiro, VSCodium, or Trae, or the `cline` CLI
+- At least one task run, so Cline has saved some requests
+
+## Today's activity
+
+Cline records every API request it makes, with its token counts and the cost it worked out from the provider's prices. UsageNow adds them up for:
+
+- **tokens today** — input, output, and tokens read from or written to the prompt cache
+- **requests** — API requests made today
+- **most recent model** and **activity by model**
+- **≈ cost** — the cost Cline recorded, not UsageNow's own estimate. A request Cline recorded no cost for is priced from UsageNow's table when the model has a published price; otherwise the total reads **partial**.
+
+Cline runs on whichever provider you connect — Anthropic, OpenAI, OpenRouter, a local model, and many more — so the models in the list are the ones you chose there.
+
+## What is read, and what isn't
+
+- **Editor tasks** (`ui_messages.json`). Cline keeps each request as a message whose text holds the token counts and cost beside the request it sent. UsageNow reads that one kind of message; the request passes through memory while the numbers are read and is never kept or logged. Every other message — your prompts, Cline's replies, tool output — is skipped.
+- **CLI sessions** (`*.messages.json`). Each answer carries its numbers beside its content; the content is never decoded.
+
+Cline's keys — `secrets.json`, and the editor's secret storage — are never opened. Task files are rewritten as a task goes on, so each is read again only when it changes.
+
+## No usage limit
+
+Cline has no limit of its own: limits belong to the provider you run it with. The Cline section says **Usage limits unavailable**.
+
+## Where UsageNow looks
+
+- `~/Library/Application Support/<editor>/User/globalStorage/saoudrizwan.claude-dev/tasks/` for VS Code (stable and Insiders), Cursor, Windsurf, Kiro, VSCodium, and Trae
+- `~/.cline/data/sessions/` and `~/.cline/data/tasks/` for the command-line Cline
+
+It recognizes Cline as installed when one of those folders exists, or when the `cline` CLI is in `~/.local/bin`, Homebrew, `/usr/local/bin`, Bun, or a Node version under nvm. Forks such as Roo Code and Kilo Code keep their tasks under their own names and aren't read.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Cline section | Cline isn't installed, or it's turned off in Settings. | Install Cline, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's tokens, requests, and models still appear. |
+| **0 tokens today** | Cline is installed but hasn't made a request today. | Run a task, then refresh. |
+| **Couldn't refresh Cline** | The task files couldn't be read at that moment. The last reading stays. | Choose **Retry**. |

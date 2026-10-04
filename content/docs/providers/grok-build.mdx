@@ -1,0 +1,47 @@
+---
+title: Grok Build
+description: How UsageNow reads Grok Build tokens, model calls, models, and cost from the session logs Grok Build writes on your Mac.
+---
+
+UsageNow shows your Grok Build activity for today — tokens, model calls, the models that answered, and the cost xAI reported for them — and a [30-day history](/menu-bar#last-30-days). Everything comes from the session logs Grok Build writes on your Mac. It doesn't show a usage limit.
+
+<Callout type="note" title="Not yet verified against a live install">
+  Grok Build support follows Grok Build's open source code for how it logs sessions, and is covered by tests, but hasn't yet been checked against real Grok Build sessions. If numbers look wrong, use **Settings › About › Report a Problem**.
+</Callout>
+
+## Requirements
+
+- Grok Build installed — the `grok` CLI
+- Used at least once, so it has logged a finished turn
+
+## Today's activity
+
+When a turn ends, Grok Build logs that turn's usage per model. UsageNow adds them up for:
+
+- **tokens today** — the whole prompt, cache reads and writes included, plus output
+- **requests** — model calls made today
+- **most recent model** and **activity by model**
+- **≈ cost** — what xAI reported for the turn. A turn whose usage is incomplete is priced from UsageNow's table instead, when the model has a published price; otherwise the total reads **partial**.
+
+## What is read, and what isn't
+
+UsageNow reads only the `turn_completed` lines of each log, and from them only the token counts, model calls, cost, model names, and time. The turn's result text on the same line is never decoded, and neither is any other line — prompts, replies, and tool calls.
+
+Grok Build's sign-in and settings are never opened.
+
+## No usage limit
+
+A Grok plan's weekly usage is shown only in your account settings on the web, and Grok Build keeps no copy of it on disk. The Grok Build section says **Usage limits unavailable**.
+
+## Where UsageNow looks
+
+UsageNow reads `~/.grok/sessions/<project>/<session>/updates.jsonl`. It recognizes Grok Build as installed when `~/.grok` exists, or when the `grok` CLI is in `~/.grok/bin`, `~/.local/bin`, Homebrew, `/usr/local/bin`, Bun, or a Node version under nvm.
+
+## States
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| No Grok Build section | Grok Build isn't installed, or it's turned off in Settings. | Install Grok Build, or turn it on in **Settings › Providers**. |
+| **Usage limits unavailable** | Expected: see above. | Today's tokens, requests, and models still appear. |
+| **0 tokens today** | Grok Build is installed but hasn't finished a turn today. | Use Grok Build, then refresh. |
+| **Couldn't refresh Grok Build** | The logs couldn't be read at that moment. The last reading stays. | Choose **Retry**. |
