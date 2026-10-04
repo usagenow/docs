@@ -7,7 +7,9 @@ Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> whil
 
 ## Language
 
-UsageNow follows your Mac's language, in English, German, Spanish, French, or Russian. To use a different language for UsageNow only, choose it in **System Settings › General › Language & Region › Applications**, then quit and reopen UsageNow.
+UsageNow speaks English, German, Spanish, French, and Russian. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
+
+The choice is the same one **System Settings › General › Language & Region › Applications** makes for UsageNow, so changing it in either place shows in both.
 
 Provider and model names, and the list of changes under [What's New](#whats-new), stay in English.
 
@@ -66,7 +68,7 @@ UsageNow reads the account each tool uses by default. If you use more than one �
 - **Codex and Claude Code** — choose the folder the tool uses for that account: the one `CODEX_HOME` or `CLAUDE_CONFIG_DIR` points to when you run it. UsageNow reads it exactly as it reads `~/.codex` or `~/.claude`. For an added Claude Code account, limits appear when Claude Code records reaching one; the [experimental limits source](/providers/claude-code#experimental-usage-limits) reads only the default account's sign-in.
 - **DeepSeek, Kimi, OpenRouter, and Ollama Cloud** — enter that account's API key. It's kept like the first: only in this Mac's Keychain, sent only to the provider, and deleted when you remove the account or turn the provider off.
 
-**Remove** forgets an account and, for an API account, deletes its key. It never touches the tool's own folder.
+Each account's **…** menu has **Rename…**, **Replace Key…** for an API account, and **Remove**. Remove forgets the account and, for an API account, deletes its key. It never touches the tool's own folder. A folder that was moved or deleted is marked **Folder not found** under the account's name.
 
 Turning a provider off stops UsageNow from refreshing it or reading anything for it. See [Providers](/providers#turning-a-provider-off).
 
