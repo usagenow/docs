@@ -99,8 +99,21 @@ The widget shows the last snapshot the UsageNow app wrote.
 
 - Make sure UsageNow is running. The widget can’t refresh providers itself. Turn on [Launch at Login](/settings#general) to keep it running.
 - Open the popover to trigger a refresh.
-- Old values stay visible with an **Updated … ago** note until new data arrives; this is intended.
+- Old values keep their original reading time, with a stale indicator per provider. After a quota reset, the old percentage becomes unknown until a new reading arrives.
+- Upgrade to **0.8.0** for the fixes to provider freshness, unchanged-value timestamps, ticking countdowns, and development/release widget separation.
 - Right after an update, if the widget shows **Open UsageNow to load usage data.**, open UsageNow once. Widgets from 0.6.0 on read data from a newer app too; earlier ones couldn't.
+
+## A new connection will not save
+
+**Check and Save** makes a read-only usage request before writing to Keychain. Check the specific error: credential format, expired or rejected sign-in, missing permission, network failure, unsupported response, or Keychain failure. Canceling preserves the old connection.
+
+- Cursor and Perplexity use a web session, not an API key. Some SSO providers block embedded windows; use the manual named session-cookie fallback only in the connection sheet.
+- Copilot uses an experimental endpoint. A token accepted by GitHub's billing API is not guaranteed to work here; do not add broad permissions blindly.
+- ElevenLabs requires **user_read**. Z.ai supports the global Coding Plan endpoint, not China-platform keys.
+- HTTP 429 pauses that connection according to Retry-After, or five minutes by default. Manual Retry cannot bypass the pause; other accounts continue updating.
+- Windsurf is different: no connection credential is needed. Open Windsurf to refresh its own cached plan.
+
+See [Connect a provider](/providers/connections). Never include a key, token, cookie, or sign-in screenshot in a bug report.
 
 ## Widget does not appear
 

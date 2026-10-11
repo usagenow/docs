@@ -1,0 +1,28 @@
+---
+title: ElevenLabs
+description: Monthly characters and subscription allowance from ElevenLabs' official read-only subscription endpoint.
+---
+
+Available in **0.8.0** through the official subscription API.
+
+## Connect
+
+1. Create a dedicated restricted API key in your ElevenLabs account with **user_read** permission.
+2. Enable ElevenLabs under **Settings › Providers**, then choose **Connect**.
+3. Paste the key and choose **Check and Save**.
+
+A missing permission is reported separately from a rejected key. UsageNow makes no audio-generation request and does not spend characters to verify the connection.
+
+## What it shows
+
+- Characters used and the monthly character allowance.
+- The plan when reported.
+- A reset date only when the subscription response explicitly provides one.
+
+Characters are not tokens and are not labeled as today's local activity. Missing fields are not estimated.
+
+## Source and storage
+
+`GET https://api.elevenlabs.io/v1/user/subscription`
+
+The key is stored only in this Mac's Keychain, sent only to `api.elevenlabs.io`, and deleted when you remove the connection or turn the provider off. See [Connect a provider](/providers/connections) for additional accounts and request cooldowns.

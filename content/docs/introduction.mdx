@@ -3,7 +3,7 @@ title: Introduction
 description: What UsageNow is, why it exists, and what it can show you today.
 ---
 
-UsageNow is a native macOS menu bar app for people who build with AI coding tools. It shows how much of your Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build usage is left, when each limit resets, and how much activity those tools have recorded on your Mac — today, by model, and day by day over the last 30 days. It can also show what's left on a pay-as-you-go DeepSeek, Kimi, or OpenRouter account, and your Ollama Cloud limits, with an API key you add.
+UsageNow is a native macOS menu bar app for people who build with AI coding tools. It shows how much of your Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build usage is left, when each limit resets, and how much activity those tools have recorded on your Mac — today, by model, and day by day over the last 30 days. It can also show what's left on a pay-as-you-go DeepSeek, Kimi, or OpenRouter account, and your Ollama Cloud limits, with an API key you add. Version **0.8.0** adds Windsurf's cached limits and explicit connections for Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai. It also fixes widget freshness and brings the app to nine languages.
 
 ## Why UsageNow exists
 
@@ -20,8 +20,9 @@ UsageNow works from information that already exists on your Mac:
 - Warp's and OpenCode's own local databases, and the usage limits Kiro writes to its own log
 - the account profile Claude Code keeps in its own configuration
 - the Antigravity app’s own local server, while it’s running
+- Windsurf's locally cached plan, without reading its sign-in
 
-You don’t need a UsageNow account, and there’s no UsageNow server that receives your usage. The one exception is optional and off by default: if you turn on experimental Claude usage limits, UsageNow asks Anthropic, not UsageNow, for your current limits.
+You don’t need a UsageNow account, and no UsageNow server receives your usage data. Optional connections ask the provider directly with the key, token, or web session you explicitly add; experimental Claude limits use its existing sign-in only if you turn the setting on. See [connection privacy](/providers/connections#where-credentials-go).
 
 <Callout type="privacy">
   UsageNow never stores or uploads your prompts, source code, or conversations. [Privacy](/privacy) explains exactly what is read and where it goes.
@@ -46,7 +47,12 @@ A provider is an AI coding tool UsageNow can report on.
 | Grok Build | <Badge variant="available">Available</Badge> Activity and the cost xAI reports; no usage limits |
 | DeepSeek, Kimi, OpenRouter | <Badge variant="available">Available</Badge> Balance, with an API key you add |
 | Ollama Cloud | <Badge variant="experimental">Experimental</Badge> Session and weekly limits, with an API key you add |
-| Cursor, GitHub Copilot | <Badge variant="planned">Coming soon</Badge> |
+| [Windsurf](/providers/windsurf) | <Badge variant="available">Available</Badge> Local cached limits |
+| [Cursor](/providers/cursor) | <Badge variant="experimental">Experimental</Badge> Personal plan allowance |
+| [GitHub Copilot](/providers/github-copilot) | <Badge variant="experimental">Experimental</Badge> Allowances and credit counters |
+| [Perplexity](/providers/perplexity) | <Badge variant="experimental">Experimental</Badge> Web credits |
+| [ElevenLabs](/providers/elevenlabs) | <Badge variant="available">Available</Badge> Monthly characters, official API |
+| [Z.ai](/providers/zai) | <Badge variant="experimental">Experimental</Badge> Global Coding Plan quota |
 
 What UsageNow can show depends on what each provider exposes. See [Providers](/providers) for details.
 

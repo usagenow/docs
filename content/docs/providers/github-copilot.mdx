@@ -1,0 +1,26 @@
+---
+title: GitHub Copilot
+description: Experimental Copilot allowances and credit counters with a GitHub token you provide.
+---
+
+<Badge variant="experimental">Experimental</Badge> Available in **0.8.0**.
+
+## Connect
+
+Enable GitHub Copilot in **Settings › Providers**, choose **Connect**, and enter your own GitHub token. Choose **Check and Save**. Use a dedicated token and the least permissions available; never paste it into an issue or chat.
+
+UsageNow does not use VS Code's OAuth client, copy a token from another app, or add headers to impersonate VS Code. It does not provide a GitHub sign-in flow.
+
+## What it shows
+
+Reported allowances, reset information, and absolute credit counters. Older free-seat counters can also appear when the endpoint returns them.
+
+Unlimited and zero-cap placeholders have no percentage. Duplicate pools are not added together. These are account counters, not today's local tokens or requests.
+
+## Source and compatibility
+
+The read request is `GET https://api.github.com/copilot_internal/user`. It is **experimental**, not GitHub's official billing/premium-request API. A token that works with the billing API is not necessarily accepted here. Some token types or plans can be refused; UsageNow cannot add permissions or bypass that refusal.
+
+Not every paid Copilot plan or token type has been verified. If the check fails, read its message; do not grant broad account permissions just to make it pass.
+
+See [Connect a provider](/providers/connections) for Keychain storage, added accounts, removal, and rate-limit cooldowns.

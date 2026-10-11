@@ -19,7 +19,7 @@ Each event has only these fields:
 | --- | --- | --- |
 | `event` | `app_active` | Which event happened |
 | `installation_id` | a random UUID | Counting installations without identifying anyone |
-| `app_version`, `build` | `0.3.0`, `1` | Which versions are in use |
+| `app_version`, `build` | `0.8.0`, `11` | Which versions are in use |
 | `macos_version` | `15.6.1` | Which macOS versions to support |
 | `architecture` | `arm64` | Apple silicon or Intel |
 | `timestamp` | ISO 8601 date and time | When the event happened |
@@ -46,6 +46,9 @@ The installation identifier is a random UUID generated on your Mac. It isn’t d
 | `qwen_detected` | Once, if Qwen Code is installed — a yes, nothing more |
 | `cline_detected` | Once, if Cline is installed — a yes, nothing more |
 | `grok_detected` | Once, if Grok Build is installed — a yes, nothing more |
+| `windsurf_detected` | Once, if Windsurf is installed — a yes, nothing more |
+
+The five new explicit connections do not add account, token, session, or usage fields to telemetry. The seven-field payload is unchanged.
 
 ## Where events go
 

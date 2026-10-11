@@ -1,0 +1,22 @@
+---
+title: Cursor
+description: Experimental personal-plan usage through a web session you explicitly connect.
+---
+
+<Badge variant="experimental">Experimental</Badge> Available in **0.8.0**.
+
+## Connect
+
+In **Settings › Providers**, enable Cursor and choose **Connect**, then **Sign In**. Sign in on Cursor's official website in the temporary window, choose **Connect**, then **Check and Save**. A manually supplied named session cookie is available if embedded sign-in is refused.
+
+See [Connect a provider](/providers/connections#cursor-and-perplexity-sign-in) for storage, SSO limitations, additional accounts, and disconnection.
+
+## What it shows
+
+The personal plan allowance and reset information reported by Cursor. Shared team pools are not substituted for personal usage. UsageNow does not average Auto/API component percentages, infer an unlimited percentage, or turn the response into local token activity or a cost estimate.
+
+## Source and limitations
+
+UsageNow reads `GET https://cursor.com/api/usage-summary` with the selected session cookie. This is not a supported public usage API and can change. Only allowed Cursor/NextAuth session cookies are retained, not analytics cookies or a whole browser profile.
+
+An expired session requires reconnecting. A refused or unfamiliar response shows a connection error or the last known reading with its original timestamp, not a fabricated zero. Plan compatibility is not universal.

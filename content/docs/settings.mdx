@@ -7,11 +7,11 @@ Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> whil
 
 ## Language
 
-UsageNow speaks English, German, Spanish, French, and Russian. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
+UsageNow speaks English, German, Spanish, French, Portuguese, Russian, Hebrew, Japanese, and Korean. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
 
 The choice is the same one **System Settings › General › Language & Region › Applications** makes for UsageNow, so changing it in either place shows in both.
 
-Provider and model names, and the list of changes under [What's New](#whats-new), stay in English.
+Provider and model names keep their original names. [What's New](#whats-new) is translated and bundled offline; Hebrew also uses right-to-left layout.
 
 ## General
 
@@ -35,7 +35,7 @@ The chart of daily activity under each provider in the popover. On by default; t
 
 ### Refresh interval
 
-How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover.
+How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover. A provider's HTTP 429 cooldown takes priority, including over manual refresh; see [rate limits](/providers/connections#rate-limits-and-stale-readings).
 
 ### Updates
 
@@ -53,10 +53,11 @@ When limits can’t be fetched, a one-line reason and a **Try Again** button app
 
 Choose which services UsageNow displays and monitors.
 
-- **Available** — Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, Grok Build, DeepSeek, Kimi, OpenRouter, and Ollama Cloud, each with its own switch. Providers that read a tool on your Mac start on; the ones that need an API key start off. Ollama Cloud carries an **Experimental** badge. Drag a row, or use its **Move Up** / **Move Down** menu, to set the order the popover and widget use.
-- **API key** — under DeepSeek, Kimi, OpenRouter, and Ollama Cloud once they're on: **Add API Key…**, or **Replace…** and **Remove** when a key is saved. Turning one of them off deletes its key. See [API Key Providers](/providers/api-keys).
-- **Accounts** — under Codex, Claude Code, and the API key providers once they're on: the accounts you added, and **Add Account…**. See [Accounts](#accounts).
-- **Coming soon** — providers on the roadmap (Cursor and GitHub Copilot), shown together in one row. They can’t be turned on yet.
+- **Available** — all [supported providers](/providers). Local tools start on; explicit connections start off. Drag a row, or use **Move Up** / **Move Down**, to set the popover and widget order.
+- **Connect** — Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai. Use **Check and Save** to verify a key, token, or session before storing it. Cursor and Perplexity also offer isolated **Sign In**. See [Connect a provider](/providers/connections).
+- **API key** — DeepSeek, Kimi, OpenRouter, and Ollama Cloud. Keys are also checked before saving. Turning off an explicit-connection provider deletes the credentials you saved in UsageNow, not the service's own sign-in.
+- **Experimental** — Cursor, Copilot, Perplexity, Z.ai, and Ollama Cloud use undocumented usage sources. The optional Claude usage-limits setting is experimental too.
+- **Accounts** — Codex, Claude Code, and explicit connections support **Add Account…**. Each has its own usage and credential where applicable. Cursor and Copilot are no longer Coming soon in 0.8.0.
 
 The list scrolls when it's taller than the window.
 
@@ -66,7 +67,7 @@ UsageNow reads the account each tool uses by default. If you use more than one �
 
 - **Name** — your own label, such as Work or Client. UsageNow never reads an account's name or email from the tool, and a [problem report](#report-a-problem) numbers accounts instead of naming them.
 - **Codex and Claude Code** — choose the folder the tool uses for that account: the one `CODEX_HOME` or `CLAUDE_CONFIG_DIR` points to when you run it. UsageNow reads it exactly as it reads `~/.codex` or `~/.claude`. For an added Claude Code account, limits appear when Claude Code records reaching one; the [experimental limits source](/providers/claude-code#experimental-usage-limits) reads only the default account's sign-in.
-- **DeepSeek, Kimi, OpenRouter, and Ollama Cloud** — enter that account's API key. It's kept like the first: only in this Mac's Keychain, sent only to the provider, and deleted when you remove the account or turn the provider off.
+- **Explicit connections** — add the account's key, GitHub token, or Cursor/Perplexity web session, then choose **Check and Add Account**. It is kept only in this Mac's Keychain, sent only to the provider, and deleted when you remove the account or turn the provider off.
 
 Each account's **…** menu has **Rename…**, **Replace Key…** for an API account, and **Remove**. Remove forgets the account and, for an API account, deletes its key. It never touches the tool's own folder. A folder that was moved or deleted is marked **Folder not found** under the account's name.
 
@@ -79,6 +80,8 @@ Turning a provider off stops UsageNow from refreshing it or reading anything for
 - **Icon only** — the default
 - **Most critical usage**
 - One per enabled provider with limits, such as **Codex usage**, **Antigravity usage**, or **Kiro usage**
+
+You can also choose a supported **added account**, such as **Codex · Work**. Removing the selected account falls back to that provider's first account.
 
 When no usage limit is available, the menu bar shows the icon alone. See [Menu bar display](/menu-bar#menu-bar-display) for how each option is calculated.
 
@@ -117,7 +120,7 @@ Shows the UsageNow version and build number, links to [usagenow.com](https://usa
 
 ### What's New
 
-Every version's changes, newest first, with the one you have marked **Installed**. The list ships inside the app, so it opens without a connection and always matches your version. It's the same as the [changelog on GitHub](https://github.com/usagenow/usagenow/blob/main/CHANGELOG.md), in English.
+Every version's changes, newest first, with the one you have marked **Installed**. The list ships inside the app, so it opens without a connection and always matches your version. The changes follow the [changelog on GitHub](https://github.com/usagenow/usagenow/blob/main/CHANGELOG.md) and appear in your chosen app language, with an English fallback when a translation is missing.
 
 ### Report a Problem
 

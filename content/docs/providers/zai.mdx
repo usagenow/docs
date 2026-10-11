@@ -1,0 +1,24 @@
+---
+title: Z.ai
+description: Experimental global Coding Plan quota windows and MCP allowance with your own API key.
+---
+
+<Badge variant="experimental">Experimental</Badge> Available in **0.8.0**.
+
+## Connect
+
+Enable Z.ai in **Settings › Providers**, choose **Connect**, enter your personal Z.ai API key, and choose **Check and Save**. The connection is for the **global Coding Plan** service, not the China platform or an organization admin account.
+
+## What it shows
+
+The Coding Plan quota windows and MCP allowance returned by the service. Window labels and units follow the response, rather than assuming every account has the same limits. Implausible five-hour reset timestamps are omitted instead of displayed as real dates.
+
+This is not local token activity, a spending estimate, or organization-wide analytics.
+
+## Source and limitations
+
+`GET https://api.z.ai/api/monitor/usage/quota/limit`
+
+This undocumented endpoint can change. Keys for `zhipuai.cn` and China-platform accounts are not supported by this connection. Missing or unsupported responses are reported, not converted to a fabricated percentage.
+
+See [Connect a provider](/providers/connections) for Keychain storage, additional accounts, removal, and HTTP 429 cooldowns.

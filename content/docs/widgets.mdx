@@ -19,6 +19,8 @@ In both sizes, percentages follow **Settings › General › Show limits as**: w
 
 A provider with no limits to show — Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, or Grok Build — shows today's activity in its own unit instead: tokens, or credits for Kiro, Warp, and Qoder. In the medium widget's rows, such a provider also gets a small chart of its last two weeks, one bar per day with today's bar highlighted. The chart shows the shape of your activity, not amounts, and turns off with **Settings › General › Show the last 30 days**.
 
+Connected-account credit and character counters are shown in their own units, separately from today's local activity. Missing or unlimited allowances do not get an invented percentage.
+
 An account you [added](/settings#accounts) appears as its own row, named after the provider and the account — **Codex · Work**.
 
 ## Add the widget
@@ -57,8 +59,11 @@ The widget follows your provider settings automatically:
 
 The widget shows what UsageNow last saw. Its values change when the UsageNow app refreshes and writes a new snapshot, so keep UsageNow running if you rely on the widget. [Launch at Login](/settings#general) helps.
 
-- When the data is old, the widget keeps showing the last known values with an **Updated … ago** note rather than hiding them.
-- The widget asks macOS to redraw it periodically and shortly after a reset, so countdowns stay current. macOS decides exactly when widgets update.
+- Each provider keeps its **own reading time**. Updating one cannot make another provider's old data appear fresh; a clock marks stale readings.
+- A fresh reading is saved even if its percentage did not change. Failed requests keep the original timestamp.
+- Countdown text keeps ticking between timeline reloads. The timeline includes upcoming resets and the point when readings become stale; macOS still controls extension scheduling.
+- When a quota window resets, the old percentage becomes **unknown** until the app gets fresh data. A reset does not prove the new window has 100% left.
+- These freshness and countdown fixes are included in **0.8.0**. Development builds use a separate app/widget identity and snapshot so they do not compete with the installed release.
 - While UsageNow updates, the app and the widget can briefly be different versions. The widget skips anything from a newer app it doesn't recognize — a provider added in that version, for example — and shows the rest.
 
 ## Widget messages

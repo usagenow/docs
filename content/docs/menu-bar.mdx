@@ -43,7 +43,7 @@ UsageNow refreshes:
 - when you open the popover, if the last refresh was more than a minute ago
 - when you click Refresh or press <Kbd>⌘R</Kbd>
 
-During automatic refreshes, UsageNow asks providers for usage limits at most once every five minutes. A manual refresh always asks for fresh limits.
+During automatic refreshes, UsageNow asks providers for usage limits at most once every five minutes. A manual refresh asks for fresh limits, except while that connection is in a provider-imposed HTTP 429 cooldown. Refresh cannot bypass that pause.
 
 If a refresh fails, UsageNow keeps the last data it had and adds a line such as **Couldn’t refresh Codex** with a **Retry** button.
 
@@ -178,6 +178,8 @@ Choose what appears next to the symbol in **Settings › Menu Bar › Display**.
 | Gemini CLI usage | Gemini CLI reports no limits, so this shows the icon. |
 | Antigravity usage | The percentage left in Antigravity’s tightest window. |
 | Kiro usage | The percentage left in Kiro's monthly credits. |
+
+An added account can also be selected in **Settings › Menu Bar**, such as **Codex · Work**. Removing it falls back to the provider's first account. Connected-account credits and characters remain separate from today's local token activity.
 
 A few details:
 

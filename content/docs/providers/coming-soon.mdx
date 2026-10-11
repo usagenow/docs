@@ -1,23 +1,23 @@
 ---
-title: Coming Soon
-description: Providers planned for UsageNow. None of them is supported yet.
+title: Provider Roadmap
+description: Providers that have shipped, and how to suggest the next integration.
 ---
 
-These providers are planned. They aren’t supported in UsageNow today.
+## Now available in 0.8.0
 
-| Provider | Status |
-| --- | --- |
-| Cursor | <Badge variant="planned">Coming soon</Badge> |
-| GitHub Copilot | <Badge variant="planned">Coming soon</Badge> |
+Cursor and GitHub Copilot are no longer Coming soon. Version 0.8.0 adds six providers:
 
-Provider support depends on whether reliable and privacy-respecting usage data can be obtained. GitHub Copilot is planned through GitHub’s official premium request usage API, with a token you provide. There are no release dates.
+- [Windsurf](/providers/windsurf) — local cached limits.
+- [Cursor](/providers/cursor) — experimental personal-plan usage with a web session.
+- [GitHub Copilot](/providers/github-copilot) — experimental allowances with your own GitHub token.
+- [Perplexity](/providers/perplexity) — experimental web credits with a web session.
+- [ElevenLabs](/providers/elevenlabs) — monthly characters through the official subscription API.
+- [Z.ai](/providers/zai) — experimental global Coding Plan quotas.
 
-Qwen was listed here and is now supported as [Qwen Code](/providers/qwen-code), along with [Cline](/providers/cline) and [Grok Build](/providers/grok-build). OpenCode and Qoder came before them — see [OpenCode](/providers/opencode) and [Qoder](/providers/qoder).
+The five explicit connections start off. See [Connect a provider](/providers/connections) for setup and limitations.
 
-## In the app
+## What comes next
 
-These providers appear in **Settings › Providers** under **Coming soon**, together in one row. They’re labels only: they can’t be turned on, and there’s no integration behind them — no credentials, no file access, and no network requests.
+No further provider or release date is promised here. An integration is added only when useful data can be read reliably with clear permission. The [overview](/providers) lists what the released app actually supports.
 
-## Suggest or build a provider
-
-If you’d like UsageNow to support a tool, or you know how it reports usage, [open an issue](https://github.com/usagenow/usagenow/issues) on GitHub. Provider integrations are welcome contributions — see [Contributing](/contributing).
+If you know a useful data source or want to suggest a tool, [open an issue](https://github.com/usagenow/usagenow/issues). Never include keys, tokens, session cookies, or private account data. Integrations are welcome contributions — see [Contributing](/contributing).

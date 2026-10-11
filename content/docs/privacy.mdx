@@ -27,8 +27,8 @@ UsageNow is local-first. Your usage data stays on your Mac unless a request to t
 | Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
 | Claude Code credentials | No | No |
 | Codex credentials | Never read | No |
-| Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build credentials | Never read | No |
-| API keys you add (DeepSeek, Kimi, OpenRouter, Ollama Cloud) | In your Keychain, on this Mac only | No — sent only to that provider |
+| Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, Grok Build, and Windsurf credentials | Never read | No |
+| Keys, tokens, and sessions you explicitly add | In your Keychain, on this Mac only | No — sent only to that provider |
 | Prompts, responses, and code | No | No |
 | Anonymous product analytics | Optional | Optional, off by default |
 
@@ -46,6 +46,9 @@ UsageNow reads only what it needs to show your usage, and only for [providers yo
 - **Cline** — each API request's time, model, token counts, and the cost Cline recorded, from the tasks its editor extension saves and the sessions its CLI saves. The request Cline stored beside those numbers passes through memory and is never kept or logged; prompts, replies, and Cline's keys are never read. [Details](/providers/cline)
 - **Grok Build** — each finished turn's time, models, token counts, model calls, and the cost xAI reported, from the session logs in `~/.grok/sessions`. Prompts, replies, tool calls, and the turn's result text are never decoded. [Details](/providers/grok-build)
 
+- **Windsurf** — only the cached plan in its read-only local database, never its credential entries. [Details](/providers/windsurf)
+- **Explicit connections** — reported usage from the service you connect, with your saved key, token, or selected web-session cookie. Only usage display fields are retained. [Details](/providers/connections)
+
 For an [account you added](/settings#accounts), the same is read from the folder you chose. Its name is the label you typed; UsageNow never reads an account's own name or email.
 
 Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals, including the [30-day history](/menu-bar#last-30-days), which is computed from the tools' own files each time and never saved by UsageNow.
@@ -62,8 +65,15 @@ UsageNow itself makes network requests only in these cases:
 | Kimi balance | Only after you add a Kimi API key | `api.moonshot.ai` |
 | OpenRouter spending | Only after you add an OpenRouter API key | `openrouter.ai` |
 | Ollama Cloud limits | Only after you add an Ollama Cloud API key | `ollama.com` |
+| Cursor usage | Only after you connect a web session | `cursor.com` |
+| Copilot usage | Only after you add your GitHub token | `api.github.com` |
+| Perplexity web credits | Only after you connect a web session | `www.perplexity.ai` |
+| ElevenLabs subscription | Only after you add a restricted API key | `api.elevenlabs.io` |
+| Z.ai Coding Plan quota | Only after you add a global API key | `api.z.ai` |
 | Update check | Only if updates are on, or you choose Check Now | `usagenow.com` |
 | Update download | Only after you accept an update | `usagenow.com` |
+
+When you explicitly choose **Sign In** for Cursor or Perplexity, a temporary browser window also loads that provider's website and its sign-in services over HTTPS. No existing browser profile is imported. Only selected session cookies can be saved after verification. See [web sign-in](/providers/connections#cursor-and-perplexity-sign-in).
 
 For Codex, UsageNow runs the Codex app-server locally, and the app-server talks to Codex’s own services on its behalf, the same way Codex does.
 
@@ -71,7 +81,7 @@ An update check asks for one file — the update feed — and carries nothing ab
 
 ## Experimental Claude usage limits
 
-This is the one feature that uses a credential. It’s off by default. When you turn it on, UsageNow reads your existing Claude Code access token from the macOS keychain, keeps it in memory, and sends it only to Anthropic to ask for your usage.
+This optional feature reads Claude Code's existing sign-in, unlike the credentials you explicitly add for other connections. It’s off by default. When you turn it on, UsageNow reads your existing Claude Code access token from the macOS keychain, keeps it in memory, and sends it only to Anthropic to ask for your usage.
 
 <Callout type="privacy">
   UsageNow never refreshes, modifies, or stores your Claude Code credentials.

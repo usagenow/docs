@@ -1,0 +1,36 @@
+---
+title: Windsurf
+description: Daily and weekly limits from Windsurf's locally cached plan, without reading credentials or making network requests.
+---
+
+Available in **0.8.0**. UsageNow reads the plan Windsurf has already cached on your Mac.
+
+## Set up
+
+1. Install Windsurf and sign in using Windsurf itself.
+2. Open Windsurf so it refreshes its plan data.
+3. Enable Windsurf in **Settings › Providers** in UsageNow, then refresh.
+
+There is no key or sign-in to add to UsageNow for this provider.
+
+## What it shows
+
+- Daily and weekly allowance, reset times, and plan when the cache reports them.
+- Billing-cycle prompt credits and flow actions on older plan formats.
+- An old reading is marked stale; an expired quota percentage is not reused for the new window.
+
+Windsurf does not provide token or model activity through this cache, so UsageNow does not invent it. Available fields depend on the Windsurf version and plan.
+
+## Data source
+
+Only `windsurf.settings.cachedPlanInfo` in:
+
+```text
+~/Library/Application Support/Windsurf/User/globalStorage/state.vscdb
+```
+
+The SQLite database is opened read-only. Credential entries are never selected, and UsageNow makes no network request to Windsurf.
+
+## If limits are missing
+
+Open Windsurf, let it update its own plan, then refresh UsageNow. Merely installing the app or finding its database does not guarantee a cached quota exists. When Windsurf is closed, UsageNow can only show the last values it saved. See [widget freshness](/widgets#freshness).

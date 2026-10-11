@@ -1,0 +1,50 @@
+---
+title: Connect a provider
+description: Add a key, GitHub token, or web session explicitly, check it before saving, and keep it only in this Mac's Keychain.
+---
+
+UsageNow 0.8.0 adds [Cursor](/providers/cursor), [GitHub Copilot](/providers/github-copilot), [Perplexity](/providers/perplexity), [ElevenLabs](/providers/elevenlabs), and [Z.ai](/providers/zai). They start **off**. No sign-in window opens and no credential is requested on first launch.
+
+ElevenLabs uses its official subscription API. The other four use **experimental endpoints**: these can change, and availability depends on your account, plan, and credential. Not every paid plan or token type has been verified.
+
+## Connect and check
+
+1. Open **Settings › Providers**, turn the provider on, and choose **Connect**.
+2. Supply the credential described on that provider's page. Use a dedicated, restricted key whenever possible.
+3. Choose **Check and Save**. UsageNow makes the same read-only request it uses to display usage. It saves the credential only after a valid response.
+4. To add another account, choose **Add Account…**, give it your own label, and choose **Check and Add Account**.
+
+An enabled provider without a saved credential makes no usage request. Checks do not generate content or buy anything. Canceling leaves the previous connection unchanged, even if a check finishes afterward. Format, sign-in, permission, network, unsupported-response, and Keychain failures have separate messages.
+
+## Cursor and Perplexity sign-in
+
+Choose **Sign In** in the connection sheet. UsageNow opens the official dashboard in an isolated, temporary browser window. The current host is visible. Enter your password only on the provider's website, not in a UsageNow field.
+
+After signing in, choose **Connect**, then **Check and Save** in the connection sheet. Only the allowed session cookies are selected; an existing Safari or Chrome profile is never imported. No script is injected to read passwords.
+
+Some SSO providers refuse embedded browsers. If sign-in is blocked, cancel and use the manual named session-cookie field instead, in the form `name=value`. Only permitted cookie names are retained; unrelated cookies are discarded. A session cookie is sensitive: never put it in a screenshot, issue, chat, or diagnostic report. Expired sessions require signing in again.
+
+UsageNow does not automatically transfer cookies from your normal browser, and does not promise system-browser OAuth where the provider offers no supported callback.
+
+## Where credentials go
+
+- Stored only in UsageNow's **device-local Keychain** entries and temporary process memory.
+- Sent over HTTPS only to that provider's catalog host, for read-only usage requests.
+- Never copied to preferences, logs, telemetry, widgets, or the repository.
+- Redirects are refused and the usage client has no shared browser cookie jar.
+- Removing a connection or added account deletes its credential. Turning the provider off deletes its saved connections; it does not sign you out of the provider's own app or website.
+- Replacing a connection clears its prior reading and ignores in-flight responses from the old account.
+
+Keys and sessions may grant more power than reading usage. Use the narrowest permissions available, and revoke them on the provider's website if you no longer use the connection.
+
+## Rate limits and stale readings
+
+If a provider answers **HTTP 429**, UsageNow pauses requests for that credential at that host. It respects `Retry-After` as seconds or a date; absent or invalid values use a five-minute pause. Manual refresh and connection checks cannot bypass it. Other accounts continue updating.
+
+A failed refresh keeps the last reading with its original timestamp. Account credits, characters, balances, and quota windows are not labeled as today's local token activity. Missing or unlimited allowances do not become invented percentages.
+
+## Existing integrations
+
+[DeepSeek, Kimi, OpenRouter, and Ollama Cloud](/providers/api-keys) use the same check-before-saving and cooldown behavior.
+
+Claude and Codex authentication is unchanged. UsageNow never refreshes, modifies, or stores Claude Code credentials, and never reads Codex credentials. The [widget](/widgets) receives only a safe display snapshot, never any credential.

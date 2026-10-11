@@ -1,0 +1,26 @@
+---
+title: Perplexity
+description: Experimental web credit balances through an explicitly connected Perplexity session.
+---
+
+<Badge variant="experimental">Experimental</Badge> Available in **0.8.0**.
+
+## Connect
+
+Enable Perplexity in **Settings › Providers**, choose **Connect**, then **Sign In**. Complete sign-in in the temporary window, choose **Connect**, then **Check and Save**. A named session-cookie fallback is available when an SSO provider refuses embedded sign-in.
+
+This integration uses a **web session**, not a Perplexity/Sonar API key. Existing browser profiles are not read. See [web sign-in](/providers/connections#cursor-and-perplexity-sign-in).
+
+## What it shows
+
+Web credit balances and reported allowance. Credits are not dollars, Sonar usage, or today's local activity. A percentage is shown only when the returned grants, balance, and usage reconcile into a real allowance.
+
+UsageNow does not infer a plan or decide which grant was spent first. Renewal is shown only for a recurring-only pool; mixed grants do not get an invented reset date.
+
+## Source and limitations
+
+`GET https://www.perplexity.ai/rest/billing/credits?version=2.18&source=default`
+
+This experimental endpoint can change independently of UsageNow. Expired sessions require reconnecting; a missing or unfamiliar response does not become a fake zero.
+
+Read [Connect a provider](/providers/connections) for storage, additional accounts, and cooldowns.

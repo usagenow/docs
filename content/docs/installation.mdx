@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Requirements, how UsageNow will be distributed, and how to build it from source today.
+description: Download UsageNow 0.8.0, update an existing installation, or build it from source.
 ---
 
 ## Requirements
@@ -10,6 +10,8 @@ description: Requirements, how UsageNow will be distributed, and how to build it
 UsageNow reads data from the AI coding tools you already use, so install and sign in to at least one of them first. You can add or remove providers at any time.
 
 ## Download
+
+The current release is **0.8.0 (11)** for Apple silicon and Intel. See the [0.8.0 release notes](https://github.com/usagenow/usagenow/releases/tag/v0.8.0).
 
 Download UsageNow from [usagenow.com](https://usagenow.com) — the button gives you [usagenow.dmg](https://usagenow.com/download/usagenow.dmg), always the current release — or pick a specific version from the [releases page](https://github.com/usagenow/usagenow/releases). Open the image and drag UsageNow to Applications. The app is signed with a Developer ID and notarized by Apple, so it opens without a Gatekeeper warning.
 
@@ -32,7 +34,7 @@ An update is installed only when it carries UsageNow's own signature, made with 
 A check is a plain request for the update feed at `usagenow.com`. Sparkle's system profiling is switched off, so nothing about your Mac, your version, or you is sent with it.
 
 <Callout type="info" title="Coming from 0.3.0 or earlier">
-  Those versions have no updater, so install 0.4.0 by hand once — download it and drag it to Applications, replacing the old copy. Later versions arrive on their own.
+  Those versions have no updater, so install the current release by hand once — download it and drag it to Applications, replacing the old copy. Later versions arrive on their own.
 </Callout>
 
 ## Build from source
@@ -82,6 +84,8 @@ xcodebuild -project UsageNow.xcodeproj -scheme UsageNow \
     USAGENOW_WIDGET_ENTITLEMENTS=Config/UsageNowWidget.entitlements \
     build
 ```
+
+From 0.8.0, Debug builds append a development suffix to the app, widget, and App Group identifiers. They do not replace the installed release's widget or snapshot. Keep this separation when signing your local build.
 
 You can set the same four build settings once in Xcode instead. See the [repository README](https://github.com/usagenow/usagenow#readme) for more.
 

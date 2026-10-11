@@ -5,6 +5,8 @@ description: How UsageNow shows DeepSeek, Kimi, and OpenRouter balances and Olla
 
 Some services have no app on your Mac to read, but do publish an official API for your balance or spending. For those, UsageNow can use an API key you give it: **DeepSeek**, **Kimi**, and **OpenRouter**, and — experimentally — **Ollama Cloud**.
 
+For Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai, see the [connection guide](/providers/connections). The same credential verification and rate-limit cooldowns apply to the providers below.
+
 These providers are off until you turn them on, and stay out of the popover until you add a key.
 
 ## What each one shows
@@ -37,9 +39,9 @@ Amounts are exactly what the service reports, in its own currency. A DeepSeek ac
 ## Add a key
 
 1. Open **Settings › Providers** and turn the provider on.
-2. Choose **Add API Key…**, paste the key, and choose **Save**.
+2. Choose **Add API Key…**, paste the key, and choose **Check and Save**.
 
-The balance appears on the next refresh. **Replace…** and **Remove** are under the provider in the same list.
+The read-only check must succeed before the key is saved. Rejected keys, missing permissions, network problems, and Keychain errors are reported separately. The balance appears on the next refresh. **Replace…** and **Remove** are under the provider in the same list.
 
 ### More than one account
 
