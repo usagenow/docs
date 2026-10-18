@@ -11,7 +11,7 @@ A provider is an AI coding tool UsageNow can report on. Each one exposes differe
   <Card title="Codex" href="/providers/codex">Usage limits, reset times, plan, and local activity.</Card>
   <Card title="Claude Code" href="/providers/claude-code">Local activity and plan, plus experimental usage limits.</Card>
   <Card title="Gemini CLI" href="/providers/gemini">Activity by model. No usage limits.</Card>
-  <Card title="Antigravity" href="/providers/antigravity">Usage limits while the Antigravity app runs.</Card>
+  <Card title="Antigravity" href="/providers/antigravity">Usage limits from the IDE or compatible official CLI.</Card>
   <Card title="Kiro" href="/providers/kiro">Monthly credit limit, plan, and today's credits.</Card>
   <Card title="Warp" href="/providers/warp">Today's agent requests, credits, and models.</Card>
   <Card title="OpenCode" href="/providers/opencode">Today's tokens, requests, models, and estimated cost.</Card>
@@ -22,6 +22,7 @@ A provider is an AI coding tool UsageNow can report on. Each one exposes differe
   <Card title="DeepSeek, Kimi, OpenRouter" href="/providers/api-keys">Balance and spending, with your own API key.</Card>
   <Card title="Ollama Cloud" href="/providers/api-keys#ollama-cloud">Session and weekly limits, with your own API key. Experimental.</Card>
   <Card title="Windsurf" href="/providers/windsurf">Daily and weekly limits from the local cached plan.</Card>
+  <Card title="JetBrains AI" href="/providers/jetbrains">Experimental local AI Assistant quota. Active-subscription validation pending.</Card>
   <Card title="Cursor" href="/providers/cursor">Personal plan allowance, with a web session. Experimental.</Card>
   <Card title="GitHub Copilot" href="/providers/github-copilot">Allowances and credits, with your GitHub token. Experimental.</Card>
   <Card title="Perplexity" href="/providers/perplexity">Web credits, with a web session. Experimental.</Card>
@@ -56,9 +57,9 @@ UsageNow never deletes or changes the provider's own files or sign-in. For expli
 Providers measure usage in their own ways, so their numbers aren’t directly comparable:
 
 - **Windows differ.** One provider may report a 5-hour and a weekly window; another may report only one, or a window for a single model family.
-- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its app’s local server while it runs; Kiro through the limits it writes to its own log; Ollama Cloud through an [experimental endpoint](/providers/api-keys#ollama-cloud). Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build report no limits. DeepSeek, Kimi, and OpenRouter report money rather than a percentage.
+- **Sources differ.** Codex reports limits through its own app-server; Claude Code through an [experimental source](/providers/claude-code#experimental-usage-limits); Antigravity through its IDE or official CLI; JetBrains AI and Windsurf through local cached quota; Kiro through the limits it writes to its own log; Ollama Cloud through an [experimental endpoint](/providers/api-keys#ollama-cloud). Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build report no limits. DeepSeek, Kimi, and OpenRouter report money rather than a percentage.
 - **Meters differ.** Most tools count tokens. Kiro and Qoder count credits, and Warp counts both. The [30-day history](/menu-bar#last-30-days) charts each tool in its own unit.
 - **Account counters are separate.** Credits or characters from connected accounts are not today's local token activity. ElevenLabs reports characters; Perplexity reports web credits, not Sonar API usage. Missing or unlimited allowances do not get a made-up percentage.
 - **Local activity is separate.** Tokens and requests come from session files on your Mac and aren’t the same as quota consumption. Where a provider records the model, UsageNow also shows [activity by model](/menu-bar#models-today).
 
-UsageNow never fills a gap with an estimate. When a value isn’t reported, it isn’t shown.
+UsageNow never invents a provider's missing limit. The separate [quota pace](/menu-bar#quota-pace) forecast is explicitly labelled as an estimate and requires sufficient fresh observations.

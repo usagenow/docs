@@ -7,7 +7,7 @@ Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> whil
 
 ## Language
 
-UsageNow speaks English, German, Spanish, French, Portuguese, Russian, Hebrew, Japanese, and Korean. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
+UsageNow speaks ten languages: English, German, Spanish, French, Portuguese, Russian, Hebrew, Japanese, Korean, and **Dutch / Nederlands**, added in 0.9.0. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
 
 The choice is the same one **System Settings › General › Language & Region › Applications** makes for UsageNow, so changing it in either place shows in both.
 
@@ -37,6 +37,10 @@ The chart of daily activity under each provider in the popover. On by default; t
 
 How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover. A provider's HTTP 429 cooldown takes priority, including over manual refresh; see [rate limits](/providers/connections#rate-limits-and-stale-readings).
 
+### Show service incidents
+
+Off by default. Periodically checks public OpenAI, Claude, Cursor, and GitHub Copilot status pages for enabled providers, with a ten-minute cache. No account or usage data is sent. A service incident is separate from your account's connection state and does not prove that your token has expired. See [Service incidents](/menu-bar#service-incidents).
+
 ### Updates
 
 **Check for updates automatically** lets UsageNow look for a new version on its own; **Check Now** asks immediately. UsageNow installs an update only when it is signed with the UsageNow update key, and a check sends nothing about you — no identifier, no system profile, no version history. See [Updates](/installation#updates).
@@ -56,10 +60,12 @@ Choose which services UsageNow displays and monitors.
 - **Available** — all [supported providers](/providers). Local tools start on; explicit connections start off. Drag a row, or use **Move Up** / **Move Down**, to set the popover and widget order.
 - **Connect** — Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai. Use **Check and Save** to verify a key, token, or session before storing it. Cursor and Perplexity also offer isolated **Sign In**. See [Connect a provider](/providers/connections).
 - **API key** — DeepSeek, Kimi, OpenRouter, and Ollama Cloud. Keys are also checked before saving. Turning off an explicit-connection provider deletes the credentials you saved in UsageNow, not the service's own sign-in.
-- **Experimental** — Cursor, Copilot, Perplexity, Z.ai, and Ollama Cloud use undocumented usage sources. The optional Claude usage-limits setting is experimental too.
+- **Experimental** — Cursor, Copilot, Perplexity, Z.ai, and Ollama Cloud use undocumented usage sources. The optional Claude usage-limits setting is experimental too. [JetBrains AI](/providers/jetbrains) reads internal local quota formats and still needs active-subscription validation.
 - **Accounts** — Codex, Claude Code, and explicit connections support **Add Account…**. Each has its own usage and credential where applicable. Cursor and Copilot are no longer Coming soon in 0.8.0.
 
 The list scrolls when it's taller than the window.
+
+Widgets can now have their own provider and account selection. Right-click a widget and choose **Edit Widget**; see [Personalize each widget](/widgets#personalize-each-widget).
 
 ### Accounts
 

@@ -24,10 +24,10 @@ UsageNow is local-first. Your usage data stays on your Mac unless a request to t
 | --- | --- | --- |
 | Preferences | Yes | No |
 | Provider activity (tokens, requests, model) | Kept in memory, and in the widget snapshot | No |
-| Usage limits and reset times | Kept in memory, and in the widget snapshot | No |
+| Usage limits and reset times | Local caches, bounded quota history, and the widget snapshot | No |
 | Claude Code credentials | No | No |
 | Codex credentials | Never read | No |
-| Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, Grok Build, and Windsurf credentials | Never read | No |
+| Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, Grok Build, Windsurf, and JetBrains credentials | Never read | No |
 | Keys, tokens, and sessions you explicitly add | In your Keychain, on this Mac only | No — sent only to that provider |
 | Prompts, responses, and code | No | No |
 | Anonymous product analytics | Optional | Optional, off by default |
@@ -47,11 +47,15 @@ UsageNow reads only what it needs to show your usage, and only for [providers yo
 - **Grok Build** — each finished turn's time, models, token counts, model calls, and the cost xAI reported, from the session logs in `~/.grok/sessions`. Prompts, replies, tool calls, and the turn's result text are never decoded. [Details](/providers/grok-build)
 
 - **Windsurf** — only the cached plan in its read-only local database, never its credential entries. [Details](/providers/windsurf)
+- **JetBrains AI** — quota percentages and explicit refill times from the selected IDE's XML cache or a newer quota event in that IDE's log. No credentials, account identifiers, prompts, or conversation fields are retained. [Details](/providers/jetbrains)
+- **Antigravity** — the IDE's loopback usage summary, or its official CLI's read-only usage report. The CLI owns its authentication; UsageNow never reads Google credentials. [Details](/providers/antigravity)
 - **Explicit connections** — reported usage from the service you connect, with your saved key, token, or selected web-session cookie. Only usage display fields are retained. [Details](/providers/connections)
 
 For an [account you added](/settings#accounts), the same is read from the folder you chose. Its name is the label you typed; UsageNow never reads an account's own name or email.
 
 Lines in session files that hold conversation content are skipped. Nothing read from them is stored beyond in-memory totals, including the [30-day history](/menu-bar#last-30-days), which is computed from the tools' own files each time and never saved by UsageNow.
+
+Quota pace keeps a bounded local history of quota observations, separate from session activity. It contains no credentials, account labels, prompts, or paths, is never sent to telemetry or widgets, and is removed for providers or accounts no longer being tracked.
 
 ## Network requests
 
@@ -70,6 +74,7 @@ UsageNow itself makes network requests only in these cases:
 | Perplexity web credits | Only after you connect a web session | `www.perplexity.ai` |
 | ElevenLabs subscription | Only after you add a restricted API key | `api.elevenlabs.io` |
 | Z.ai Coding Plan quota | Only after you add a global API key | `api.z.ai` |
+| Public service status | Only if you enable Show service incidents | `status.openai.com`, `status.claude.com`, `status.cursor.com`, `www.githubstatus.com` |
 | Update check | Only if updates are on, or you choose Check Now | `usagenow.com` |
 | Update download | Only after you accept an update | `usagenow.com` |
 
@@ -77,7 +82,9 @@ When you explicitly choose **Sign In** for Cursor or Perplexity, a temporary bro
 
 For Codex, UsageNow runs the Codex app-server locally, and the app-server talks to Codex’s own services on its behalf, the same way Codex does.
 
-An update check asks for one file — the update feed — and carries nothing about you: Sparkle's system profiling is off, so no identifier, version history, or hardware description is attached. As with any request, the server sees your IP address, which is unavoidable in fetching a file at all.
+For the Antigravity CLI fallback, the official CLI handles its own sign-in and any provider network requests. UsageNow asks only for its usage report and never launches an agent conversation.
+
+An update check asks for one file — the update feed — and carries nothing about you: system profiling is off, so no identifier, version history, or hardware description is attached. As with any request, the server sees your IP address, which is unavoidable in fetching a file at all.
 
 ## Experimental Claude usage limits
 

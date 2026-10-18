@@ -18,6 +18,8 @@ Usage data stays on your Mac. Nothing UsageNow reads from other tools — `~/.co
 - **Qwen Code, Cline, and Grok Build** — UsageNow reads no credential for any of them: not Qwen Code's `oauth_creds.json`, not Cline's `secrets.json` or the editor's secret storage, and not Grok Build's sign-in. Only the numbers described in [Privacy](/privacy#what-usagenow-reads) are decoded.
 - **OpenCode and Qoder** — UsageNow reads no credential for either. OpenCode's database is opened read-only, and SQLite hands over only each answer's time, model, and token counts. Qoder's transcripts are read for each answer's time, identifier, and credits; its sign-in files are never opened.
 - **Windsurf** — only the cached plan is selected from its read-only database, never credential entries.
+- **JetBrains AI** — bounded local quota XML and log reads only. No credentials, Keychain access, sign-in, or JetBrains network client. Unknown local formats remain unavailable; active-subscription validation is pending.
+- **Antigravity** — the IDE's loopback server or the official CLI's fixed read-only usage report. The CLI authenticates itself; UsageNow never extracts credentials, impersonates client headers, or starts an agent turn.
 - **Keys, tokens, and sessions you add** — for [explicit connections](/providers/connections), including the API key providers. A key is stored only in the Keychain on this Mac, sent over HTTPS only to that provider's host, used only for read requests, and deleted when you turn the provider off. A key for an [added account](/settings#accounts) is kept the same way, and is also deleted when you remove that account. Redirects aren't followed, and an answer from any other host is refused, so the key can't be passed on. See [API Key Providers](/providers/api-keys).
 
 UsageNow never refreshes, modifies, or stores your Claude Code credentials.
@@ -25,6 +27,8 @@ UsageNow never refreshes, modifies, or stores your Claude Code credentials.
 Cursor, Copilot, Perplexity, Z.ai, and Ollama Cloud use undocumented usage endpoints, so those providers are labeled Experimental. An answer UsageNow doesn't recognize shows the limits as unavailable rather than a guessed number.
 
 Connection checks happen before Keychain changes. Redirects are refused, and the usage transport has no shared cookie jar. Cursor and Perplexity browser sign-in uses a nonpersistent store without importing other browser profiles or injecting credential-reading scripts. Only permitted session cookies are selected. HTTP 429 cooldowns are shared by manual refresh and connection verification; no credential is stored in the cooldown cache.
+
+Public service incidents are optional and separate from provider authentication. Requests contain no account or usage data; redirects, cookies, and credentials are disabled. Quota pace observations stay in a bounded local cache and never enter telemetry.
 
 ## Widget isolation
 

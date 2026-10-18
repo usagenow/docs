@@ -63,7 +63,11 @@ Anthropic’s usage endpoint didn’t answer, or answered in a way UsageNow does
 
 ## Antigravity limits aren't shown
 
-UsageNow reads Antigravity limits from the **Antigravity app** while it runs — the `agy` CLI alone isn't enough, because its local server keeps its token in memory. Open the Antigravity app; limits appear on the next refresh. Until then, the last known limits stay, marked stale, with **Open the Antigravity app to update usage limits.** See [Antigravity](/providers/antigravity).
+UsageNow first asks the **Antigravity IDE**. In 0.9.0, it can fall back to the official CLI's read-only usage report if the IDE cannot answer. Use a signed-in CLI 1.x, version 1.1.11 or later; 1.2.2 was verified. Unsupported versions and unrecognized replies are not treated as current quota. Open the IDE or check the CLI's own sign-in, then refresh. Last known readings keep their original age. See [Antigravity](/providers/antigravity).
+
+## JetBrains AI limits aren't shown
+
+This integration is experimental and still needs validation with an active AI Assistant subscription. Open your IDE's AI Assistant usage view so the IDE can update its own quota cache, then refresh UsageNow. Installing the IDE alone is not enough. Unknown, expired, or unsupported quota data stays unavailable; UsageNow never signs in or fetches JetBrains quota itself. See [JetBrains AI](/providers/jetbrains).
 
 ## Gemini CLI shows no limits
 

@@ -3,7 +3,16 @@ title: Introduction
 description: What UsageNow is, why it exists, and what it can show you today.
 ---
 
-UsageNow is a native macOS menu bar app for people who build with AI coding tools. It shows how much of your Codex, Claude Code, Gemini CLI, Antigravity, Kiro, Warp, OpenCode, Qoder, Qwen Code, Cline, and Grok Build usage is left, when each limit resets, and how much activity those tools have recorded on your Mac — today, by model, and day by day over the last 30 days. It can also show what's left on a pay-as-you-go DeepSeek, Kimi, or OpenRouter account, and your Ollama Cloud limits, with an API key you add. Version **0.8.0** adds Windsurf's cached limits and explicit connections for Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai. It also fixes widget freshness and brings the app to nine languages.
+UsageNow is a native macOS menu bar app for people who build with AI coding tools. It brings reported limits, reset times, and local activity together, without a UsageNow account. [Supported providers](/providers) include Codex, Claude Code, Gemini CLI, Antigravity, Windsurf, Cursor, GitHub Copilot, Perplexity, ElevenLabs, Z.ai, and more.
+
+## New in 0.9.0
+
+- [Personal widgets](/widgets#personalize-each-widget), with independent provider and account choices, and a new Large size.
+- [Quota pace](/menu-bar#quota-pace): a local chart and a clearly labelled estimate from fresh quota readings, never token counts.
+- Optional [service incidents](/menu-bar#service-incidents), off by default.
+- [Antigravity CLI fallback](/providers/antigravity#cli-fallback) when the IDE cannot answer.
+- Experimental [JetBrains AI](/providers/jetbrains) local quota; active-subscription validation remains pending.
+- **Dutch / Nederlands**, bringing the app and website to ten languages, and refreshed Windsurf and ElevenLabs icons.
 
 ## Why UsageNow exists
 
@@ -19,8 +28,9 @@ UsageNow works from information that already exists on your Mac:
 - the session files Codex, Claude Code, Gemini CLI, Kiro, Qoder, Qwen Code, Cline, and Grok Build write as you work
 - Warp's and OpenCode's own local databases, and the usage limits Kiro writes to its own log
 - the account profile Claude Code keeps in its own configuration
-- the Antigravity app’s own local server, while it’s running
+- the Antigravity app's local server, or the official CLI's read-only usage report
 - Windsurf's locally cached plan, without reading its sign-in
+- JetBrains AI Assistant quota cached by the IDE, without credentials or network access
 
 You don’t need a UsageNow account, and no UsageNow server receives your usage data. Optional connections ask the provider directly with the key, token, or web session you explicitly add; experimental Claude limits use its existing sign-in only if you turn the setting on. See [connection privacy](/providers/connections#where-credentials-go).
 
@@ -37,7 +47,7 @@ A provider is an AI coding tool UsageNow can report on.
 | Codex | <Badge variant="available">Available</Badge> |
 | Claude Code | <Badge variant="available">Available</Badge> Usage limits are <Badge variant="experimental">Experimental</Badge> |
 | Gemini CLI | <Badge variant="available">Available</Badge> Activity only; no usage limits |
-| Antigravity | <Badge variant="available">Available</Badge> Limits while the app runs |
+| Antigravity | <Badge variant="available">Available</Badge> IDE limits or compatible official CLI report |
 | Kiro | <Badge variant="available">Available</Badge> Monthly credit limit and today's credits |
 | Warp | <Badge variant="available">Available</Badge> Activity only; no usage limits |
 | OpenCode | <Badge variant="available">Available</Badge> Activity and estimated cost; no usage limits |
@@ -53,6 +63,7 @@ A provider is an AI coding tool UsageNow can report on.
 | [Perplexity](/providers/perplexity) | <Badge variant="experimental">Experimental</Badge> Web credits |
 | [ElevenLabs](/providers/elevenlabs) | <Badge variant="available">Available</Badge> Monthly characters, official API |
 | [Z.ai](/providers/zai) | <Badge variant="experimental">Experimental</Badge> Global Coding Plan quota |
+| [JetBrains AI](/providers/jetbrains) | <Badge variant="experimental">Experimental</Badge> Local quota; active-subscription validation pending |
 
 What UsageNow can show depends on what each provider exposes. See [Providers](/providers) for details.
 
@@ -61,7 +72,7 @@ What UsageNow can show depends on what each provider exposes. See [Providers](/p
 | Surface | Status |
 | --- | --- |
 | [Menu bar](/menu-bar) | The main way to use UsageNow: a menu bar item and a popover. |
-| [Desktop widget](/widgets) | Small and medium WidgetKit widgets. |
+| [Desktop widget](/widgets) | Small, Medium, and Large WidgetKit widgets, with individual provider/account choices. |
 | Command-line tool | Coming later. |
 
 ## Platform

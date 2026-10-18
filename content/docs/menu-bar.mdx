@@ -101,6 +101,20 @@ VoiceOver reads these states as “High usage” and “Nearly exhausted.”
 
 Providers decide which windows exist, and that depends on your plan and can change over time. An account might have only a weekly limit, for example. UsageNow shows exactly the windows a provider reports and never adds a placeholder for a missing one.
 
+## Quota pace
+
+Version 0.9.0 adds a local chart and a clearly labelled consumption estimate for the most critical supported quota window. It needs at least **three fresh observations spanning 15 minutes**; cached repeats are not new samples. This estimate uses quota percentages, never local token counts, and is not a provider's promise or billing forecast.
+
+Stale readings, resets, a decrease in reported usage, gaps over 35 minutes, or unknown window lengths prevent a forecast. Monthly or generic allowances without a known duration do not get an inferred timeline. New data may take time to build a useful trend after updating.
+
+The small, bounded quota history stays on your Mac, separate from the 30-day activity chart. It is not sent to telemetry or the widget.
+
+## Service incidents
+
+Enable **Settings › General › Show service incidents** to check public OpenAI, Claude, Cursor, and GitHub Copilot status pages for enabled providers. Checks are off by default and cached for ten minutes; no account or usage data is sent.
+
+An incident is service-wide information, not a diagnosis of your sign-in or a replacement for the provider's usage data. An unavailable status page is not evidence of a healthy service or an expired credential.
+
 ## Local activity
 
 Below the windows, a provider section can show today’s activity:

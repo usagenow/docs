@@ -1,34 +1,41 @@
 ---
 title: Antigravity
-description: How UsageNow reads Antigravity usage limits from the Antigravity app while it runs.
+description: Antigravity usage limits from the IDE or its official read-only CLI report.
 ---
 
-UsageNow shows Antigravity’s weekly usage limits — one window per group of models — and your plan, while the Antigravity app is running.
+UsageNow shows the quota windows Antigravity reports for each model group. Version **0.9.0** adds a CLI fallback, so the IDE no longer has to stay open when a compatible, signed-in official CLI is available.
 
 ## Requirements
 
-- The **Antigravity app** installed and running, and signed in
+- The **Antigravity IDE** installed, running, and signed in; **or**
+- The official **Antigravity CLI (`agy`)**, signed in, version **1.x from 1.1.11 onward**. This path was verified with **1.2.2**. Unknown major versions are not assumed compatible.
 
-The Antigravity CLI (`agy`) on its own isn’t enough: its local server keeps its access token in memory, so UsageNow can’t read it. The app must be running.
+UsageNow does not sign you in. Use Antigravity's own sign-in flow before asking it for usage.
 
-## How it works
+## IDE source
 
 The Antigravity app runs a language server on a loopback port and prints that port and a CSRF token in its own command line. UsageNow reads just those two arguments (via `ps`), finds the socket with `lsof`, and asks the server for the same quota summary the app’s `/usage` panel shows.
 
 Antigravity’s limits are shared by groups of models, so each group appears as its own window — for example **5-hour · Gemini** and **Weekly · Claude and GPT**.
 
 <Callout type="privacy" title="No credentials are involved">
-  UsageNow never reads the Google sign-in Antigravity saved, never reads any other process’s arguments or memory, and sends nothing beyond `127.0.0.1`. The loopback server uses a self-signed certificate, which UsageNow accepts for loopback addresses only. It never calls Google directly.
+  For the IDE source, UsageNow never reads the Google sign-in Antigravity saved or another process's memory. The usage request stays on `127.0.0.1`. The loopback server uses a self-signed certificate, accepted for loopback addresses only. UsageNow never calls Google directly.
 </Callout>
 
-## When the app isn’t running
+## CLI fallback
 
-There’s nothing to ask, so the last limits UsageNow read stay for a day, marked stale, with **Open the Antigravity app to update usage limits.** Antigravity reports no token or model activity, because it stores conversations in an undocumented binary format and UsageNow doesn’t guess at numbers.
+If the IDE cannot answer, UsageNow runs the official CLI's fixed, read-only usage command: `agy -p /usage --output-format json`. This is the CLI's own usage report, not an agent conversation. UsageNow accepts only the recognized usage-report structure and never sends a prompt to a model.
+
+The CLI handles its own authentication and service requests. UsageNow does not open its credentials, extract client secrets, impersonate Antigravity headers, or refresh Google tokens. Reports are cached for five minutes. The CLI can be signed into a different account from the IDE, so its reading is never combined with the IDE's plan badge.
+
+## When neither source can answer
+
+Last known readings can stay for up to a day with their original timestamp, marked stale. An expired window becomes unknown rather than a guessed 100% remaining. Open the IDE or verify your compatible CLI's own sign-in, then refresh UsageNow. Neither source provides token or model activity through this integration.
 
 ## States
 
 | What you see | What it means | What to do |
 | --- | --- | --- |
 | No Antigravity section | Antigravity isn’t installed, or it’s turned off in Settings. | Install Antigravity, or turn it on in **Settings › Providers**. |
-| **Open the Antigravity app to update usage limits.** | The Antigravity app isn’t running, so its limits can’t be read now. | Open the Antigravity app. Limits appear on the next refresh. |
+| A message asking you to open Antigravity | Neither the IDE nor the supported CLI path produced current limits. | Open the IDE, or check the official CLI version and sign-in, then refresh. |
 | **Antigravity usage limits are temporarily unavailable.** | The app answered, but its reply couldn’t be used. | Wait and refresh later. |

@@ -1,6 +1,6 @@
 ---
 title: Widgets
-description: Small and medium macOS widgets that show what’s left at a glance, and how they stay isolated from your data.
+description: Personal small, medium, and large macOS widgets, with independent provider and account selections.
 ---
 
 UsageNow includes native macOS widgets, built with WidgetKit, that you can place on your desktop.
@@ -15,7 +15,11 @@ A glance at what matters most: for each enabled provider, the usage window with 
 
 A column for each enabled provider, with its usage windows, the percentage left in each, and reset times. With three or more providers, it switches to one compact row per provider so each stays readable. When more providers are enabled than fit, the ones closest to a limit are shown.
 
-In both sizes, percentages follow **Settings › General › Show limits as**: what's **left** by default, or what's **used** — exactly as in the [menu bar](/menu-bar#left-or-used).
+### Large
+
+Up to four detailed provider or account rows, with two reported quota windows and reset times per row. Missing data is not invented to fill the extra space.
+
+In every size, percentages follow **Settings › General › Show limits as**: what's **left** by default, or what's **used** — exactly as in the [menu bar](/menu-bar#left-or-used).
 
 A provider with no limits to show — Gemini CLI, Warp, OpenCode, Qoder, Qwen Code, Cline, or Grok Build — shows today's activity in its own unit instead: tokens, or credits for Kiro, Warp, and Qoder. In the medium widget's rows, such a provider also gets a small chart of its last two weeks, one bar per day with today's bar highlighted. The chart shows the shape of your activity, not amounts, and turns off with **Settings › General › Show the last 30 days**.
 
@@ -27,9 +31,15 @@ An account you [added](/settings#accounts) appears as its own row, named after t
 
 1. Right-click an empty area of your desktop and choose **Edit Widgets**.
 2. Search for **UsageNow**.
-3. Choose Small or Medium and drag it onto your desktop.
+3. Choose Small, Medium, or Large and drag it onto your desktop.
 
 Open UsageNow at least once first, so the widget has data to show.
+
+## Personalize each widget
+
+Right-click a widget, choose **Edit Widget**, then select **Providers and accounts**. Each widget has its own selection: keep work accounts in one widget and personal accounts in another, for example. Leave the selection empty to follow UsageNow's enabled providers automatically.
+
+The choices come only from the app's sanitized snapshot. Renaming an account preserves its selection. Removing an account never silently substitutes another one; an unavailable selection remains unavailable until you change it. Disabled providers are excluded even when selected.
 
 ## How the widget gets its data
 
@@ -49,7 +59,7 @@ The snapshot holds display values only: each enabled provider’s usage windows 
 
 ## Providers and the widget
 
-The widget follows your provider settings automatically:
+With an empty selection, the widget follows your provider settings automatically. A personalized widget filters the same snapshot to its selected sources:
 
 - Providers you turn off in **Settings › Providers** don’t appear in the widget.
 - Providers that aren’t installed don’t appear either.
@@ -63,7 +73,7 @@ The widget shows what UsageNow last saw. Its values change when the UsageNow app
 - A fresh reading is saved even if its percentage did not change. Failed requests keep the original timestamp.
 - Countdown text keeps ticking between timeline reloads. The timeline includes upcoming resets and the point when readings become stale; macOS still controls extension scheduling.
 - When a quota window resets, the old percentage becomes **unknown** until the app gets fresh data. A reset does not prove the new window has 100% left.
-- These freshness and countdown fixes are included in **0.8.0**. Development builds use a separate app/widget identity and snapshot so they do not compete with the installed release.
+- The freshness and countdown fixes from **0.8.0** also apply to personalized widgets in **0.9.0**.
 - While UsageNow updates, the app and the widget can briefly be different versions. The widget skips anything from a newer app it doesn't recognize — a provider added in that version, for example — and shows the rest.
 
 ## Widget messages

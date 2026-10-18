@@ -48,6 +48,7 @@ export const navigation: NavGroup[] = [
       { title: "Cline", slug: "providers/cline" },
       { title: "Grok Build", slug: "providers/grok-build" },
       { title: "Windsurf", slug: "providers/windsurf" },
+      { title: "JetBrains AI", slug: "providers/jetbrains" },
       { title: "Connect a Provider", slug: "providers/connections" },
       { title: "Cursor", slug: "providers/cursor" },
       { title: "GitHub Copilot", slug: "providers/github-copilot" },

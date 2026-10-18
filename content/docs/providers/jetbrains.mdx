@@ -1,0 +1,41 @@
+---
+title: JetBrains AI
+description: Experimental local AI Assistant quota from your JetBrains IDE, without credentials or network requests.
+---
+
+<Badge variant="experimental">Experimental · 0.9.0</Badge>
+
+UsageNow reads the AI Assistant quota your JetBrains IDE has already saved on this Mac. It can show the remaining monthly tariff allowance and a refill date in the menu bar and widgets. **Validation against an active AI Assistant subscription is still pending.** This is a local-format integration, not an official JetBrains usage API.
+
+## Set up
+
+1. Open your JetBrains IDE and use its own AI Assistant sign-in and usage controls.
+2. Enable **JetBrains AI** in **UsageNow › Settings › Providers**.
+3. Refresh UsageNow after the IDE has written its quota data.
+
+There is no JetBrains login, API key, or Keychain prompt in UsageNow. Installing an IDE alone does not guarantee that it has saved a usable quota.
+
+## What is shown
+
+- **Monthly tariff remaining**, when the IDE reports the monthly portion of the allowance. Purchased top-ups are not added to that percentage.
+- **Refill time**, only when explicitly reported. A quota's expiry time is not treated as a monthly reset.
+- **Allowance**, without an invented monthly reset, when only a total percentage is available.
+- **Original reading time** and the source IDE in the app. Re-reading an unchanged cache does not make its quota fresh.
+
+There are no token counts, model activity, currency estimates, absolute top-up counters, inferred plan names, or organization-wide analytics.
+
+## Local sources
+
+UsageNow looks in known versioned JetBrains and Android Studio directories for `options/AIAssistantQuotaManager2.xml` and `idea.log`. It selects one IDE, not a combination of accounts: the latest quota XML determines the source IDE; without an XML cache, the newest available IDE log is used.
+
+Only a newer recognized quota event from that same IDE can replace its XML reading. The log reader accepts quota events from AI Assistant and Junie; it does not parse conversations. The XML read is capped at 256 KiB and the log tail at 4 MiB. Account identifiers, prompts, and paths are not retained in the snapshot.
+
+<Callout type="privacy" title="Local, read-only">
+  UsageNow never reads JetBrains credentials, opens its Keychain items, signs in, launches the IDE, or calls a JetBrains endpoint. The widget receives only sanitized display values, not the IDE files.
+</Callout>
+
+## If limits are missing
+
+Open the IDE's AI Assistant usage view and let the IDE update its own data, then refresh UsageNow. Old readings keep their original age; unknown or changed formats are not replaced with guessed percentages. An expired allowance becomes unavailable rather than 100% remaining.
+
+If an active subscription still shows no quota, report the IDE and UsageNow versions and the displayed state. Do not attach raw IDE logs, credentials, or private account data. See [Report a Problem](/settings#report-a-problem).
