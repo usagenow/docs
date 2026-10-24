@@ -6,20 +6,22 @@ Website: [docs.usagenow.com](https://docs.usagenow.com)
 
 ## Development
 
-Requires Node.js 20.9 or later.
+Uses Next.js 16.4.3 and React 19.3.1. Requires Node.js 20.9 or later; Node.js 24 LTS is recommended for deployment.
 
 ```sh
-npm install        # install dependencies
+npm ci             # install the locked dependency versions
 npm run dev        # start the dev server at http://localhost:3000
 npm run build      # build the static site into out/
 npm start          # serve out/ locally at http://localhost:3000
 ```
 
-Before opening a pull request, run every check — TypeScript, lint, production build, and internal links:
+Before opening a pull request, run every check — TypeScript, lint, production build, internal links, and the static server:
 
 ```sh
 npm run check
 ```
+
+The local server binds to `127.0.0.1` by default. Set `PORT` to change the port or `HOST` to change the bind address, for example `PORT=3058 npm start`. An explicit port passed to `node scripts/serve.mjs <port>` takes priority. Server checks cover malformed URLs, missing pages, path boundaries, caching, and HEAD requests.
 
 ## Writing docs
 
