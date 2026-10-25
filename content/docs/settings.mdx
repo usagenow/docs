@@ -7,13 +7,21 @@ Open Settings from the gear button in the popover, or press <Kbd>⌘,</Kbd> whil
 
 ## Language
 
-UsageNow speaks ten languages: English, German, Spanish, French, Portuguese, Russian, Hebrew, Japanese, Korean, and **Dutch / Nederlands**, added in 0.9.0. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
+UsageNow speaks thirteen languages: English, German, Spanish, French, Portuguese, Russian, Hebrew, Japanese, Korean, Dutch, **Kazakh / Қазақша**, **Uzbek / Özbekça**, and **Turkish / Türkçe**. The last three were added in 1.0.0. Uzbek copy uses Ö, Ğ, Ş and Ç. By default it follows your Mac's language. To use another for UsageNow only, choose it in **Settings › General › Language** and then **Restart Now** — the widget follows too. **System** goes back to your Mac's language.
 
 The choice is the same one **System Settings › General › Language & Region › Applications** makes for UsageNow, so changing it in either place shows in both.
 
 Provider and model names keep their original names. [What's New](#whats-new) is translated and bundled offline; Hebrew also uses right-to-left layout.
 
 ## General
+
+### Open Setup
+
+Reopens the optional [first-run setup](/getting-started#first-run). Updating an existing installation preserves its choices and does not automatically show setup again.
+
+### Command line
+
+**Install CLI** adds `~/.local/bin/usagenow`, a link to the command inside the app. Run `usagenow status` or `usagenow status --json` to read the safe snapshot without starting providers. **Remove CLI** removes only UsageNow's own link. An unrelated existing command is never overwritten; shell profiles are never edited. See [Command Line](/cli) for PATH setup, freshness and exit codes.
 
 ### Launch UsageNow at login
 
@@ -101,12 +109,14 @@ The shortcut needs no Accessibility or Input Monitoring permission: macOS tells 
 
 ## Notifications
 
+Since **1.0.0**, choose warning and critical remaining percentages for each enabled provider, and turn notices about a warned limit's reset on or off independently. Initial thresholds are 20% and 5%. Quiet hours follow this Mac’s time zone and can cross midnight. Warnings and resets in quiet hours are skipped, never saved up for the morning. Stale readings and windows whose reset has passed do not trigger low-limit warnings. Existing notification consent is preserved when upgrading.
+
 ### Notify me about limits
 
 Off by default. When on, UsageNow sends a notification:
 
-- when a limit is down to **20%**, and again at **5%** — once each, not on every refresh
-- when a limit it warned you about **has reset**
+- when a limit crosses your warning and critical thresholds (**20%** and **5%** left initially) — once each, not on every refresh
+- when a limit it warned you about **has reset**, if reset notices are enabled for that provider
 
 A limit first seen below both thresholds gets one notification, not two. A limit you were never warned about resets silently. The wording follows [Show limits as](#show-limits-as): “18% of the 5-hour limit left” or “82% of the 5-hour limit used”.
 

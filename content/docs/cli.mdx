@@ -1,0 +1,41 @@
+---
+title: Command Line
+description: Read the latest UsageNow snapshot from Terminal or a script.
+---
+
+<Callout title="Available in 1.0.0">
+The CLI is included with UsageNow 1.0.0 and later. Installation is optional and does not change your shell configuration.
+</Callout>
+
+## Install the command
+
+Open **Settings › General › Install CLI**. UsageNow adds a symbolic link at `~/.local/bin/usagenow` to the command inside the app. Keep the app in a stable location, such as Applications.
+
+If your shell does not find `usagenow`, add `~/.local/bin` to your PATH using your usual shell configuration. UsageNow never changes shell profiles automatically or overwrites an unrelated command. **Remove CLI** removes only the link it installed.
+
+## Read your status
+
+```sh
+usagenow status
+usagenow status --json
+usagenow --help
+usagenow --version
+```
+
+The command reads the same safe snapshot as the [desktop widget](/widgets). It never starts providers, reads their folders or credentials, or accesses the network. It does not automatically launch the app. With UsageNow closed, the last saved reading remains available with its freshness information. Open UsageNow to update it.
+
+## JSON output
+
+Schema version **1** includes the snapshot and read times, freshness, state and provider list. Each provider includes its local selection ID, optional user-chosen account label and reported plan, update time, quota availability and windows. Window values contain the reported kind, duration when known, optional scope, remaining percentage and reset time.
+
+Dates use ISO 8601 UTC. Readings older than ten minutes are marked stale. A percentage becomes unknown after its reported reset; missing data is never turned into a zero balance. Missing optional fields are omitted. Scripts should check `schemaVersion` and tolerate additional fields.
+
+This is current status output. Historical CSV/JSON export is not part of 1.0.0. Review account labels and usage values before sharing command output.
+
+## Exit codes
+
+- **0** — snapshot read successfully, including stale or empty results.
+- **1** — snapshot missing, corrupt or from an unsupported schema. Open UsageNow to update it.
+- **2** — unsupported arguments. Run `usagenow --help`.
+
+Diagnostics go to stderr. On failure no partial JSON is printed to stdout.

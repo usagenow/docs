@@ -30,6 +30,7 @@ export const navigation: NavGroup[] = [
       { title: "Menu Bar", slug: "menu-bar" },
       { title: "Widgets", slug: "widgets" },
       { title: "Settings", slug: "settings" },
+      { title: "Command Line", slug: "cli" },
     ],
   },
   {
