@@ -6,7 +6,7 @@ Website: [docs.usagenow.com](https://docs.usagenow.com)
 
 ## Development
 
-Uses Next.js 16.4.3 and React 19.3.1. Requires Node.js 20.9 or later; Node.js 24 LTS is recommended for deployment.
+Uses Next.js 16.4.5 and React 19.3.1. Requires Node.js 20.9 or later; Node.js 24 LTS is recommended for deployment.
 
 ```sh
 npm ci             # install the locked dependency versions
