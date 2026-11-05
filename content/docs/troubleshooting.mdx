@@ -5,6 +5,14 @@ description: Fixes for the most common problems with providers, usage limits, th
 
 Start with a manual refresh: open the popover and press <Kbd>⌘R</Kbd>. Many problems clear up once UsageNow asks providers for fresh data.
 
+## Widget is stale or blank after an app update
+
+Update to **1.1.2**. On the first launch of a new build, the installed app refreshes its widget registration and asks macOS for a fresh timeline. In-app updates also retire the previous UsageNow widget process before replacing the bundle. Your widget placement, selected accounts and provider connections are preserved.
+
+If a widget was already stuck before updating, remove that widget and add it again once. Choose its accounts again if it had a custom selection. Do not delete UsageNow preferences or reconnect providers. Also compare the same quota window: the menu bar may show a more critical window than Weekly.
+
+The widget renders the main app's last saved snapshot. macOS controls when it accepts and displays a new timeline, so a widget is not a guaranteed real-time mirror. Its update-time label continues to advance even if the next timeline is delayed.
+
 ## App freezes after enabling Provider icons in 1.1.0
 
 This was a menu bar rendering bug in 1.1.0, fixed in **1.1.1**. It could also occur when reopening UsageNow with Provider icons already selected.
