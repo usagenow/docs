@@ -5,6 +5,12 @@ description: Fixes for the most common problems with providers, usage limits, th
 
 Start with a manual refresh: open the popover and press <Kbd>⌘R</Kbd>. Many problems clear up once UsageNow asks providers for fresh data.
 
+## App freezes after enabling Provider icons in 1.1.0
+
+This was a menu bar rendering bug in 1.1.0, fixed in **1.1.1**. It could also occur when reopening UsageNow with Provider icons already selected.
+
+If UsageNow is responsive, use **Settings › General › Check Now** to update. If it is frozen, force quit UsageNow in Activity Monitor, download the latest [disk image](https://usagenow.com/download/usagenow.dmg), and replace UsageNow in Applications. Your saved connections and account selections are retained. There is no need to delete preferences or reconnect providers.
+
 ## Codex is not detected
 
 UsageNow hides Codex when it can’t find it. Check that:
