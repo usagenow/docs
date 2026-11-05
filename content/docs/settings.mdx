@@ -43,7 +43,9 @@ The chart of daily activity under each provider in the popover. On by default; t
 
 ### Refresh interval
 
-How often UsageNow refreshes on its own: **Manual**, **5 minutes** (the default), **15 minutes**, or **30 minutes**. With any setting, UsageNow also checks for new usage when you open the popover. A provider's HTTP 429 cooldown takes priority, including over manual refresh; see [rate limits](/providers/connections#rate-limits-and-stale-readings).
+Choose **Adaptive**, **Manual**, **5 minutes**, **15 minutes**, or **30 minutes**. Adaptive is the default for new installations in 1.1.0; upgrades preserve an existing fixed or manual choice.
+
+Adaptive schedules each enabled account independently. It slows repeated unchanged readings and failed sources, pauses for unavailable network or a locked screen, and considers Low Power Mode. Normal intervals range from five to thirty minutes; provider-requested pauses take priority. Opening the popover checks which accounts are due, without starting a second provider runtime. A provider's HTTP 429 cooldown takes priority, including over manual refresh; see [rate limits](/providers/connections#rate-limits-and-stale-readings).
 
 ### Show service incidents
 
@@ -67,7 +69,7 @@ Choose which services UsageNow displays and monitors.
 
 - **Available** — all [supported providers](/providers). Local tools start on; explicit connections start off. Drag a row, or use **Move Up** / **Move Down**, to set the popover and widget order.
 - **Connect** — Cursor, GitHub Copilot, Perplexity, ElevenLabs, and Z.ai. Use **Check and Save** to verify a key, token, or session before storing it. Cursor and Perplexity also offer isolated **Sign In**. See [Connect a provider](/providers/connections).
-- **API key** — DeepSeek, Kimi, OpenRouter, and Ollama Cloud. Keys are also checked before saving. Turning off an explicit-connection provider deletes the credentials you saved in UsageNow, not the service's own sign-in.
+- **API key** — DeepSeek, Kimi, OpenRouter, Ollama Cloud, and global MiniMax M Plan. Keys are also checked before saving. Turning off an explicit-connection provider deletes the credentials you saved in UsageNow, not the service's own sign-in.
 - **Experimental** — Cursor, Copilot, Perplexity, Z.ai, and Ollama Cloud use undocumented usage sources. The optional Claude usage-limits setting is experimental too. [JetBrains AI](/providers/jetbrains) reads internal local quota formats and still needs active-subscription validation.
 - **Accounts** — Codex, Claude Code, and explicit connections support **Add Account…**. Each has its own usage and credential where applicable. Cursor and Copilot are no longer Coming soon in 0.8.0.
 
@@ -87,9 +89,20 @@ Each account's **…** menu has **Rename…**, **Replace Key…** for an API acc
 
 Turning a provider off stops UsageNow from refreshing it or reading anything for it. See [Providers](/providers#turning-a-provider-off).
 
+### Account sets
+
+In **Settings › Providers**, open **Account sets › Manage…**. Use Work, Personal, or create a custom named set; select its accounts and reorder them. A set can also choose the source for the original single menu bar item.
+
+The popover and Overview share a set picker. **All accounts** shows all enabled sources. An empty set stays empty. Sets change display only: enabled accounts keep refreshing and sending notifications, even when another set is selected.
+
+Widgets with no explicit selection follow the active set. Personalized widgets retain their own choices, and the CLI keeps all enabled sources. Renaming an account preserves membership; deleting it never silently substitutes another account.
+
 ## Menu Bar
 
-**Display** chooses what appears next to the symbol in the menu bar:
+Choose **UsageNow icon** for the original single-item display, or **Provider icons** for up to four separate provider/account icons. Select and reorder them in this tab. Each shows its most critical current window. An empty or unavailable selection falls back to the UsageNow icon; see [separate provider icons](/menu-bar#separate-provider-icons).
+
+
+In **UsageNow icon** mode, **Display** chooses what appears next to the symbol in the menu bar:
 
 - **Icon only** — the default
 - **Most critical usage**
@@ -123,6 +136,18 @@ A limit first seen below both thresholds gets one notification, not two. A limit
 The first time you turn it on, macOS asks whether UsageNow may show notifications. If notifications are off for UsageNow in System Settings, the tab says so and offers **Open Notification Settings…**.
 
 Limits are checked when UsageNow refreshes, so a warning can arrive up to one [refresh interval](#refresh-interval) late. The reset notification is scheduled with macOS when the warning goes out, so it arrives on time even if UsageNow isn't running then. Notifications are local to this Mac; nothing is sent anywhere.
+
+### Balance and budgets
+
+Since **1.1.0**, enable **Notify me about limits** to configure optional per-account rules under **Balance and budgets**:
+
+- **Low balance** uses an absolute amount in the account's reported currency.
+- **Low credits** and **Low characters** use reported remaining counters.
+- **Daily budget** and **Monthly budget** warn at 80% and 100% of reported spending, once per threshold and period.
+
+Daily/monthly budgets initially use OpenRouter's explicitly documented UTC counters. Providers exposing only a prepaid balance can have low-balance warnings; balance changes and top-ups are not treated as spending. API-price estimates are excluded.
+
+Alerts never block requests or spending. Stale, failed and future readings do not trigger alerts. Quiet hours apply, skipped alerts are not queued, and threshold memory survives relaunch. A changed account currency requires monetary rules to be configured again.
 
 ## Privacy
 

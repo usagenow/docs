@@ -28,6 +28,7 @@ export const navigation: NavGroup[] = [
     title: "Usage",
     items: [
       { title: "Menu Bar", slug: "menu-bar" },
+      { title: "Overview", slug: "overview" },
       { title: "Widgets", slug: "widgets" },
       { title: "Settings", slug: "settings" },
       { title: "Command Line", slug: "cli" },
@@ -56,6 +57,7 @@ export const navigation: NavGroup[] = [
       { title: "Perplexity", slug: "providers/perplexity" },
       { title: "ElevenLabs", slug: "providers/elevenlabs" },
       { title: "Z.ai", slug: "providers/zai" },
+      { title: "MiniMax", slug: "providers/minimax" },
       { title: "API Key Providers", slug: "providers/api-keys" },
       { title: "Provider Roadmap", slug: "providers/coming-soon" },
     ],

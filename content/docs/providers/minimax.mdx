@@ -1,0 +1,37 @@
+---
+title: MiniMax
+description: Global MiniMax M Plan quota windows and reset times using an explicitly supplied subscription key.
+---
+
+Available in **1.1.0** for **global M Plan** subscriptions.
+
+<Callout title="Live account validation pending">
+The integration has automated checks against the documented API and official CLI schema. A real paid M Plan account has not yet been used to validate it. PAYG balances and regional plans are outside this integration.
+</Callout>
+
+## Connect
+
+1. Open your global MiniMax account and obtain its **M Plan subscription key**.
+2. Enable MiniMax in **Settings › Providers**, then choose **Connect**.
+3. Enter the key and choose **Check and Save**.
+
+A successful read-only quota request is required before the key is saved. UsageNow does not sign in to MiniMax, import browser credentials, generate content, or refresh your key.
+
+## What it shows
+
+- The quota windows and reset times MiniMax reports.
+- Remaining usage only when the response provides consistent counters or percentages.
+- Separate accounts through **Add Account…**, with their own keys.
+- The same reported limits in the menu bar and widget.
+
+Unlimited weekly limits are omitted. Missing data and ambiguous boosted-plan denominators remain unknown rather than becoming a made-up percentage. Local token activity is not available through this connection.
+
+## Source and storage
+
+The official read-only source is:
+
+    GET https://www.minimax.io/v1/token_plan/remains
+
+The subscription key is stored only in UsageNow's Keychain on this Mac and sent only to **www.minimax.io**. Redirects are refused. Removing an account or turning MiniMax off deletes the key saved in UsageNow. It never changes MiniMax's own credentials.
+
+See [connection checks and cooldowns](/providers/connections) for rejected keys, HTTP 429 and stale readings.

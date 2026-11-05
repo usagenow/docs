@@ -24,6 +24,8 @@ usagenow --version
 
 The command reads the same safe snapshot as the [desktop widget](/widgets). It never starts providers, reads their folders or credentials, or accesses the network. It does not automatically launch the app. With UsageNow closed, the last saved reading remains available with its freshness information. Open UsageNow to update it.
 
+In 1.1.0 the CLI retains all enabled sources even when a Work, Personal or custom set filters the app or a following widget.
+
 ## JSON output
 
 Schema version **1** includes the snapshot and read times, freshness, state and provider list. Each provider includes its local selection ID, optional user-chosen account label and reported plan, update time, quota availability and windows. Window values contain the reported kind, duration when known, optional scope, remaining percentage and reset time.

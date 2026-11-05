@@ -1,0 +1,28 @@
+---
+title: Overview
+description: Compare local activity for today, seven days, or thirty days across your enabled accounts.
+---
+
+Available in **1.1.0**. Open the menu bar popover and choose **Overview**.
+
+## Choose a period and account
+
+Use **Today**, **7 days**, or **30 days** in the toolbar. Filter by provider, choose an individual account in the sidebar, or keep **All accounts** selected. The account-set picker follows the same [Work, Personal or custom set](/settings#account-sets) as the popover.
+
+Each account keeps its own card and units. Tokens, requests, credits, characters, reported spending and API-price estimates are not combined into a fictional shared allowance.
+
+## Local history
+
+History and model totals reuse the session data already read on this Mac. Other devices are not included. Missing or deleted sessions leave incomplete history; UsageNow does not reconstruct it or turn unknown activity into zero.
+
+The provider's current reported balance and daily/monthly spending remain separately labeled. They are not a historical billing ledger. Changing the period does not invent spending for a provider that reports only a current balance.
+
+## Reported cost and estimates
+
+**Reported spend** is the amount a provider explicitly reports. **API price estimate** is what local token activity would cost at published API prices; a subscription does not charge this amount. Missing model prices can make an estimate partial.
+
+[Balance and budget alerts](/settings#balance-and-budgets) use reported counters, never token-based estimates. See [Menu Bar](/menu-bar) for current quota windows and resets.
+
+## Privacy
+
+Overview reuses the app's existing readers and in-memory numeric aggregates. Opening it does not create another provider runtime or send account, model or usage data to UsageNow telemetry.

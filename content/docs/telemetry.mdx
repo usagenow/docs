@@ -19,7 +19,7 @@ Each event has only these fields:
 | --- | --- | --- |
 | `event` | `app_active` | Which event happened |
 | `installation_id` | a random UUID | Counting installations without identifying anyone |
-| `app_version`, `build` | `0.8.0`, `11` | Which versions are in use |
+| `app_version`, `build` | `1.1.0`, `15` | Which versions are in use |
 | `macos_version` | `15.6.1` | Which macOS versions to support |
 | `architecture` | `arm64` | Apple silicon or Intel |
 | `timestamp` | ISO 8601 date and time | When the event happened |
@@ -27,6 +27,8 @@ Each event has only these fields:
 Events contain no IP address or location. As with any network request, the request itself reaches the server from your IP address; the analytics design derives at most an approximate country from it.
 
 The installation identifier is a random UUID generated on your Mac. It isn’t derived from hardware identifiers, serial numbers, network addresses, your Apple Account, your user name, or your computer’s name. It’s created only when analytics actually send something, and it’s kept in your keychain so it survives app updates.
+
+Overview, account-set membership, menu bar choices, financial rules, balances and budgets never add fields or events to telemetry.
 
 ## Events
 

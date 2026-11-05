@@ -6,6 +6,7 @@
  * without rewriting prose. Never mark something available before it is.
  */
 export const release = {
+  version: "1.1.0",
   /** Download from usagenow.com. */
   websiteDownload: { available: true, url: "https://usagenow.com/download/usagenow.dmg" },
   /** GitHub Releases. */

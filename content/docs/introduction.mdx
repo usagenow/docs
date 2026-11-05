@@ -5,13 +5,16 @@ description: What UsageNow is, why it exists, and what it can show you today.
 
 UsageNow is a native macOS menu bar app for people who build with AI coding tools. It brings reported limits, reset times, and local activity together, without a UsageNow account. [Supported providers](/providers) include Codex, Claude Code, Gemini CLI, Antigravity, Windsurf, Cursor, GitHub Copilot, Perplexity, ElevenLabs, Z.ai, and more.
 
-## New in 1.0.0
+## New in 1.1.0
 
-- **Kazakh / Қазақша, Uzbek / Özbekça and Turkish / Türkçe**, bringing the app, widgets and website to thirteen languages. Uzbek uses Ö, Ğ, Ş and Ç.
-- Optional [first-run setup](/getting-started#first-run), with provider choices and deferred permissions. Existing installations retain their settings.
-- [Flexible notifications](/settings#notifications): provider-specific thresholds, reset notices and quiet hours, without stale-reading alerts or a morning backlog.
-- Optional [CLI](/cli): `usagenow status` and `usagenow status --json` read the safe snapshot without provider requests or credentials.
-- Refresh after wake, snapshot compatibility checks, and updated JetBrains AI and Perplexity icons for both appearances.
+- [Overview](/overview): local activity for today, seven days or thirty days, filtered by provider, account and set.
+- [Separate menu bar icons](/menu-bar#separate-provider-icons): up to four selected accounts, each with its most critical current limit.
+- [Account sets](/settings#account-sets): Work, Personal and custom selections for the popover, Overview and following widgets.
+- [Adaptive refresh](/settings#refresh-interval): per-account scheduling that considers unchanged readings, network, screen lock and power.
+- [Balance and budget alerts](/settings#balance-and-budgets): low reported balances, credits or characters, plus 80%/100% notices for supported reported spending. Alerts do not block spending.
+- [MiniMax](/providers/minimax): global M Plan windows with an explicit subscription key; live-account validation pending.
+
+The app and widgets remain available in thirteen languages, with optional first-run setup, configurable quota notifications and a safe snapshot-only [CLI](/cli).
 
 ## Also available since 0.9.0
 
@@ -71,6 +74,7 @@ A provider is an AI coding tool UsageNow can report on.
 | [Perplexity](/providers/perplexity) | <Badge variant="experimental">Experimental</Badge> Web credits |
 | [ElevenLabs](/providers/elevenlabs) | <Badge variant="available">Available</Badge> Monthly characters, official API |
 | [Z.ai](/providers/zai) | <Badge variant="experimental">Experimental</Badge> Global Coding Plan quota |
+| [MiniMax](/providers/minimax) | <Badge variant="available">Available</Badge> Global M Plan; live-account validation pending |
 | [JetBrains AI](/providers/jetbrains) | <Badge variant="experimental">Experimental</Badge> Local quota; active-subscription validation pending |
 
 What UsageNow can show depends on what each provider exposes. See [Providers](/providers) for details.
@@ -81,7 +85,8 @@ What UsageNow can show depends on what each provider exposes. See [Providers](/p
 | --- | --- |
 | [Menu bar](/menu-bar) | The main way to use UsageNow: a menu bar item and a popover. |
 | [Desktop widget](/widgets) | Small, Medium, and Large WidgetKit widgets, with individual provider/account choices. |
-| Command-line tool | Coming later. |
+| [Overview](/overview) | A native window for period and account comparisons. |
+| [Command-line tool](/cli) | Optional safe snapshot reader, included since 1.0.0. |
 
 ## Platform
 

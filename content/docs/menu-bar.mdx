@@ -3,11 +3,19 @@ title: Menu Bar
 description: The menu bar item and its popover — how to read usage windows, reset times, local activity, and the last 30 days.
 ---
 
-UsageNow lives in the macOS menu bar. There’s no Dock icon and no main window. Everything happens in the menu bar item and the popover it opens.
+UsageNow lives in the macOS menu bar. There’s no Dock icon. The menu bar popover shows current usage; the separate [Overview](/overview) window compares local activity.
 
 ## The menu bar item
 
 By default, the menu bar item shows only the UsageNow symbol. It can also show one percentage next to the symbol. See [Menu bar display](#menu-bar-display).
+
+### Separate provider icons
+
+In **Settings › Menu Bar › Menu bar icons**, choose **Provider icons**. Select up to four enabled provider/accounts and reorder them with the arrows. Each gets a separate monochrome icon and the percentage for its most critical current window, following Remaining/Used.
+
+Clicking an icon opens that account first in the shared popover. Settings, Overview and the global shortcut remain available. A clock marks cached stale data; after a window resets, its old percentage becomes unknown.
+
+The active account set filters these selections. If no selected source is available in that set, the UsageNow icon returns. Switching back to **UsageNow icon** restores the original single-item display. All items share the existing store and refresh scheduler.
 
 ## The popover
 
@@ -17,7 +25,7 @@ Click the menu bar item to open the popover.
 
 From top to bottom, it contains:
 
-- **Header** — the Refresh and Settings buttons.
+- **Header** — Refresh, Settings, the account-set picker and Overview.
 - **Provider sections** — one for each enabled provider that’s installed on your Mac.
 - **Footer** — when UsageNow last refreshed, and **Quit**.
 
@@ -39,8 +47,8 @@ To open UsageNow from any app, record a shortcut of your own in [Settings › Me
 
 UsageNow refreshes:
 
-- automatically, at the interval you choose in **Settings › General** (every 5 minutes by default)
-- when you open the popover, if the last refresh was more than a minute ago
+- automatically, using **Adaptive** or the fixed interval you choose in **Settings › General**
+- when you open the popover: Adaptive checks which accounts are due; fixed/manual modes refresh when the last reading is more than a minute old
 - when you click Refresh or press <Kbd>⌘R</Kbd>
 
 During automatic refreshes, UsageNow asks providers for usage limits at most once every five minutes. A manual refresh asks for fresh limits, except while that connection is in a provider-imposed HTTP 429 cooldown. Refresh cannot bypass that pause.
